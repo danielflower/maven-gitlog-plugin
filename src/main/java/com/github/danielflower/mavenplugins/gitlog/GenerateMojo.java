@@ -3,6 +3,10 @@ package com.github.danielflower.mavenplugins.gitlog;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.RepositoryBuilder;
+import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.revwalk.RevWalk;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -27,6 +31,14 @@ public class GenerateMojo extends AbstractMojo {
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("Generating change log in " + outputDirectory.getAbsolutePath());
 
+		Repository repository;
+		try {
+			repository = new RepositoryBuilder().findGitDir().build();
+			getLog().info("Reading repo " + repository.getFullBranch());
+		} catch (IOException e) {
+			throw new MojoFailureException("Could not load git repository. Is there a .git folder available?");
+		}
+
 		File f = outputDirectory;
 
 		if (!f.exists()) {
@@ -38,7 +50,12 @@ public class GenerateMojo extends AbstractMojo {
 		FileWriter w = null;
 		try {
 			w = new FileWriter(touch);
-			w.write("changelog.txt");
+			RevWalk walk = new RevWalk(repository);
+			for (RevCommit commit : walk) {
+				getLog().info("Commit: " + commit.toString());
+				w.write(commit.getShortMessage() + String.format("%n"));
+			}
+			walk.dispose();
 		} catch (IOException e) {
 			throw new MojoExecutionException("Error creating file " + touch, e);
 		} finally {
