@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.github.danielflower</groupId>
-	<artifactId>git-log-maven-plugin</artifactId>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-gitlog-plugin</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
-	<packaging>jar</packaging>
-	<name>Git Log Maven Plugin</name>
+	<packaging>maven-plugin</packaging>
+	<name>Maven Git Log Plugin</name>
 	<description>Generates a change log based on commits to a git repository in text and HTML format showing the changes
 		that are included in each version.
 	</description>
@@ -18,6 +18,42 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<goalPrefix>gitlog</goalPrefix>
+				</configuration>
+				<executions>
+					<execution>
+						<id>generated-helpmojo</id>
+						<goals>
+							<goal>helpmojo</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
 
 	<licenses>
 		<license>
@@ -43,6 +79,11 @@
 		</developer>
 	</developers>
 
-	<inceptionYear></inceptionYear>
+	<inceptionYear>2011</inceptionYear>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>http://github.com/danielflower/git-log-maven-plugin/issues</url>
+	</issueManagement>
 
 </project>
