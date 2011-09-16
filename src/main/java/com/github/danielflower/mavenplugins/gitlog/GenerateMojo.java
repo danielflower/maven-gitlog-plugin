@@ -3,6 +3,7 @@ package com.github.danielflower.mavenplugins.gitlog;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.RepositoryBuilder;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -51,8 +52,12 @@ public class GenerateMojo extends AbstractMojo {
 		try {
 			w = new FileWriter(touch);
 			RevWalk walk = new RevWalk(repository);
+			ObjectId head = repository.resolve("HEAD");
+			RevCommit mostRecentCommit = walk.parseCommit(head);
+			walk.markStart(mostRecentCommit);
+
 			for (RevCommit commit : walk) {
-				getLog().info("Commit: " + commit.toString());
+				getLog().info("Commit: " + commit.getShortMessage());
 				w.write(commit.getShortMessage() + String.format("%n"));
 			}
 			walk.dispose();
