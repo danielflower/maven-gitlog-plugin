@@ -119,7 +119,7 @@
 
 	<issueManagement>
 		<system>GitHub</system>
-		<url>http://github.com/danielflower/git-log-maven-plugin/issues</url>
+		<url>http://github.com/danielflower/maven-gitlog-plugin/issues</url>
 	</issueManagement>
 
 	<distributionManagement>
