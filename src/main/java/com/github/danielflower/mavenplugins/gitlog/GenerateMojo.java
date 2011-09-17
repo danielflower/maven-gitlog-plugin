@@ -32,13 +32,33 @@ public class GenerateMojo extends AbstractMojo {
 		if (!f.exists()) {
 			f.mkdirs();
 		}
+
+		List<ChangeLogRenderer> renderers;
 		try {
-			List<ChangeLogRenderer> renderers = createRenderers();
-			Generator generator = new Generator(renderers, Defaults.COMMIT_FILTERS, getLog());
+			renderers = createRenderers();
+		} catch (IOException e) {
+			getLog().warn("Error while setting up gitlog renderers.  No changelog will be generated.", e);
+			return;
+		}
+
+		Generator generator = new Generator(renderers, Defaults.COMMIT_FILTERS, getLog());
+
+		try {
 			generator.openRepository();
+		} catch (IOException e) {
+			getLog().warn("Error opening git repository.  Is this Maven project hosted in a git repository? " +
+					"No changelog will be generated.", e);
+			return;
+		} catch (NoGitRepositoryException e) {
+			getLog().warn("This maven project does not appear to be in a git repository, " +
+					"therefore no git changelog will be generated.");
+			return;
+		}
+
+		try {
 			generator.generate();
 		} catch (IOException e) {
-			getLog().error("Error while generating gitlog", e);
+			getLog().warn("Error while generating changelog.  Some changelogs may be incomplete or corrupt.", e);
 		}
 	}
 

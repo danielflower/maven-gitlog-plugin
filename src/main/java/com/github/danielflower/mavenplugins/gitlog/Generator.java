@@ -30,11 +30,17 @@ class Generator {
 		this.log = log;
 	}
 
-	public void openRepository() throws IOException {
-		Repository repository = new RepositoryBuilder().findGitDir().build();
-		log.debug("Opened " + repository);
+	public void openRepository() throws IOException, NoGitRepositoryException {
+		log.debug("About to open git repository.");
+		Repository repository;
+		try {
+			repository = new RepositoryBuilder().findGitDir().build();
+		} catch (IllegalArgumentException iae) {
+			throw new NoGitRepositoryException();
+		}
+		log.debug("Opened " + repository + ". About to load the commits.");
 		walk = createWalk(repository);
-		log.debug("Loaded commits.");
+		log.debug("Loaded commits. about to load the tags.");
 		commitIDToTagsMap = createCommitIDToTagsMap(repository, walk);
 		log.debug("Loaded tag map: " + commitIDToTagsMap);
 	}
