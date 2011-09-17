@@ -21,10 +21,12 @@ class Generator {
 	private final List<ChangeLogRenderer> renderers;
 	private RevWalk walk;
 	private Map<String, List<RevTag>> commitIDToTagsMap;
+	private final List<CommitFilter> commitFilters;
 	private final Log log;
 
-	public Generator(List<ChangeLogRenderer> renderers, Log log) {
+	public Generator(List<ChangeLogRenderer> renderers, List<CommitFilter> commitFilters, Log log) {
 		this.renderers = renderers;
+		this.commitFilters = (commitFilters == null) ? new ArrayList<CommitFilter>() : commitFilters;
 		this.log = log;
 	}
 
@@ -50,7 +52,9 @@ class Generator {
 						renderer.renderTag(revTag);
 					}
 				}
-				renderer.renderCommit(commit);
+				if (show(commit)) {
+					renderer.renderCommit(commit);
+				}
 			}
 		}
 		walk.dispose();
@@ -60,6 +64,15 @@ class Generator {
 			renderer.renderFooter();
 			renderer.close();
 		}
+	}
+
+	private boolean show(RevCommit commit) {
+		for (CommitFilter commitFilter : commitFilters) {
+			if (!commitFilter.renderCommit(commit)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private static RevWalk createWalk(Repository repository) throws IOException {
