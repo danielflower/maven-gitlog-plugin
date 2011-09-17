@@ -29,7 +29,7 @@ class MavenLoggerRenderer implements ChangeLogRenderer {
 		if (!previousWasTag) {
 			log.info("");
 		}
-		log.info(tag.getTagName() + " - " + tag.getShortMessage());
+		log.info(tag.getTagName());
 		previousWasTag = true;
 	}
 

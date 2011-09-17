@@ -11,7 +11,8 @@ import java.util.List;
 // Not unit tests, but a way to manually observe the output during maven test phase
 public class GeneratorTest {
 
-	private List<CommitFilter> commitFilters = Arrays.<CommitFilter>asList(
+	private List<CommitFilter> commitFilters = Arrays.asList(
+			new MavenReleasePluginMessageFilter(),
 			new DuplicateCommitFilter()
 	);
 
