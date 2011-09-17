@@ -88,4 +88,14 @@
 		<url>http://github.com/danielflower/git-log-maven-plugin/issues</url>
 	</issueManagement>
 
+	<distributionManagement>
+		<repository>
+			<id>local</id>
+			<layout>default</layout>
+			<name>Daniels Local Repo</name>
+			<url>file:///C:/Users/Daniel/.m2/releases/</url>
+		</repository>
+	</distributionManagement>
+
+
 </project>
