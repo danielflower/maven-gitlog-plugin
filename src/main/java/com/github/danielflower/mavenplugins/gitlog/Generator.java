@@ -58,7 +58,9 @@ class Generator {
 						renderer.renderTag(revTag);
 					}
 				}
-				if (show(commit)) {
+			}
+			if (show(commit)) {
+				for (ChangeLogRenderer renderer : renderers) {
 					renderer.renderCommit(commit);
 				}
 			}
@@ -75,6 +77,7 @@ class Generator {
 	private boolean show(RevCommit commit) {
 		for (CommitFilter commitFilter : commitFilters) {
 			if (!commitFilter.renderCommit(commit)) {
+				log.debug("Commit filtered out by " + commitFilter.getClass().getSimpleName());
 				return false;
 			}
 		}
@@ -84,8 +87,11 @@ class Generator {
 	private static RevWalk createWalk(Repository repository) throws IOException {
 		RevWalk walk = new RevWalk(repository);
 		ObjectId head = repository.resolve("HEAD");
-		RevCommit mostRecentCommit = walk.parseCommit(head);
-		walk.markStart(mostRecentCommit);
+		if (head != null) {
+			// if head is null, it means there are no commits in the repository.  The walk will be empty.
+			RevCommit mostRecentCommit = walk.parseCommit(head);
+			walk.markStart(mostRecentCommit);
+		}
 		return walk;
 	}
 

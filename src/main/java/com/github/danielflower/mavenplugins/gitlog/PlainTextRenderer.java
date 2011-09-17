@@ -20,7 +20,7 @@ class PlainTextRenderer implements ChangeLogRenderer {
 	public PlainTextRenderer(Log log, File targetFolder, String filename) throws IOException {
 		this.log = log;
 		File file = new File(targetFolder, filename);
-		log.debug("Creating plaintext changelog file at " + file.getAbsolutePath());
+		log.debug("Creating git changelog at " + file.getAbsolutePath());
 		writer = new FileWriter(file);
 	}
 
