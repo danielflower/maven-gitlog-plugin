@@ -23,6 +23,7 @@ class Generator {
 	private Map<String, List<RevTag>> commitIDToTagsMap;
 	private final List<CommitFilter> commitFilters;
 	private final Log log;
+	private Repository repository;
 
 	public Generator(List<ChangeLogRenderer> renderers, List<CommitFilter> commitFilters, Log log) {
 		this.renderers = renderers;
@@ -32,7 +33,6 @@ class Generator {
 
 	public void openRepository() throws IOException, NoGitRepositoryException {
 		log.debug("About to open git repository.");
-		Repository repository;
 		try {
 			repository = new RepositoryBuilder().findGitDir().build();
 		} catch (IllegalArgumentException iae) {
@@ -47,7 +47,7 @@ class Generator {
 
 	public void generate() throws IOException {
 		for (ChangeLogRenderer renderer : renderers) {
-			renderer.renderHeader();
+			renderer.renderHeader(repository);
 		}
 
 		for (RevCommit commit : walk) {

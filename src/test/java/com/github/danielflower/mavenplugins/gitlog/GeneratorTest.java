@@ -10,8 +10,6 @@ import java.util.Arrays;
 // Not unit tests, but a way to manually observe the output during maven test phase
 public class GeneratorTest {
 
-
-
 	@Test
 	public void writeLogToStandardOutput() throws Exception {
 		Log log = new SystemStreamLog();
@@ -25,6 +23,15 @@ public class GeneratorTest {
 	public void writePlainTextLogToFile() throws Exception {
 		Log log = new SystemStreamLog();
 		ChangeLogRenderer renderer = new PlainTextRenderer(log, new File("target"), "changelog.txt");
+		Generator generator = new Generator(Arrays.asList(renderer), Defaults.COMMIT_FILTERS, log);
+		generator.openRepository();
+		generator.generate();
+	}
+
+	@Test
+	public void writeSimpleHtmlLogToFile() throws Exception {
+		Log log = new SystemStreamLog();
+		ChangeLogRenderer renderer = new SimpleHtmlRenderer(log, new File("target"), "changelog.html");
 		Generator generator = new Generator(Arrays.asList(renderer), Defaults.COMMIT_FILTERS, log);
 		generator.openRepository();
 		generator.generate();

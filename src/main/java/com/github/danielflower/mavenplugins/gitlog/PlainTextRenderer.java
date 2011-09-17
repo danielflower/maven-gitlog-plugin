@@ -1,30 +1,24 @@
 package com.github.danielflower.mavenplugins.gitlog;
 
 import org.apache.maven.plugin.logging.Log;
+import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTag;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 
 import static com.github.danielflower.mavenplugins.gitlog.Formatter.NEW_LINE;
 
-class PlainTextRenderer implements ChangeLogRenderer {
+class PlainTextRenderer extends FileRenderer {
 
-	private Writer writer;
-	private final Log log;
 	private boolean previousWasTag = false;
 
 	public PlainTextRenderer(Log log, File targetFolder, String filename) throws IOException {
-		this.log = log;
-		File file = new File(targetFolder, filename);
-		log.debug("Creating git changelog at " + file.getAbsolutePath());
-		writer = new FileWriter(file);
+		super(log, targetFolder, filename);
 	}
 
-	public void renderHeader() throws IOException {
+	public void renderHeader(Repository repository) throws IOException {
 	}
 
 	public void renderTag(RevTag tag) throws IOException {
@@ -46,18 +40,4 @@ class PlainTextRenderer implements ChangeLogRenderer {
 	public void renderFooter() throws IOException {
 	}
 
-	public void close() {
-		if (writer != null) {
-			try {
-				writer.flush();
-			} catch (IOException e) {
-				log.error("Could not flush file to disk", e);
-			}
-			try {
-				writer.close();
-			} catch (IOException e) {
-				// ignore
-			}
-		}
-	}
 }
