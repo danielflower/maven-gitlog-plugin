@@ -10,6 +10,7 @@ import java.io.IOException;
 class MavenLoggerRenderer implements ChangeLogRenderer {
 
 	private final Log log;
+	private boolean previousWasTag = false;
 
 	public MavenLoggerRenderer(Log log) {
 		if (log == null) {
@@ -25,13 +26,17 @@ class MavenLoggerRenderer implements ChangeLogRenderer {
 	}
 
 	public void renderTag(RevTag tag) throws IOException {
-		log.info("");
+		if (!previousWasTag) {
+			log.info("");
+		}
 		log.info(tag.getTagName() + " - " + tag.getShortMessage());
+		previousWasTag = true;
 	}
 
 	public void renderCommit(RevCommit commit) throws IOException {
 		log.info(Formatter.formatDateTime(commit.getCommitTime()) + " "
 				+ commit.getShortMessage() + " (" + commit.getCommitterIdent().getName() + ")");
+		previousWasTag = false;
 	}
 
 	public void renderFooter() throws IOException {

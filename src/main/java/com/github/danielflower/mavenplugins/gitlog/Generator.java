@@ -58,6 +58,7 @@ class Generator {
 
 		for (ChangeLogRenderer renderer : renderers) {
 			renderer.renderFooter();
+			renderer.close();
 		}
 	}
 

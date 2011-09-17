@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 class Formatter {
+
+	public static String NEW_LINE = String.format("%n");
+
 	private static DateFormat dateFormat =
 			new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z");
 
