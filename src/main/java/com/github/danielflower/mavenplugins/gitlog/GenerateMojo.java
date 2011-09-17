@@ -69,5 +69,4 @@ public class GenerateMojo extends AbstractMojo {
 		return renderers;
 	}
 
-
 }
