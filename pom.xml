@@ -90,7 +90,7 @@
 
 	<distributionManagement>
 		<repository>
-			<id>local</id>
+			<id>temp</id>
 			<layout>default</layout>
 			<name>Daniels Local Repo</name>
 			<url>file:///C:/Users/Daniel/.m2/releases/</url>
