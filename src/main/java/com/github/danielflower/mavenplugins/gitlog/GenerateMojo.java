@@ -5,7 +5,6 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,31 +32,20 @@ public class GenerateMojo extends AbstractMojo {
 		if (!f.exists()) {
 			f.mkdirs();
 		}
-
-		List<ChangeLogRenderer> renderers = createRenderers();
-
-		File touch = new File(f, "changelog.txt");
-
-		FileWriter w = null;
 		try {
-
-
-			w = new FileWriter(touch);
-
-
+			List<ChangeLogRenderer> renderers = createRenderers();
+			Generator generator = new Generator(renderers, Defaults.COMMIT_FILTERS, getLog());
+			generator.openRepository();
+			generator.generate();
 		} catch (IOException e) {
-			throw new MojoExecutionException("Error creating file " + touch, e);
-		} finally {
-			for (ChangeLogRenderer renderer : renderers) {
-				renderer.close();
-			}
+			getLog().error("Error while generating gitlog", e);
 		}
-
-
 	}
 
-	private List<ChangeLogRenderer> createRenderers() {
+	private List<ChangeLogRenderer> createRenderers() throws IOException {
 		ArrayList<ChangeLogRenderer> renderers = new ArrayList<ChangeLogRenderer>();
+		renderers.add(new PlainTextRenderer(getLog(), outputDirectory, "changelog.txt"));
+		renderers.add(new MavenLoggerRenderer(getLog()));
 		return renderers;
 	}
 
