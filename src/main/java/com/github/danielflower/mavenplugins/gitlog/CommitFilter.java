@@ -2,7 +2,7 @@ package com.github.danielflower.mavenplugins.gitlog;
 
 import org.eclipse.jgit.revwalk.RevCommit;
 
-public interface CommitFilter {
+interface CommitFilter {
 
 	/**
 	 * Returns true if the commit should be rendered; otherwise false.
