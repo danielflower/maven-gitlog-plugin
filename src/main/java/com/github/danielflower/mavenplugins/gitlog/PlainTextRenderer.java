@@ -1,7 +1,6 @@
 package com.github.danielflower.mavenplugins.gitlog;
 
 import org.apache.maven.plugin.logging.Log;
-import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTag;
 
@@ -18,7 +17,12 @@ class PlainTextRenderer extends FileRenderer {
 		super(log, targetFolder, filename);
 	}
 
-	public void renderHeader(Repository repository) throws IOException {
+	public void renderHeader(String reportTitle) throws IOException {
+		if (reportTitle != null && reportTitle.length() > 0) {
+			writer.write(reportTitle);
+			writer.write(NEW_LINE);
+			writer.write(NEW_LINE);
+		}
 	}
 
 	public void renderTag(RevTag tag) throws IOException {

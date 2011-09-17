@@ -1,7 +1,6 @@
 package com.github.danielflower.mavenplugins.gitlog;
 
 import org.apache.maven.plugin.logging.Log;
-import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTag;
 
@@ -28,8 +27,8 @@ class SimpleHtmlRenderer extends FileRenderer {
 	}
 
 	@Override
-	public void renderHeader(Repository repository) throws IOException {
-		title = "Change log";
+	public void renderHeader(String reportTitle) throws IOException {
+		this.title = reportTitle;
 	}
 
 	@Override

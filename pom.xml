@@ -5,14 +5,15 @@
 
 	<groupId>org.apache.maven.plugins</groupId>
 	<artifactId>maven-gitlog-plugin</artifactId>
-	<version>1.4.1-SNAPSHOT</version>
+	<version>1.4.4-SNAPSHOT</version>
 
 	<packaging>maven-plugin</packaging>
 	<name>Maven Git Log Plugin</name>
-	<description>Generates a change log based on commits to a git repository in text and HTML format showing the changes
-		that are included in each version.
+	<description>Generates a changelog based on commits to a git repository in text and HTML format showing the changes
+		that are included in each version. A possible use of this is to include these changelogs when packaging your
+		maven project so that you have an accurate list of commits that the current package includes.
 	</description>
-	<url>http://github.com/danielflower/git-log-maven-plugin</url>
+	<url>http://github.com/danielflower/maven-gitlog-plugin</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -86,6 +87,11 @@
 					<failOnWarning>true</failOnWarning>
 					<artifactItems />
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.0-beta-2</version>
 			</plugin>
 		</plugins>
 	</build>

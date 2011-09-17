@@ -2,7 +2,6 @@ package com.github.danielflower.mavenplugins.gitlog;
 
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugin.logging.SystemStreamLog;
-import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTag;
 
@@ -20,9 +19,9 @@ class MavenLoggerRenderer implements ChangeLogRenderer {
 		this.log = log;
 	}
 
-	public void renderHeader(Repository repository) throws IOException {
+	public void renderHeader(String reportTitle) throws IOException {
 		log.info("*********************************************");
-		log.info("Change log");
+		log.info(reportTitle);
 		log.info("*********************************************");
 	}
 
