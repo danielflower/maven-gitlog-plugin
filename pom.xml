@@ -69,9 +69,9 @@
 	</licenses>
 
 	<scm>
-		<url>git://github.com/danielflower/git-log-maven-plugin.git</url>
-		<connection>scm:git:git://github.com/danielflower/git-log-maven-plugin.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:danielflower/git-log-maven-plugin.git</developerConnection>
+		<url>git://github.com/danielflower/maven-gitlog-plugin.git</url>
+		<connection>scm:git:git://github.com/danielflower/maven-gitlog-plugin.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:danielflower/maven-gitlog-plugin.git</developerConnection>
 	</scm>
 
 	<developers>
