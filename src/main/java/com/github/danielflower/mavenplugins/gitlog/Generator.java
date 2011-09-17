@@ -1,5 +1,6 @@
 package com.github.danielflower.mavenplugins.gitlog;
 
+import org.apache.maven.plugin.logging.Log;
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
@@ -20,15 +21,20 @@ class Generator {
 	private final List<ChangeLogRenderer> renderers;
 	private RevWalk walk;
 	private Map<String, List<RevTag>> commitIDToTagsMap;
+	private final Log log;
 
-	public Generator(List<ChangeLogRenderer> renderers) {
+	public Generator(List<ChangeLogRenderer> renderers, Log log) {
 		this.renderers = renderers;
+		this.log = log;
 	}
 
 	public void openRepository() throws IOException {
 		Repository repository = new RepositoryBuilder().findGitDir().build();
+		log.debug("Opened " + repository);
 		walk = createWalk(repository);
+		log.debug("Loaded commits.");
 		commitIDToTagsMap = createCommitIDToTagsMap(repository, walk);
+		log.debug("Loaded tag map: " + commitIDToTagsMap);
 	}
 
 	public void generate() throws IOException {
@@ -64,27 +70,7 @@ class Generator {
 	}
 
 
-	private List<Ref> getTags(Map<String, Ref> allTags, RevCommit commit) {
-
-		ArrayList<Ref> tags = new ArrayList<Ref>();
-		String commitId = commit.getName();
-		for (Ref ref : allTags.values()) {
-
-			Ref leaf = ref;
-			ObjectId commitTagPointsTo = leaf.getPeeledObjectId();
-			if (commitTagPointsTo == null) {
-				commitTagPointsTo = leaf.getObjectId();
-			} else {
-				System.out.println("Peeled tag: " + commitTagPointsTo);
-			}
-			if (commitId.equals(commitTagPointsTo.getName())) {
-				tags.add(leaf);
-			}
-		}
-		return tags;
-	}
-
-	private static Map<String, List<RevTag>> createCommitIDToTagsMap(Repository repository, RevWalk revWalk) throws IOException {
+	private Map<String, List<RevTag>> createCommitIDToTagsMap(Repository repository, RevWalk revWalk) throws IOException {
 		Map<String, Ref> allTags = repository.getTags();
 
 		Map<String, List<RevTag>> revTags = new HashMap<String, List<RevTag>>();
@@ -98,7 +84,7 @@ class Generator {
 				}
 				revTags.get(commitID).add(revTag);
 			} catch (IncorrectObjectTypeException e) {
-				System.out.println("Light-weight tags not supported. Skipping " + ref.getName());
+				log.debug("Light-weight tags not supported. Skipping " + ref.getName());
 			}
 		}
 
