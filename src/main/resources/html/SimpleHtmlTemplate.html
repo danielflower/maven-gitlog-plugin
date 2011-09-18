@@ -5,28 +5,31 @@
 	<title>{title}</title>
 	<style type="text/css">
 		body {
-			font-family: Arial;
+		font-family: Arial;
 		}
 		table {
-			border-collapse: collapse;
+		border-collapse: collapse;
 		}
 		td {
-			border: 1px solid #CCCCCC;
+		border: 1px solid #CCCCCC;
+		}
+		td.date, .author, .committer {
+		white-space: nowrap;
 		}
 		.tag td {
-			border-width: 0px;
-			font-weight: bold;
-			padding-top: 30px;
-			padding-bottom: 7px;
+		border-width: 0px;
+		font-weight: bold;
+		padding-top: 30px;
+		padding-bottom: 7px;
 		}
 	</style>
 </head>
 <body>
-	<h1>{title}</h1>
-	<table>
-		<tbody>
-{rows}
-		</tbody>
-	</table>
+<h1>{title}</h1>
+<table>
+	<tbody>
+	{rows}
+	</tbody>
+</table>
 </body>
 </html>

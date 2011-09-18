@@ -48,17 +48,22 @@ public class SimpleHtmlRenderer extends FileRenderer {
 	public void renderCommit(RevCommit commit) throws IOException {
 		String date = Formatter.formatDateTime(commit.getCommitTime());
 		String message = htmlEncode(commit.getShortMessage());
-		String author = commit.getCommitterIdent().getName();
-		if (commit.getAuthorIdent() != null && !commit.getAuthorIdent().getName().equals(author)) {
-			author += " and " + commit.getAuthorIdent().getName();
+		String author = htmlEncode(commit.getCommitterIdent().getName());
+		String committer = htmlEncode(commit.getCommitterIdent().getName());
+		String authorHtml = "<span class=\"committer\">" + commit.getAuthorIdent().getName() + "</span>";
+		if (!areSame(author, committer)) {
+			authorHtml += "and <span class=\"author\">" + author + "</span>";
 		}
-		author = htmlEncode(author);
 
 		tableRows.append("\t\t<tr>")
-				.append("<td>").append(date).append("</td>")
+				.append("<td class=\"date\">").append(date).append("</td>")
 				.append("<td>").append(message).append("</td>")
-				.append("<td>").append(author).append("</td>")
+				.append("<td>").append(authorHtml).append("</td>")
 				.append("</tr>").append(NEW_LINE);
+	}
+
+	private boolean areSame(String author, String committer) {
+		return ("" + author).toLowerCase().equals("" + committer.toLowerCase());
 	}
 
 	@Override
