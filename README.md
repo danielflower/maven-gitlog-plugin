@@ -80,3 +80,15 @@ file which includes the two changelog reports in the docs folder of the zip file
 			</fileSet>
 		</fileSets>
 	</assembly>
+
+Showing the git changelog for your current project
+--------------------------------------------
+
+If your project has a reference to the gitlog plugin already, the following command will print
+a changelog to the command line:
+
+	$ mvn gitlog:show
+
+If you want to see a git log without having the plugin defined in your pom, you can run:
+
+	$ mvn com.github.danielflower.mavenplugins:maven-gitlog-plugin:show
