@@ -1,5 +1,6 @@
 package com.github.danielflower.mavenplugins.gitlog.renderers;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.maven.plugin.logging.Log;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTag;
@@ -34,19 +35,25 @@ public class SimpleHtmlRenderer extends FileRenderer {
 	@Override
 	public void renderTag(RevTag tag) throws IOException {
 		tableRows.append("\t\t<tr class=\"tag\"><td colspan=3>")
-				.append(tag.getTagName())
+				.append(htmlEncode(tag.getTagName()))
 				.append("</td></tr>")
 				.append(NEW_LINE);
+	}
+
+	private static String htmlEncode(String input) {
+		return StringEscapeUtils.escapeHtml4(input);
 	}
 
 	@Override
 	public void renderCommit(RevCommit commit) throws IOException {
 		String date = Formatter.formatDateTime(commit.getCommitTime());
-		String message = commit.getShortMessage();
+		String message = htmlEncode(commit.getShortMessage());
 		String author = commit.getCommitterIdent().getName();
 		if (commit.getAuthorIdent() != null && !commit.getAuthorIdent().getName().equals(author)) {
 			author += " and " + commit.getAuthorIdent().getName();
 		}
+		author = htmlEncode(author);
+
 		tableRows.append("\t\t<tr>")
 				.append("<td>").append(date).append("</td>")
 				.append("<td>").append(message).append("</td>")
@@ -57,12 +64,13 @@ public class SimpleHtmlRenderer extends FileRenderer {
 	@Override
 	public void renderFooter() throws IOException {
 		String html = template
-				.replace("{title}", title)
+				.replace("{title}", htmlEncode(title))
 				.replace("{rows}", tableRows.toString());
 		writer.append(html);
 	}
 
 	public String convertStreamToString(InputStream is) {
+
 		return new Scanner(is, "UTF-8").useDelimiter("\\A").next();
 	}
 
