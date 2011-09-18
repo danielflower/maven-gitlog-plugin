@@ -36,6 +36,7 @@ public class PlainTextRenderer extends FileRenderer {
 
 	public void renderCommit(RevCommit commit) throws IOException {
 		writer.write(Formatter.formatDateTime(commit.getCommitTime()) + "    " + commit.getShortMessage());
+		writer.write(" (" + commit.getCommitterIdent().getName() + ")");
 		writer.write(NEW_LINE);
 		previousWasTag = false;
 	}

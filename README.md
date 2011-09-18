@@ -12,9 +12,9 @@ Add the following to your `<plugins>` section in your pom.xml file to generate c
 in your target folder:
 
 	<plugin>
-		<groupId>org.apache.maven.plugins</groupId>
+		<groupId>com.github.danielflower.mavenplugins</groupId>
 		<artifactId>maven-gitlog-plugin</artifactId>
-		<version>1.4.4-SNAPSHOT</version>
+		<version>1.5.0</version>
 		<executions>
 			<execution>
 				<goals>
@@ -27,9 +27,9 @@ in your target folder:
 The following example shows all the possible configuration values.
 
 	<plugin>
-		<groupId>org.apache.maven.plugins</groupId>
+		<groupId>com.github.danielflower.mavenplugins</groupId>
 		<artifactId>maven-gitlog-plugin</artifactId>
-		<version>1.4.4-SNAPSHOT</version>
+		<version>1.5.0</version>
 		<configuration>
 			<verbose>true</verbose>
 			<generatePlainTextChangeLog>true</generatePlainTextChangeLog>
