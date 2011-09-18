@@ -136,7 +136,7 @@
 
 	<issueManagement>
 		<system>GitHub</system>
-		<url>http://github.com/danielflower/maven-gitlog-plugin/issues</url>
+		<url>https://github.com/danielflower/maven-gitlog-plugin/issues</url>
 	</issueManagement>
 
 	<distributionManagement>
