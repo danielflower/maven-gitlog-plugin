@@ -1,11 +1,11 @@
-package com.github.danielflower.mavenplugins.gitlog;
+package com.github.danielflower.mavenplugins.gitlog.renderers;
 
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTag;
 
 import java.io.IOException;
 
-interface ChangeLogRenderer {
+public interface ChangeLogRenderer {
 
 	public void renderHeader(String reportTitle) throws IOException;
 

@@ -1,4 +1,4 @@
-package com.github.danielflower.mavenplugins.gitlog;
+package com.github.danielflower.mavenplugins.gitlog.renderers;
 
 import org.apache.maven.plugin.logging.Log;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import static com.github.danielflower.mavenplugins.gitlog.Formatter.NEW_LINE;
+import static com.github.danielflower.mavenplugins.gitlog.renderers.Formatter.NEW_LINE;
 
-class SimpleHtmlRenderer extends FileRenderer {
+public class SimpleHtmlRenderer extends FileRenderer {
 
 	private String title;
 	private StringBuilder tableRows = new StringBuilder();

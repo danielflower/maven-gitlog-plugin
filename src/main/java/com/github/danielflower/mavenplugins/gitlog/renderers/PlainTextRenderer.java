@@ -1,4 +1,4 @@
-package com.github.danielflower.mavenplugins.gitlog;
+package com.github.danielflower.mavenplugins.gitlog.renderers;
 
 import org.apache.maven.plugin.logging.Log;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -7,9 +7,9 @@ import org.eclipse.jgit.revwalk.RevTag;
 import java.io.File;
 import java.io.IOException;
 
-import static com.github.danielflower.mavenplugins.gitlog.Formatter.NEW_LINE;
+import static com.github.danielflower.mavenplugins.gitlog.renderers.Formatter.NEW_LINE;
 
-class PlainTextRenderer extends FileRenderer {
+public class PlainTextRenderer extends FileRenderer {
 
 	private boolean previousWasTag = false;
 

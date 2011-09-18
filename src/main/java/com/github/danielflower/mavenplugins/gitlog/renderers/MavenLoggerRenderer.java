@@ -1,4 +1,4 @@
-package com.github.danielflower.mavenplugins.gitlog;
+package com.github.danielflower.mavenplugins.gitlog.renderers;
 
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugin.logging.SystemStreamLog;
@@ -7,7 +7,7 @@ import org.eclipse.jgit.revwalk.RevTag;
 
 import java.io.IOException;
 
-class MavenLoggerRenderer implements ChangeLogRenderer {
+public class MavenLoggerRenderer implements ChangeLogRenderer {
 
 	private final Log log;
 	private boolean previousWasTag = false;

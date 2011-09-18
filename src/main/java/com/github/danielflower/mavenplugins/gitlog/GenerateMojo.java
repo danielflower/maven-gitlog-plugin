@@ -1,5 +1,9 @@
 package com.github.danielflower.mavenplugins.gitlog;
 
+import com.github.danielflower.mavenplugins.gitlog.renderers.ChangeLogRenderer;
+import com.github.danielflower.mavenplugins.gitlog.renderers.MavenLoggerRenderer;
+import com.github.danielflower.mavenplugins.gitlog.renderers.PlainTextRenderer;
+import com.github.danielflower.mavenplugins.gitlog.renderers.SimpleHtmlRenderer;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;

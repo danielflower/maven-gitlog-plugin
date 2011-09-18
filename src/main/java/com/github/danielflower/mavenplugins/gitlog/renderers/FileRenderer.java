@@ -1,4 +1,4 @@
-package com.github.danielflower.mavenplugins.gitlog;
+package com.github.danielflower.mavenplugins.gitlog.renderers;
 
 import org.apache.maven.plugin.logging.Log;
 
@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-abstract class FileRenderer implements ChangeLogRenderer {
+public abstract class FileRenderer implements ChangeLogRenderer {
 
 	protected Writer writer;
 	protected final Log log;

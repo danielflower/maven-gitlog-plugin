@@ -1,10 +1,10 @@
-package com.github.danielflower.mavenplugins.gitlog;
+package com.github.danielflower.mavenplugins.gitlog.renderers;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-class Formatter {
+public class Formatter {
 
 	public static String NEW_LINE = String.format("%n");
 

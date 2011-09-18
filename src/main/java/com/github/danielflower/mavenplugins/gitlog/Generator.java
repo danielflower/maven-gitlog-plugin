@@ -1,5 +1,7 @@
 package com.github.danielflower.mavenplugins.gitlog;
 
+import com.github.danielflower.mavenplugins.gitlog.filters.CommitFilter;
+import com.github.danielflower.mavenplugins.gitlog.renderers.ChangeLogRenderer;
 import org.apache.maven.plugin.logging.Log;
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.lib.ObjectId;

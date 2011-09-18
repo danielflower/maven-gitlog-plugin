@@ -1,8 +1,8 @@
-package com.github.danielflower.mavenplugins.gitlog;
+package com.github.danielflower.mavenplugins.gitlog.filters;
 
 import org.eclipse.jgit.revwalk.RevCommit;
 
-class DuplicateCommitMessageFilter implements CommitFilter {
+public class DuplicateCommitMessageFilter implements CommitFilter {
 
 	private RevCommit previous;
 
