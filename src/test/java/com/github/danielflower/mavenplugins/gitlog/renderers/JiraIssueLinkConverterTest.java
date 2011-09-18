@@ -28,14 +28,20 @@ public class JiraIssueLinkConverterTest {
 	@Test
 	public void multipleJiraCodesAreRendered() {
 		test("CONF-10 Some CONF-12 commit message CONF-13",
-				"<a href=\"" + PREFIX + "-10\">CONF-10</a> Some CONF-12 commit message CONF-13");
+				"<a href=\"" + PREFIX + "-10\">CONF-10</a> Some <a href=\"" + PREFIX
+						+ "-12\">CONF-12</a> commit message <a href=\"" + PREFIX + "-13\">CONF-13</a>");
+	}
+
+	@Test
+	public void jiraCodesInOtherProjectsAreRendered() {
+		test("CONF-10 Some commit message related to JRA-23013", "<a href=\"" + PREFIX + "-10\">CONF-10</a> Some commit message related to " +
+				"<a href=\"https://jira.atlassian.com/browse/JRA-23013\">JRA-23013</a>");
 	}
 
 	@Test
 	public void lowerCaseJiraCodesAreIgnored() {
 		test("conf-10 Some commit message", "conf-10 Some commit message");
 	}
-
 
 	@Test
 	public void urlWithTrailingSlashHasItRemovedCorrectly() {

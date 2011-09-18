@@ -15,22 +15,17 @@ public class JiraIssueLinkConverter implements MessageConverter {
 		this.log = log;
 		// strip off trailing slash
 		urlPrefix = urlPrefix.endsWith("/") ? urlPrefix.substring(0, urlPrefix.length() - 2) : urlPrefix;
-		// strip off jira code
+		// strip off jira project code
 		this.urlPrefix = urlPrefix.substring(0, urlPrefix.lastIndexOf("/") + 1);
-		this.pattern = Pattern.compile("(.*[^A-Z]|)([A-Z]+-[0-9]+)(.*)");
+		this.pattern = Pattern.compile("[A-Z]+-[0-9]+");
 	}
 
 	@Override
 	public String formatCommitMessage(String original) {
 		try {
 			Matcher matcher = pattern.matcher(original);
-			if (matcher.matches()) {
-				String startText = matcher.group(1);
-				String jiraCode = matcher.group(2);
-				String endText = matcher.group(3);
-				String result = matcher.replaceAll("<a href=\"" + urlPrefix + jiraCode + "\">" + jiraCode + "</a>");
-				return startText + result + endText;
-			}
+				String result = matcher.replaceAll("<a href=\"" + urlPrefix + "$0\">$0</a>");
+				return result;
 		} catch (Exception e) {
 			// log, but don't let this small setback fail the build
 			log.info("Unable to parse issue tracking URL in commit message: " + original, e);
