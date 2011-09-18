@@ -24,7 +24,15 @@ in your target folder:
 		</executions>
 	</plugin>
 
-The following example shows all the possible configuration values.
+HTML reports will render issue codes as links if you have your issue tracking system is defined in your pom file.
+Currently only Jira and GitHub issue tracking is supported.
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/danielflower/maven-gitlog-plugin/issues</url>
+	</issueManagement>
+
+The following example shows all the possible configuration values with default values overridden.
 
 	<plugin>
 		<groupId>com.github.danielflower.mavenplugins</groupId>
@@ -38,6 +46,8 @@ The following example shows all the possible configuration values.
 			<generateSimpleHTMLChangeLog>true</generateSimpleHTMLChangeLog>
 			<simpleHTMLChangeLogFilename>changelog-${project.version}.html</simpleHTMLChangeLogFilename>
 			<reportTitle>Changelog for ${project.name} version ${project.version}</reportTitle>
+			<issueManagementSystem>GitHub issue tracker</issueManagementSystem>
+			<issueManagementUrl>https://github.com/danielflower/maven-gitlog-plugin/issues</issueManagementUrl>
 		</configuration>
 		<executions>
 			<execution>
