@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-// Not unit tests, but a way to manually observe the output during maven test phase
+// Not unit tests as such, but a way to manually observe the output during maven test phase
 public class GeneratorTest {
 
 	@Test
