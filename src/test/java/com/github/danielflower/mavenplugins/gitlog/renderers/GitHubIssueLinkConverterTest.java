@@ -70,8 +70,8 @@ public class GitHubIssueLinkConverterTest {
 	@Test
 	public void multipleIssueNumbersAreAllRendered() {
 		test("#1 Some commit message. Closes gh-10 it's true, also gh-11 and GH-13",
-				"Some commit message. Closes <a href=\"" + PREFIX + "10\">gh-10</a> it's true, also <a href=\""
-						+ PREFIX + "\"10\">gh-11</a> and <a href=\"" + PREFIX + "10\">GH-13</a>");
+				"<a href=\"https://github.com/danielflower/maven-gitlog-plugin/issues/1\">#1</a> Some commit message. Closes <a href=\"" + PREFIX + "10\">gh-10</a> it's true, also <a href=\""
+						+ PREFIX + "11\">gh-11</a> and <a href=\"" + PREFIX + "13\">GH-13</a>");
 	}
 
 	@Test

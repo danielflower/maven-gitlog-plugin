@@ -14,21 +14,15 @@ public class GitHubIssueLinkConverter implements MessageConverter {
 	public GitHubIssueLinkConverter(Log log, String urlPrefix) {
 		this.log = log;
 		this.urlPrefix = urlPrefix.endsWith("/") ? urlPrefix : urlPrefix + "/";
-		this.pattern = Pattern.compile("(.*)(GH-[0-9]+|#[0-9]+)(.*)", Pattern.CASE_INSENSITIVE);
+		this.pattern = Pattern.compile("(GH-|#)([0-9]+)", Pattern.CASE_INSENSITIVE);
 	}
 
 	@Override
 	public String formatCommitMessage(String original) {
 		try {
 			Matcher matcher = pattern.matcher(original);
-			if (matcher.matches()) {
-				String startText = matcher.group(1);
-				String group = matcher.group(2);
-				String endText = matcher.group(3);
-				String number = getNumberFrom(group);
-				String result = matcher.replaceAll("<a href=\"" + urlPrefix + number + "\">" + group + "</a>");
-				return startText + result + endText;
-			}
+			String result = matcher.replaceAll("<a href=\"" + urlPrefix + "$2\">$0</a>");
+			return result;
 		} catch (Exception e) {
 			// log, but don't let this small setback fail the build
 			log.info("Unable to parse issue tracking URL in commit message: " + original, e);

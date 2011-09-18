@@ -153,7 +153,7 @@ public class GenerateMojo extends AbstractMojo {
 			if (issueManagementUrl != null && issueManagementUrl.contains("://")) {
 				String system = ("" + issueManagementSystem).toLowerCase();
 				if (system.contains("jira")) {
-					converter = new NullMessageConverter();
+					converter = new JiraIssueLinkConverter(getLog(), issueManagementUrl);
 				} else if (system.contains("github")) {
 					converter = new GitHubIssueLinkConverter(getLog(), issueManagementUrl);
 				}
