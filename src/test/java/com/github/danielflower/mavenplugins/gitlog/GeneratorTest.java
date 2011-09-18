@@ -1,9 +1,6 @@
 package com.github.danielflower.mavenplugins.gitlog;
 
-import com.github.danielflower.mavenplugins.gitlog.renderers.ChangeLogRenderer;
-import com.github.danielflower.mavenplugins.gitlog.renderers.MavenLoggerRenderer;
-import com.github.danielflower.mavenplugins.gitlog.renderers.PlainTextRenderer;
-import com.github.danielflower.mavenplugins.gitlog.renderers.SimpleHtmlRenderer;
+import com.github.danielflower.mavenplugins.gitlog.renderers.*;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugin.logging.SystemStreamLog;
 import org.junit.Test;
@@ -32,7 +29,8 @@ public class GeneratorTest {
 	@Test
 	public void writeSimpleHtmlLogToFile() throws Exception {
 		Log log = new SystemStreamLog();
-		ChangeLogRenderer renderer = new SimpleHtmlRenderer(log, new File("target"), "changelog.html");
+		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, "https://github.com/danielflower/maven-gitlog-plugin/issues/");
+		ChangeLogRenderer renderer = new SimpleHtmlRenderer(log, new File("target"), "changelog.html", messageConverter);
 		generateReport(log, renderer);
 	}
 

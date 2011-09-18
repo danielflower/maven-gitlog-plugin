@@ -17,9 +17,11 @@ public class SimpleHtmlRenderer extends FileRenderer {
 	private String title;
 	private StringBuilder tableRows = new StringBuilder();
 	private String template;
+	private final MessageConverter messageConverter;
 
-	public SimpleHtmlRenderer(Log log, File targetFolder, String filename) throws IOException {
+	public SimpleHtmlRenderer(Log log, File targetFolder, String filename, MessageConverter messageConverter) throws IOException {
 		super(log, targetFolder, filename);
+		this.messageConverter = messageConverter;
 
 		InputStream templateStream = getClass().getResourceAsStream("/html/SimpleHtmlTemplate.html");
 		this.template = convertStreamToString(templateStream);
@@ -47,7 +49,8 @@ public class SimpleHtmlRenderer extends FileRenderer {
 	@Override
 	public void renderCommit(RevCommit commit) throws IOException {
 		String date = Formatter.formatDateTime(commit.getCommitTime());
-		String message = htmlEncode(commit.getShortMessage());
+		String message = messageConverter.formatCommitMessage(htmlEncode(commit.getShortMessage()));
+
 		String author = htmlEncode(commit.getCommitterIdent().getName());
 		String committer = htmlEncode(commit.getCommitterIdent().getName());
 		String authorHtml = "<span class=\"committer\">" + commit.getAuthorIdent().getName() + "</span>";

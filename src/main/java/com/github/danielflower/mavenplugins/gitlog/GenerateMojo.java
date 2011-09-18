@@ -1,9 +1,6 @@
 package com.github.danielflower.mavenplugins.gitlog;
 
-import com.github.danielflower.mavenplugins.gitlog.renderers.ChangeLogRenderer;
-import com.github.danielflower.mavenplugins.gitlog.renderers.MavenLoggerRenderer;
-import com.github.danielflower.mavenplugins.gitlog.renderers.PlainTextRenderer;
-import com.github.danielflower.mavenplugins.gitlog.renderers.SimpleHtmlRenderer;
+import com.github.danielflower.mavenplugins.gitlog.renderers.*;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -73,6 +70,25 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	private boolean verbose;
 
+	/**
+	 * Used to create links to your issue tracking system for HTML reports. If unspecified, it will try to use the value
+	 * specified in the issueManagement section of your project's POM.  The following values are supported:
+	 * a value containing the string "github" for the GitHub Issue tracking software;
+	 * a value containing the string "jira" for Jira tracking software.
+	 * Any other value will result in no links being made.
+	 *
+	 * @parameter expression="${project.issueManagement.system}"
+	 */
+	private String issueManagementSystem;
+
+	/**
+	 * Used to create links to your issue tracking system for HTML reports. If unspecified, it will try to use the value
+	 * specified in the issueManagement section of your project's POM.
+	 *
+	 * @parameter expression="${project.issueManagement.url}"
+	 */
+	private String issueManagementUrl;
+
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("Generating changelog in " + outputDirectory.getAbsolutePath()
 				+ " with title " + reportTitle);
@@ -119,7 +135,8 @@ public class GenerateMojo extends AbstractMojo {
 		}
 
 		if (generateSimpleHTMLChangeLog) {
-			renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, simpleHTMLChangeLogFilename));
+			MessageConverter messageConverter = getCommitMessageConverter();
+			renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, simpleHTMLChangeLogFilename, messageConverter));
 		}
 
 		if (verbose) {
@@ -127,6 +144,28 @@ public class GenerateMojo extends AbstractMojo {
 		}
 
 		return renderers;
+	}
+
+	private MessageConverter getCommitMessageConverter() {
+		getLog().debug("Trying to load issue tracking info: " + issueManagementSystem + " / " + issueManagementUrl);
+		MessageConverter converter = null;
+		try {
+			if (issueManagementUrl != null && issueManagementUrl.contains("://")) {
+				String system = ("" + issueManagementSystem).toLowerCase();
+				if (system.contains("jira")) {
+					converter = new NullMessageConverter();
+				} else if (system.contains("github")) {
+					converter = new GitHubIssueLinkConverter(getLog(), issueManagementUrl);
+				}
+			}
+		} catch (Exception ex) {
+			getLog().warn("Could not load issue management system information; no HTML links will be generated.", ex);
+		}
+		if (converter == null) {
+			converter = new NullMessageConverter();
+		}
+		getLog().debug("Using tracker " + converter.getClass().getSimpleName());
+		return converter;
 	}
 
 }
