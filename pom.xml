@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.apache.maven.plugins</groupId>
+	<groupId>com.github.danielflower.mavenplugins</groupId>
 	<artifactId>maven-gitlog-plugin</artifactId>
-	<version>1.4.4-SNAPSHOT</version>
+	<version>1.4.5-SNAPSHOT</version>
 
 	<packaging>maven-plugin</packaging>
 	<name>Maven Git Log Plugin</name>
