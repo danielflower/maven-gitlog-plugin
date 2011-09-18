@@ -7,6 +7,7 @@ class Defaults {
 
 	public static final List<CommitFilter> COMMIT_FILTERS = Arrays.asList(
 			new MavenReleasePluginMessageFilter(),
+			new MergeCommitFilter(),
 			new DuplicateCommitMessageFilter()
 	);
 
