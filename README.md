@@ -10,7 +10,7 @@ Sample output
 
 Using the default plugin parameters, the changelog for this project looks like the following:
 
-[HTML example](http://danielflower.github.com/maven-gitlog-plugin/samples/changelog.html)
+[HTML example](http://danielflower.github.com/maven-gitlog-plugin/samples/changelog.html) /
 [Text example](http://danielflower.github.com/maven-gitlog-plugin/samples/changelog.txt)
 
 Configuring the plugin
