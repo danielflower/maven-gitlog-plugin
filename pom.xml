@@ -139,20 +139,4 @@
 		<url>https://github.com/danielflower/maven-gitlog-plugin/issues</url>
 	</issueManagement>
 
-	<distributionManagement>
-		<repository>
-			<id>temp</id>
-			<layout>default</layout>
-			<name>Daniels Local Repo</name>
-			<url>file:///C:/Users/Daniel/.m2/releases/</url>
-		</repository>
-		<snapshotRepository>
-			<id>temp</id>
-			<layout>default</layout>
-			<name>Daniels Local Repo</name>
-			<url>file:///C:/Users/Daniel/.m2/releases/</url>
-		</snapshotRepository>
-	</distributionManagement>
-
-
 </project>
