@@ -47,13 +47,15 @@ The following example shows all the possible configuration values with default v
 		<artifactId>maven-gitlog-plugin</artifactId>
 		<version>1.4.7</version>
 		<configuration>
+			<reportTitle>Changelog for ${project.name} version ${project.version}</reportTitle>
 			<verbose>true</verbose>
+			<outputDirectory>target/docs</outputDirectory>
 			<generatePlainTextChangeLog>true</generatePlainTextChangeLog>
 			<plainTextChangeLogFilename>changelog-${project.version}.txt</plainTextChangeLogFilename>
-			<outputDirectory>target/docs</outputDirectory>
 			<generateSimpleHTMLChangeLog>true</generateSimpleHTMLChangeLog>
 			<simpleHTMLChangeLogFilename>changelog-${project.version}.html</simpleHTMLChangeLogFilename>
-			<reportTitle>Changelog for ${project.name} version ${project.version}</reportTitle>
+			<generateHTMLTableOnlyChangeLog>true</generateHTMLTableOnlyChangeLog>
+			<htmlTableOnlyChangeLogFilename>changelog-${project.version}-tableonly.html</htmlTableOnlyChangeLogFilename>
 			<issueManagementSystem>GitHub issue tracker</issueManagementSystem>
 			<issueManagementUrl>https://github.com/danielflower/maven-gitlog-plugin/issues</issueManagementUrl>
 		</configuration>

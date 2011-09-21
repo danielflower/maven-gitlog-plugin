@@ -64,6 +64,23 @@ public class GenerateMojo extends AbstractMojo {
 	private String simpleHTMLChangeLogFilename;
 
 	/**
+	 * If true, then an HTML changelog which contains only a table element will be generated.
+	 * This incomplete HTML page is suitable for inclusion in other webpages, for example you
+	 * may want to embed it in a wiki page.
+	 *
+	 * @parameter default-value="false"
+	 */
+	private boolean generateHTMLTableOnlyChangeLog;
+
+	/**
+	 * The filename of the HTML table changelog, if generated.
+	 *
+	 * @parameter default-value="changelogtable.html"
+	 * @required
+	 */
+	private String htmlTableOnlyChangeLogFilename;
+
+	/**
 	 * If true, the changelog will be printed to the Maven build log during packaging.
 	 *
 	 * @parameter default-value="false"
@@ -134,9 +151,14 @@ public class GenerateMojo extends AbstractMojo {
 			renderers.add(new PlainTextRenderer(getLog(), outputDirectory, plainTextChangeLogFilename));
 		}
 
-		if (generateSimpleHTMLChangeLog) {
+		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog) {
 			MessageConverter messageConverter = getCommitMessageConverter();
-			renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, simpleHTMLChangeLogFilename, messageConverter));
+			if (generateSimpleHTMLChangeLog) {
+				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, simpleHTMLChangeLogFilename, messageConverter, false));
+			}
+			if (generateHTMLTableOnlyChangeLog) {
+				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, htmlTableOnlyChangeLogFilename, messageConverter, true));
+			}
 		}
 
 		if (verbose) {

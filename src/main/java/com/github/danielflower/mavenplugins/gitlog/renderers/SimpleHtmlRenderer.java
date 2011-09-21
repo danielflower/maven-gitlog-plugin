@@ -15,71 +15,86 @@ import static com.github.danielflower.mavenplugins.gitlog.renderers.Formatter.NE
 public class SimpleHtmlRenderer extends FileRenderer {
 
 	private String title;
-	private StringBuilder tableRows = new StringBuilder();
 	private String template;
-	private final MessageConverter messageConverter;
+	protected StringBuilder tableHtml = new StringBuilder();
+	protected final MessageConverter messageConverter;
+	private final boolean tableOnly;
 
-	public SimpleHtmlRenderer(Log log, File targetFolder, String filename, MessageConverter messageConverter) throws IOException {
+	public SimpleHtmlRenderer(Log log, File targetFolder, String filename, MessageConverter messageConverter, boolean tableOnly) throws IOException {
 		super(log, targetFolder, filename);
 		this.messageConverter = messageConverter;
+		this.tableOnly = tableOnly;
 
-		InputStream templateStream = getClass().getResourceAsStream("/html/SimpleHtmlTemplate.html");
-		this.template = convertStreamToString(templateStream);
-		templateStream.close();
+		if (!tableOnly) {
+			InputStream templateStream = getClass().getResourceAsStream("/html/SimpleHtmlTemplate.html");
+			this.template = convertStreamToString(templateStream);
+			templateStream.close();
+		}
 
+	}
+
+	protected static String htmlEncode(String input) {
+		return StringEscapeUtils.escapeHtml4(input);
 	}
 
 	@Override
 	public void renderHeader(String reportTitle) throws IOException {
 		this.title = reportTitle;
+		tableHtml.append("\t<table class=\"changelog\">")
+				.append(NEW_LINE)
+				.append("\t\t<tbody>")
+				.append(NEW_LINE);
 	}
 
 	@Override
 	public void renderTag(RevTag tag) throws IOException {
-		tableRows.append("\t\t<tr class=\"tag\"><td colspan=3>")
-				.append(htmlEncode(tag.getTagName()))
+		tableHtml.append("\t\t<tr class=\"tag\"><td colspan=3>")
+				.append(SimpleHtmlRenderer.htmlEncode(tag.getTagName()))
 				.append("</td></tr>")
 				.append(NEW_LINE);
-	}
-
-	private static String htmlEncode(String input) {
-		return StringEscapeUtils.escapeHtml4(input);
 	}
 
 	@Override
 	public void renderCommit(RevCommit commit) throws IOException {
 		String date = Formatter.formatDateTime(commit.getCommitTime());
-		String message = messageConverter.formatCommitMessage(htmlEncode(commit.getShortMessage()));
+		String message = messageConverter.formatCommitMessage(SimpleHtmlRenderer.htmlEncode(commit.getShortMessage()));
 
-		String author = htmlEncode(commit.getCommitterIdent().getName());
-		String committer = htmlEncode(commit.getCommitterIdent().getName());
+		String author = SimpleHtmlRenderer.htmlEncode(commit.getCommitterIdent().getName());
+		String committer = SimpleHtmlRenderer.htmlEncode(commit.getCommitterIdent().getName());
 		String authorHtml = "<span class=\"committer\">" + commit.getAuthorIdent().getName() + "</span>";
 		if (!areSame(author, committer)) {
 			authorHtml += "and <span class=\"author\">" + author + "</span>";
 		}
 
-		tableRows.append("\t\t<tr>")
+		tableHtml.append("\t\t<tr>")
 				.append("<td class=\"date\">").append(date).append("</td>")
 				.append("<td>").append(message).append("</td>")
 				.append("<td>").append(authorHtml).append("</td>")
 				.append("</tr>").append(NEW_LINE);
 	}
 
+	@Override
+	public void renderFooter() throws IOException {
+		tableHtml.append("\t\t</tbody>")
+				.append(NEW_LINE)
+				.append("\t</table>")
+				.append(NEW_LINE);
+
+		if (tableOnly) {
+			writer.append(tableHtml.toString());
+		} else {
+			String html = template
+					.replace("{title}", htmlEncode(title))
+					.replace("{table}", tableHtml.toString());
+			writer.append(html);
+		}
+	}
+
 	private boolean areSame(String author, String committer) {
 		return ("" + author).toLowerCase().equals("" + committer.toLowerCase());
 	}
 
-	@Override
-	public void renderFooter() throws IOException {
-		String html = template
-				.replace("{title}", htmlEncode(title))
-				.replace("{rows}", tableRows.toString());
-		writer.append(html);
-	}
-
-	public String convertStreamToString(InputStream is) {
-
+	private String convertStreamToString(InputStream is) {
 		return new Scanner(is, "UTF-8").useDelimiter("\\A").next();
 	}
-
 }

@@ -30,7 +30,15 @@ public class GeneratorTest {
 	public void writeSimpleHtmlLogToFile() throws Exception {
 		Log log = new SystemStreamLog();
 		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, "https://github.com/danielflower/maven-gitlog-plugin/issues/");
-		ChangeLogRenderer renderer = new SimpleHtmlRenderer(log, new File("target"), "changelog.html", messageConverter);
+		ChangeLogRenderer renderer = new SimpleHtmlRenderer(log, new File("target"), "changelog.html", messageConverter, false);
+		generateReport(log, renderer);
+	}
+
+	@Test
+	public void writeHtmlTableOnlyLogToFile() throws Exception {
+		Log log = new SystemStreamLog();
+		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, "https://github.com/danielflower/maven-gitlog-plugin/issues/");
+		ChangeLogRenderer renderer = new SimpleHtmlRenderer(log, new File("target"), "changelogtable.html", messageConverter, true);
 		generateReport(log, renderer);
 	}
 
