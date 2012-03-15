@@ -106,6 +106,13 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	private String issueManagementUrl;
 
+	/**
+	 * If true, the changelog will include the full git message rather that the short git message
+	 *
+	 * @parameter default-value="false"
+	 */
+	private boolean fullGitMessage;
+	
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("Generating changelog in " + outputDirectory.getAbsolutePath()
 				+ " with title " + reportTitle);
@@ -148,16 +155,16 @@ public class GenerateMojo extends AbstractMojo {
 		ArrayList<ChangeLogRenderer> renderers = new ArrayList<ChangeLogRenderer>();
 
 		if (generatePlainTextChangeLog) {
-			renderers.add(new PlainTextRenderer(getLog(), outputDirectory, plainTextChangeLogFilename));
+			renderers.add(new PlainTextRenderer(getLog(), outputDirectory, plainTextChangeLogFilename, fullGitMessage));
 		}
 
 		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog) {
 			MessageConverter messageConverter = getCommitMessageConverter();
 			if (generateSimpleHTMLChangeLog) {
-				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, simpleHTMLChangeLogFilename, messageConverter, false));
+				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, simpleHTMLChangeLogFilename, fullGitMessage, messageConverter, false));
 			}
 			if (generateHTMLTableOnlyChangeLog) {
-				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, htmlTableOnlyChangeLogFilename, messageConverter, true));
+				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, htmlTableOnlyChangeLogFilename, fullGitMessage, messageConverter, true));
 			}
 		}
 
