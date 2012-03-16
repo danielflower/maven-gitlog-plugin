@@ -19,11 +19,13 @@ public class SimpleHtmlRenderer extends FileRenderer {
 	protected StringBuilder tableHtml = new StringBuilder();
 	protected final MessageConverter messageConverter;
 	private final boolean tableOnly;
+	private final boolean fullGitMessage;
 
-	public SimpleHtmlRenderer(Log log, File targetFolder, String filename, MessageConverter messageConverter, boolean tableOnly) throws IOException {
+	public SimpleHtmlRenderer(Log log, File targetFolder, String filename, boolean fullGitMessage, MessageConverter messageConverter, boolean tableOnly) throws IOException {
 		super(log, targetFolder, filename);
 		this.messageConverter = messageConverter;
 		this.tableOnly = tableOnly;
+		this.fullGitMessage = fullGitMessage;
 
 		if (!tableOnly) {
 			InputStream templateStream = getClass().getResourceAsStream("/html/SimpleHtmlTemplate.html");
@@ -34,7 +36,8 @@ public class SimpleHtmlRenderer extends FileRenderer {
 	}
 
 	protected static String htmlEncode(String input) {
-		return StringEscapeUtils.escapeHtml4(input);
+		input = StringEscapeUtils.escapeHtml4(input);
+		return input.replaceAll("\n", "<br/>");
 	}
 
 	@Override
@@ -57,7 +60,12 @@ public class SimpleHtmlRenderer extends FileRenderer {
 	@Override
 	public void renderCommit(RevCommit commit) throws IOException {
 		String date = Formatter.formatDateTime(commit.getCommitTime());
-		String message = messageConverter.formatCommitMessage(SimpleHtmlRenderer.htmlEncode(commit.getShortMessage()));
+		String message = null;
+		if (fullGitMessage){
+			message = messageConverter.formatCommitMessage(SimpleHtmlRenderer.htmlEncode(commit.getFullMessage()));
+		} else {
+			message = messageConverter.formatCommitMessage(SimpleHtmlRenderer.htmlEncode(commit.getShortMessage()));	
+		}
 
 		String author = SimpleHtmlRenderer.htmlEncode(commit.getCommitterIdent().getName());
 		String committer = SimpleHtmlRenderer.htmlEncode(commit.getCommitterIdent().getName());
