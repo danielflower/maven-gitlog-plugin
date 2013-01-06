@@ -1,6 +1,7 @@
 package com.github.danielflower.mavenplugins.gitlog;
 
 import com.github.danielflower.mavenplugins.gitlog.renderers.*;
+
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -47,6 +48,22 @@ public class GenerateMojo extends AbstractMojo {
 	 * @required
 	 */
 	private String plainTextChangeLogFilename;
+
+
+	/**
+	 * If true, then a markdown changelog will be generated.
+	 *
+	 * @parameter default-value="false"
+	 */
+	private boolean generateMarkdownChangeLog;
+
+	/**
+	 * The filename of the markdown changelog, if generated.
+	 *
+	 * @parameter default-value="changelog.md"
+	 * @required
+	 */
+	private String markdownChangeLogFilename;
 
 	/**
 	 * If true, then a simple HTML changelog will be generated.
@@ -158,13 +175,16 @@ public class GenerateMojo extends AbstractMojo {
 			renderers.add(new PlainTextRenderer(getLog(), outputDirectory, plainTextChangeLogFilename, fullGitMessage));
 		}
 
-		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog) {
+		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog || generateMarkdownChangeLog) {
 			MessageConverter messageConverter = getCommitMessageConverter();
 			if (generateSimpleHTMLChangeLog) {
 				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, simpleHTMLChangeLogFilename, fullGitMessage, messageConverter, false));
 			}
 			if (generateHTMLTableOnlyChangeLog) {
 				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, htmlTableOnlyChangeLogFilename, fullGitMessage, messageConverter, true));
+			}
+			if (generateMarkdownChangeLog) {
+				renderers.add(new MarkdownRenderer(getLog(), outputDirectory, markdownChangeLogFilename, fullGitMessage, messageConverter));
 			}
 		}
 

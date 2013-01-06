@@ -53,6 +53,8 @@ The following example shows all the possible configuration values with default v
 			<generatePlainTextChangeLog>true</generatePlainTextChangeLog>
 			<plainTextChangeLogFilename>changelog-${project.version}.txt</plainTextChangeLogFilename>
 			<generateSimpleHTMLChangeLog>true</generateSimpleHTMLChangeLog>
+			<markdownChangeLogFilename>changelog-${project.version}.md</markdownChangeLogFilename>
+			<generateMarkdownChangeLog>true</generateMarkdownChangeLog>
 			<simpleHTMLChangeLogFilename>changelog-${project.version}.html</simpleHTMLChangeLogFilename>
 			<generateHTMLTableOnlyChangeLog>true</generateHTMLTableOnlyChangeLog>
 			<htmlTableOnlyChangeLogFilename>changelog-${project.version}-tableonly.html</htmlTableOnlyChangeLogFilename>
