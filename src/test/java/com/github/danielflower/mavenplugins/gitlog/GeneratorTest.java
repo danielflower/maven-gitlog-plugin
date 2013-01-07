@@ -27,6 +27,13 @@ public class GeneratorTest {
 	}
 
 	@Test
+	public void writePlainTextFullLogToFile() throws Exception {
+		Log log = new SystemStreamLog();
+		ChangeLogRenderer renderer = new PlainTextRenderer(log, new File("target"), "changelogFull.txt", true);
+		generateReport(log, renderer);
+	}
+
+	@Test
 	public void writeSimpleHtmlLogToFile() throws Exception {
 		Log log = new SystemStreamLog();
 		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, "https://github.com/danielflower/maven-gitlog-plugin/issues/");
@@ -39,6 +46,14 @@ public class GeneratorTest {
 		Log log = new SystemStreamLog();
 		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, "https://github.com/danielflower/maven-gitlog-plugin/issues/");
 		ChangeLogRenderer renderer = new SimpleHtmlRenderer(log, new File("target"), "changelogtable.html", false, messageConverter, true);
+		generateReport(log, renderer);
+	}
+
+	@Test
+	public void writeMarkdownLogToFile() throws Exception {
+		Log log = new SystemStreamLog();
+		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, "https://github.com/danielflower/maven-gitlog-plugin/issues/");
+		ChangeLogRenderer renderer = new MarkdownRenderer(log, new File("target"), "changelog.md", false, messageConverter);
 		generateReport(log, renderer);
 	}
 
