@@ -10,7 +10,7 @@
 
 	<groupId>com.github.danielflower.mavenplugins</groupId>
 	<artifactId>maven-gitlog-plugin</artifactId>
-	<version>1.4.12-SNAPSHOT</version>
+	<version>1.5.0</version>
 
 	<packaging>maven-plugin</packaging>
 	<name>Maven Git Log Plugin</name>
