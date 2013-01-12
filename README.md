@@ -115,3 +115,6 @@ a changelog to the command line:
 If you want to see a git log without having the plugin defined in your pom, you can run:
 
 	$ mvn com.github.danielflower.mavenplugins:maven-gitlog-plugin:show
+
+
+[![Build Status](https://travis-ci.org/danielflower/maven-gitlog-plugin.png?branch=master)
