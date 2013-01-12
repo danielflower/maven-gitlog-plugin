@@ -1,4 +1,4 @@
-[Build Status](https://travis-ci.org/danielflower/maven-gitlog-plugin.png?branch=master)
+![Build Status](https://travis-ci.org/danielflower/maven-gitlog-plugin.png?branch=master)
 
 Overview
 ========
