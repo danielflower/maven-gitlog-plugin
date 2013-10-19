@@ -11,6 +11,8 @@ import java.util.Arrays;
 
 // Not unit tests as such, but a way to manually observe the output during maven test phase
 public class GeneratorTest {
+	private static final String THIS_PLUGIN_ISSUES = "https://github.com/danielflower/maven-gitlog-plugin/issues/";
+	private static final String TARGET_DIR = "target";
 
 	@Test
 	public void writeLogToStandardOutput() throws Exception {
@@ -22,38 +24,38 @@ public class GeneratorTest {
 	@Test
 	public void writePlainTextLogToFile() throws Exception {
 		Log log = new SystemStreamLog();
-		ChangeLogRenderer renderer = new PlainTextRenderer(log, new File("target"), "changelog.txt", false);
+		ChangeLogRenderer renderer = new PlainTextRenderer(log, new File(TARGET_DIR), "changelog.txt", false);
 		generateReport(log, renderer);
 	}
 
 	@Test
 	public void writePlainTextFullLogToFile() throws Exception {
 		Log log = new SystemStreamLog();
-		ChangeLogRenderer renderer = new PlainTextRenderer(log, new File("target"), "changelogFull.txt", true);
+		ChangeLogRenderer renderer = new PlainTextRenderer(log, new File(TARGET_DIR), "changelogFull.txt", true);
 		generateReport(log, renderer);
 	}
 
 	@Test
 	public void writeSimpleHtmlLogToFile() throws Exception {
 		Log log = new SystemStreamLog();
-		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, "https://github.com/danielflower/maven-gitlog-plugin/issues/");
-		ChangeLogRenderer renderer = new SimpleHtmlRenderer(log, new File("target"), "changelog.html", false, messageConverter, false);
+		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, THIS_PLUGIN_ISSUES);
+		ChangeLogRenderer renderer = new SimpleHtmlRenderer(log, new File(TARGET_DIR), "changelog.html", false, messageConverter, false);
 		generateReport(log, renderer);
 	}
 
 	@Test
 	public void writeHtmlTableOnlyLogToFile() throws Exception {
 		Log log = new SystemStreamLog();
-		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, "https://github.com/danielflower/maven-gitlog-plugin/issues/");
-		ChangeLogRenderer renderer = new SimpleHtmlRenderer(log, new File("target"), "changelogtable.html", false, messageConverter, true);
+		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, THIS_PLUGIN_ISSUES);
+		ChangeLogRenderer renderer = new SimpleHtmlRenderer(log, new File(TARGET_DIR), "changelogtable.html", false, messageConverter, true);
 		generateReport(log, renderer);
 	}
 
 	@Test
 	public void writeMarkdownLogToFile() throws Exception {
 		Log log = new SystemStreamLog();
-		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, "https://github.com/danielflower/maven-gitlog-plugin/issues/");
-		ChangeLogRenderer renderer = new MarkdownRenderer(log, new File("target"), "changelog.md", false, messageConverter);
+		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, THIS_PLUGIN_ISSUES);
+		ChangeLogRenderer renderer = new MarkdownRenderer(log, new File(TARGET_DIR), "changelog.md", false, messageConverter);
 		generateReport(log, renderer);
 	}
 
