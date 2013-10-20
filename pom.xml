@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>com.madgag</groupId>
 			<artifactId>org.eclipse.jgit</artifactId>
-			<version>1.0.99.0.2-UNOFFICIAL-ROBERTO-RELEASE</version>
+			<version>2.99.99.2.0-UNOFFICIAL-ROBERTO-RELEASE</version>
 			<exclusions>
 				<exclusion>
 					<groupId>com.jcraft</groupId>
