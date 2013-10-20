@@ -12,7 +12,7 @@ public class Formatter {
 	
 	private static final String DEFAULT_FORMAT = "yyyy-MM-dd HH:mm:ss Z";
 
-	private static DateFormat dateFormat;
+	private static DateFormat dateFormat = new SimpleDateFormat(DEFAULT_FORMAT);
 
 	public static String formatDateTime() {
 		return formatDateTime(new Date());
