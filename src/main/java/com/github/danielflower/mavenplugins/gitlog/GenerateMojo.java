@@ -122,6 +122,13 @@ public class GenerateMojo extends AbstractMojo {
 	 * @parameter expression="${project.issueManagement.url}"
 	 */
 	private String issueManagementUrl;
+	
+	/**
+	 * Used to set date format in log messages. If unspecified, will be used default format 'yyyy-MM-dd HH:mm:ss Z'.
+	 * 
+	 * @parameter default-value=""
+	 */
+	private String dateFormat;
 
 	/**
 	 * If true, the changelog will include the full git message rather that the short git message
@@ -161,6 +168,10 @@ public class GenerateMojo extends AbstractMojo {
 			return;
 		}
 
+		if (!"".equals(dateFormat)) {
+			Formatter.setFormat(dateFormat, getLog());
+		}
+		
 		try {
 			generator.generate(reportTitle);
 		} catch (IOException e) {

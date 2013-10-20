@@ -1,7 +1,7 @@
 package com.github.danielflower.mavenplugins.gitlog.renderers;
 
-import junit.framework.Assert;
-import org.apache.maven.plugin.logging.SystemStreamLog;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 public class MarkdownLinkConverterTest {
@@ -32,7 +32,7 @@ public class MarkdownLinkConverterTest {
 
 	private void test(String input, String expectedOutput) {
 		String actual = converter.formatCommitMessage(input);
-		Assert.assertEquals("Input: " + input, expectedOutput, actual);
+		assertEquals("Input: " + input, expectedOutput, actual);
 	}
 
 }
