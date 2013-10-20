@@ -1,6 +1,6 @@
 package com.github.danielflower.mavenplugins.gitlog.renderers;
 
-import junit.framework.Assert;
+import static org.junit.Assert.assertEquals;
 import org.apache.maven.plugin.logging.SystemStreamLog;
 import org.junit.Test;
 
@@ -79,12 +79,12 @@ public class GitHubIssueLinkConverterTest {
 		GitHubIssueLinkConverter converter = new GitHubIssueLinkConverter(new SystemStreamLog(),
 				"https://github.com/danielflower/maven-gitlog-plugin/issues");
 		String actual = converter.formatCommitMessage("#10 Some commit message");
-		Assert.assertEquals("<a href=\"https://github.com/danielflower/maven-gitlog-plugin/issues/10\">#10</a> Some commit message", actual);
+		assertEquals("<a href=\"https://github.com/danielflower/maven-gitlog-plugin/issues/10\">#10</a> Some commit message", actual);
 	}
 
 	private void test(String input, String expectedOutput) {
 		String actual = converter.formatCommitMessage(input);
-		Assert.assertEquals("Input: " + input, expectedOutput, actual);
+		assertEquals("Input: " + input, expectedOutput, actual);
 	}
 
 }

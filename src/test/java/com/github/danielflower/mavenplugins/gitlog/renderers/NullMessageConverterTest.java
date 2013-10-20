@@ -1,6 +1,7 @@
 package com.github.danielflower.mavenplugins.gitlog.renderers;
 
-import junit.framework.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 public class NullMessageConverterTest {
@@ -9,7 +10,7 @@ public class NullMessageConverterTest {
 	public void thatWhichGoesInIsThatWhichComesOutAgain() {
 		NullMessageConverter converter = new NullMessageConverter();
 		String someText = "Yeah £1 #1 GH-1 yeah yeah";
-		Assert.assertEquals(someText, converter.formatCommitMessage(someText));
+		assertEquals(someText, converter.formatCommitMessage(someText));
 	}
 
 }

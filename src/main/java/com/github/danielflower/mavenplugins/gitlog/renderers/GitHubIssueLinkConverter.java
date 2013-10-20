@@ -29,8 +29,4 @@ public class GitHubIssueLinkConverter implements MessageConverter {
 		}
 		return original;
 	}
-
-	private String getNumberFrom(String input) {
-		return Pattern.compile("[^0-9]").matcher(input).replaceAll("");
-	}
 }

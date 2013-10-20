@@ -1,6 +1,6 @@
 package com.github.danielflower.mavenplugins.gitlog.renderers;
 
-import junit.framework.Assert;
+import static org.junit.Assert.assertEquals;
 import org.apache.maven.plugin.logging.SystemStreamLog;
 import org.junit.Test;
 
@@ -48,12 +48,12 @@ public class JiraIssueLinkConverterTest {
 		JiraIssueLinkConverter converter = new JiraIssueLinkConverter(new SystemStreamLog(),
 				"https://jira.atlassian.com/browse/CONF/");
 		String actual = converter.formatCommitMessage("CONF-10 Some commit message");
-		Assert.assertEquals("<a href=\"https://jira.atlassian.com/browse/CONF-10\">CONF-10</a> Some commit message", actual);
+		assertEquals("<a href=\"https://jira.atlassian.com/browse/CONF-10\">CONF-10</a> Some commit message", actual);
 	}
 
 	private void test(String input, String expectedOutput) {
 		String actual = converter.formatCommitMessage(input);
-		Assert.assertEquals("Input: " + input, expectedOutput, actual);
+		assertEquals("Input: " + input, expectedOutput, actual);
 	}
 
 }
