@@ -64,6 +64,7 @@ The following example shows all the possible configuration values with default v
 			<issueManagementSystem>GitHub issue tracker</issueManagementSystem>
 			<issueManagementUrl>https://github.com/danielflower/maven-gitlog-plugin/issues</issueManagementUrl>
 			<fullGitMessage>true</fullGitMessage>
+			<dateFormat>yyyy-MM-dd HH:mm:ss Z</dateFormat>
 		</configuration>
 		<executions>
 			<execution>
