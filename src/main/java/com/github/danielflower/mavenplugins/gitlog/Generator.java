@@ -14,6 +14,7 @@ import org.eclipse.jgit.revwalk.RevWalk;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,22 +49,30 @@ class Generator {
 	}
 
 	public void generate(String reportTitle) throws IOException {
+		generate(reportTitle, new Date(0l));
+	}
+	
+	public void generate(String reportTitle, Date includeCommitsAfter) throws IOException {
 		for (ChangeLogRenderer renderer : renderers) {
 			renderer.renderHeader(reportTitle);
 		}
 
+		long dateInSecondsSinceEpoch = includeCommitsAfter.getTime() / 1000;
 		for (RevCommit commit : walk) {
-			List<RevTag> revTags = commitIDToTagsMap.get(commit.name());
-			for (ChangeLogRenderer renderer : renderers) {
-				if (revTags != null) {
-					for (RevTag revTag : revTags) {
-						renderer.renderTag(revTag);
+			int commitTimeInSecondsSinceEpoch = commit.getCommitTime();
+			if (dateInSecondsSinceEpoch < commitTimeInSecondsSinceEpoch) {
+				List<RevTag> revTags = commitIDToTagsMap.get(commit.name());
+				for (ChangeLogRenderer renderer : renderers) {
+					if (revTags != null) {
+						for (RevTag revTag : revTags) {
+							renderer.renderTag(revTag);
+						}
 					}
 				}
-			}
-			if (show(commit)) {
-				for (ChangeLogRenderer renderer : renderers) {
-					renderer.renderCommit(commit);
+				if (show(commit)) {
+					for (ChangeLogRenderer renderer : renderers) {
+						renderer.renderCommit(commit);
+					}
 				}
 			}
 		}
