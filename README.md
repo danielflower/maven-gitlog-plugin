@@ -74,6 +74,16 @@ The following example shows all the possible configuration values with default v
 				</goals>
 			</execution>
 		</executions>
+		<dependencies>
+			<!-- Maven artifact that contains maven-gitlog-plugin CommitFilter to be used -->
+			<!-- CommitFilters are loaded using the SPI mechanism Provided by the JRE:    -->
+			<!-- http://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html    -->
+			<dependency>
+				<groupId>es.e-ucm.ead</groupId>
+				<artifactId>gitlog-maven-plugin-ext</artifactId>
+				<version>0.1.1</version>
+			</dependency>
+		</dependencies>
 	</plugin>
 
 Including the changelog in your Maven assembly
