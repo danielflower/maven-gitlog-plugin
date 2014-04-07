@@ -65,6 +65,7 @@ The following example shows all the possible configuration values with default v
 			<issueManagementUrl>https://github.com/danielflower/maven-gitlog-plugin/issues</issueManagementUrl>
 			<fullGitMessage>true</fullGitMessage>
 			<dateFormat>yyyy-MM-dd HH:mm:ss Z</dateFormat>
+			<includeCommitsAfter>2014-04-01 00:00:00.0 AM</includeCommitsAfter>
 		</configuration>
 		<executions>
 			<execution>
