@@ -25,7 +25,7 @@ in your target folder:
 	<plugin>
 		<groupId>com.github.danielflower.mavenplugins</groupId>
 		<artifactId>maven-gitlog-plugin</artifactId>
-		<version>1.5.2</version>
+		<version>1.6.0</version>
 		<executions>
 			<execution>
 				<goals>
@@ -48,7 +48,7 @@ The following example shows all the possible configuration values with default v
 	<plugin>
 		<groupId>com.github.danielflower.mavenplugins</groupId>
 		<artifactId>maven-gitlog-plugin</artifactId>
-		<version>1.5.2</version>
+		<version>1.6.0</version>
 		<configuration>
 			<reportTitle>Changelog for ${project.name} version ${project.version}</reportTitle>
 			<verbose>true</verbose>
