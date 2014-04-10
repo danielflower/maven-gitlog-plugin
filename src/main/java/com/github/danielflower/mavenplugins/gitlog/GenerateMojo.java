@@ -9,6 +9,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -137,6 +138,13 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	private boolean fullGitMessage;
 	
+	/**
+	 * Include in the changelog the commits after this parameter value.
+	 * 
+	 * @parameter default-value="1970-01-01 00:00:00.0 AM"
+	 */
+	private Date includeCommitsAfter;
+	
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("Generating changelog in " + outputDirectory.getAbsolutePath()
 				+ " with title " + reportTitle);
@@ -173,7 +181,7 @@ public class GenerateMojo extends AbstractMojo {
 		}
 		
 		try {
-			generator.generate(reportTitle);
+			generator.generate(reportTitle, includeCommitsAfter);
 		} catch (IOException e) {
 			getLog().warn("Error while generating changelog.  Some changelogs may be incomplete or corrupt.", e);
 		}

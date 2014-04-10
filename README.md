@@ -65,6 +65,7 @@ The following example shows all the possible configuration values with default v
 			<issueManagementUrl>https://github.com/danielflower/maven-gitlog-plugin/issues</issueManagementUrl>
 			<fullGitMessage>true</fullGitMessage>
 			<dateFormat>yyyy-MM-dd HH:mm:ss Z</dateFormat>
+			<includeCommitsAfter>2014-04-01 00:00:00.0 AM</includeCommitsAfter>
 		</configuration>
 		<executions>
 			<execution>
@@ -73,6 +74,16 @@ The following example shows all the possible configuration values with default v
 				</goals>
 			</execution>
 		</executions>
+		<dependencies>
+			<!-- Maven artifact that contains maven-gitlog-plugin CommitFilter to be used -->
+			<!-- CommitFilters are loaded using the SPI mechanism Provided by the JRE:    -->
+			<!-- http://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html    -->
+			<dependency>
+				<groupId>es.e-ucm.ead</groupId>
+				<artifactId>gitlog-maven-plugin-ext</artifactId>
+				<version>0.1.1</version>
+			</dependency>
+		</dependencies>
 	</plugin>
 
 Including the changelog in your Maven assembly
