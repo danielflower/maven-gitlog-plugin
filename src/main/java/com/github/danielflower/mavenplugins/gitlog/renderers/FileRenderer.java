@@ -5,7 +5,9 @@ import org.apache.maven.plugin.logging.Log;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Writer;
+import java.util.Scanner;
 
 public abstract class FileRenderer implements ChangeLogRenderer {
 
@@ -32,5 +34,9 @@ public abstract class FileRenderer implements ChangeLogRenderer {
 				// ignore
 			}
 		}
+	}
+	
+	protected String convertStreamToString(InputStream is) {
+		return new Scanner(is, "UTF-8").useDelimiter("\\A").next();
 	}
 }
