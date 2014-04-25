@@ -42,4 +42,12 @@ public abstract class FileRenderer implements ChangeLogRenderer {
 		scanner.close();
 		return first;
 	}
+	
+	protected String loadResourceToString(String resourcePath) throws IOException {
+		InputStream templateStream = getClass().getResourceAsStream(resourcePath);
+		String s = convertStreamToString(templateStream);
+		templateStream.close();
+		return s;
+	}
+
 }

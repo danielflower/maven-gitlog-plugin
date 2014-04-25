@@ -27,9 +27,7 @@ public class SimpleHtmlRenderer extends FileRenderer {
 		this.fullGitMessage = fullGitMessage;
 
 		if (!tableOnly) {
-			InputStream templateStream = getClass().getResourceAsStream("/html/SimpleHtmlTemplate.html");
-			this.template = convertStreamToString(templateStream);
-			templateStream.close();
+			this.template = loadResourceToString("/html/SimpleHtmlTemplate.html");
 		}
 
 	}
