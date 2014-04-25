@@ -37,6 +37,9 @@ public abstract class FileRenderer implements ChangeLogRenderer {
 	}
 	
 	protected String convertStreamToString(InputStream is) {
-		return new Scanner(is, "UTF-8").useDelimiter("\\A").next();
+		Scanner scanner = new Scanner(is, "UTF-8");
+		String first = scanner.useDelimiter("\\A").next();
+		scanner.close();
+		return first;
 	}
 }
