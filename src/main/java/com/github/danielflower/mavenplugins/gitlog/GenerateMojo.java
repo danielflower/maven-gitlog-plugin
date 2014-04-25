@@ -99,6 +99,21 @@ public class GenerateMojo extends AbstractMojo {
 	private String htmlTableOnlyChangeLogFilename;
 
 	/**
+	 * If true, then a JSON changelog will be generated.
+	 *
+	 * @parameter default-value="true"
+	 */
+	private boolean generateJSONChangeLog;
+
+	/**
+	 * The filename of the JSON changelog, if generated.
+	 *
+	 * @parameter default-value="changelog.json"
+	 * @required
+	 */
+	private String jsonChangeLogFilename;
+
+	/**
 	 * If true, the changelog will be printed to the Maven build log during packaging.
 	 *
 	 * @parameter default-value="false"
@@ -205,6 +220,10 @@ public class GenerateMojo extends AbstractMojo {
 			if (generateMarkdownChangeLog) {
 				renderers.add(new MarkdownRenderer(getLog(), outputDirectory, markdownChangeLogFilename, fullGitMessage, messageConverter));
 			}
+		}
+
+		if (generateJSONChangeLog) {
+			renderers.add(new JsonRenderer(getLog(), outputDirectory, jsonChangeLogFilename, fullGitMessage));
 		}
 
 		if (verbose) {

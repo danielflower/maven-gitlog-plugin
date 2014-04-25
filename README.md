@@ -61,6 +61,8 @@ The following example shows all the possible configuration values with default v
 			<simpleHTMLChangeLogFilename>changelog-${project.version}.html</simpleHTMLChangeLogFilename>
 			<generateHTMLTableOnlyChangeLog>true</generateHTMLTableOnlyChangeLog>
 			<htmlTableOnlyChangeLogFilename>changelog-${project.version}-tableonly.html</htmlTableOnlyChangeLogFilename>
+			<generateJSONChangeLog>true</generateJSONChangeLog>
+			<jsonChangeLogFilename>changelog-${project.version}.json</jsonChangeLogFilename>
 			<issueManagementSystem>GitHub issue tracker</issueManagementSystem>
 			<issueManagementUrl>https://github.com/danielflower/maven-gitlog-plugin/issues</issueManagementUrl>
 			<fullGitMessage>true</fullGitMessage>
