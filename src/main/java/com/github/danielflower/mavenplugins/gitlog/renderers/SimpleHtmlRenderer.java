@@ -8,7 +8,6 @@ import org.eclipse.jgit.revwalk.RevTag;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Scanner;
 
 import static com.github.danielflower.mavenplugins.gitlog.renderers.Formatter.NEW_LINE;
 
@@ -28,9 +27,7 @@ public class SimpleHtmlRenderer extends FileRenderer {
 		this.fullGitMessage = fullGitMessage;
 
 		if (!tableOnly) {
-			InputStream templateStream = getClass().getResourceAsStream("/html/SimpleHtmlTemplate.html");
-			this.template = convertStreamToString(templateStream);
-			templateStream.close();
+			this.template = loadResourceToString("/html/SimpleHtmlTemplate.html");
 		}
 
 	}
@@ -100,9 +97,5 @@ public class SimpleHtmlRenderer extends FileRenderer {
 
 	private boolean areSame(String author, String committer) {
 		return ("" + author).toLowerCase().equals("" + committer.toLowerCase());
-	}
-
-	private String convertStreamToString(InputStream is) {
-		return new Scanner(is, "UTF-8").useDelimiter("\\A").next();
 	}
 }

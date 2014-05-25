@@ -59,6 +59,13 @@ public class GeneratorTest {
 		generateReport(log, renderer);
 	}
 
+	@Test
+	public void writeJsonLogToFile() throws Exception {
+		Log log = new SystemStreamLog();
+		ChangeLogRenderer renderer = new JsonRenderer(log, new File(TARGET_DIR), "changelog.json", false);
+		generateReport(log, renderer);
+	}
+
 	private void generateReport(Log log, ChangeLogRenderer renderer) throws IOException, NoGitRepositoryException {
 		Generator generator = new Generator(Arrays.asList(renderer), Defaults.COMMIT_FILTERS, log);
 		generator.openRepository();
