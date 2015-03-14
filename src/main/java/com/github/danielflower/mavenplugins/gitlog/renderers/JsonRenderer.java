@@ -95,6 +95,10 @@ public class JsonRenderer extends FileRenderer {
 		}
 		input = input.replace("\\", "\\\\");
 		input = input.replace("\n", "\\n");
+		input = input.replace("\t", "\\t");
+		input = input.replace("\b", "\\b");
+		input = input.replace("\f", "\\f");
+		input = input.replace("\r", "\\r");
 		input = input.replace("\"", "\\\"");
 		return input;
 	}
