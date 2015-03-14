@@ -1,10 +1,12 @@
 package com.github.danielflower.mavenplugins.gitlog;
 
 import com.github.danielflower.mavenplugins.gitlog.renderers.*;
-
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,110 +16,93 @@ import java.util.List;
 
 /**
  * Goal which generates a changelog based on commits made to the current git repo.
- *
- * @goal generate
- * @phase prepare-package
  */
+@Mojo(
+		name = "generate",
+		defaultPhase = LifecyclePhase.PREPARE_PACKAGE,
+		aggregator = true // the plugin should only run once against the aggregator pom
+)
 public class GenerateMojo extends AbstractMojo {
 
 	/**
 	 * The directory to put the reports in.  Defaults to the project build directory (normally target).
-	 *
-	 * @parameter expression="${project.build.directory}"
-	 * @required
 	 */
+	@Parameter(property = "project.build.directory")
 	private File outputDirectory;
 
 	/**
 	 * The title of the reports. Defaults to: ${project.name} v${project.version} changelog
-	 *
-	 * @parameter expression="${project.name} v${project.version} changelog"
 	 */
+	@Parameter(defaultValue = "${project.name} v${project.version} changelog")
 	private String reportTitle;
 
 	/**
 	 * If true, then a plain text changelog will be generated.
-	 *
-	 * @parameter default-value="true"
 	 */
+	@Parameter(defaultValue = "true")
 	private boolean generatePlainTextChangeLog;
 
 	/**
 	 * The filename of the plain text changelog, if generated.
-	 *
-	 * @parameter default-value="changelog.txt"
-	 * @required
 	 */
+	@Parameter(defaultValue = "changelog.txt")
 	private String plainTextChangeLogFilename;
 
 
 	/**
 	 * If true, then a markdown changelog will be generated.
-	 *
-	 * @parameter default-value="false"
 	 */
+	@Parameter(defaultValue = "false")
 	private boolean generateMarkdownChangeLog;
 
 	/**
 	 * The filename of the markdown changelog, if generated.
-	 *
-	 * @parameter default-value="changelog.md"
-	 * @required
 	 */
+	@Parameter(defaultValue = "changelog.md")
 	private String markdownChangeLogFilename;
 
 	/**
 	 * If true, then a simple HTML changelog will be generated.
-	 *
-	 * @parameter default-value="true"
 	 */
+	@Parameter(defaultValue = "true")
 	private boolean generateSimpleHTMLChangeLog;
 
 	/**
 	 * The filename of the simple HTML changelog, if generated.
-	 *
-	 * @parameter default-value="changelog.html"
-	 * @required
 	 */
+	@Parameter(defaultValue = "changelog.html")
 	private String simpleHTMLChangeLogFilename;
 
 	/**
 	 * If true, then an HTML changelog which contains only a table element will be generated.
 	 * This incomplete HTML page is suitable for inclusion in other webpages, for example you
 	 * may want to embed it in a wiki page.
-	 *
-	 * @parameter default-value="false"
 	 */
+	@Parameter(defaultValue = "false")
 	private boolean generateHTMLTableOnlyChangeLog;
 
 	/**
 	 * The filename of the HTML table changelog, if generated.
-	 *
-	 * @parameter default-value="changelogtable.html"
-	 * @required
 	 */
+	@Parameter(defaultValue = "changelogtable.html")
 	private String htmlTableOnlyChangeLogFilename;
 
 	/**
 	 * If true, then a JSON changelog will be generated.
-	 *
-	 * @parameter default-value="true"
 	 */
+	@Parameter(defaultValue = "true")
 	private boolean generateJSONChangeLog;
 
 	/**
 	 * The filename of the JSON changelog, if generated.
-	 *
-	 * @parameter default-value="changelog.json"
-	 * @required
 	 */
+	@Parameter(defaultValue = "changelog.json")
 	private String jsonChangeLogFilename;
 
 	/**
 	 * If true, the changelog will be printed to the Maven build log during packaging.
-	 *
-	 * @parameter default-value="false"
 	 */
+	@Parameter(defaultValue = "false")
 	private boolean verbose;
 
 	/**
@@ -126,38 +111,33 @@ public class GenerateMojo extends AbstractMojo {
 	 * a value containing the string "github" for the GitHub Issue tracking software;
 	 * a value containing the string "jira" for Jira tracking software.
 	 * Any other value will result in no links being made.
-	 *
-	 * @parameter expression="${project.issueManagement.system}"
 	 */
+	@Parameter(property = "project.issueManagement.system")
 	private String issueManagementSystem;
 
 	/**
 	 * Used to create links to your issue tracking system for HTML reports. If unspecified, it will try to use the value
 	 * specified in the issueManagement section of your project's POM.
-	 *
-	 * @parameter expression="${project.issueManagement.url}"
 	 */
+	@Parameter(property="project.issueManagement.url")
 	private String issueManagementUrl;
 	
 	/**
-	 * Used to set date format in log messages. If unspecified, will be used default format 'yyyy-MM-dd HH:mm:ss Z'.
-	 * 
-	 * @parameter default-value=""
+	 * Used to set date format in log messages.
 	 */
+	@Parameter(defaultValue = "yyyy-MM-dd HH:mm:ss Z")
 	private String dateFormat;
 
 	/**
 	 * If true, the changelog will include the full git message rather that the short git message
-	 *
-	 * @parameter default-value="false"
 	 */
+	@Parameter(defaultValue="false")
 	private boolean fullGitMessage;
 	
 	/**
 	 * Include in the changelog the commits after this parameter value.
-	 * 
-	 * @parameter default-value="1970-01-01 00:00:00.0 AM"
 	 */
+	@Parameter(defaultValue="1970-01-01 00:00:00.0 AM")
 	private Date includeCommitsAfter;
 	
 	public void execute() throws MojoExecutionException, MojoFailureException {

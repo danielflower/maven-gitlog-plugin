@@ -1,0 +1,119 @@
+Usage
+-----
+
+Add the following to your `<plugins>` section in your pom.xml file to generate changelog.txt and changelog.html
+in your target folder:
+
+	<plugin>
+		<groupId>${project.groupId}</groupId>
+		<artifactId>${project.artifactId}</artifactId>
+		<version>${project.version}</version>
+		<executions>
+			<execution>
+				<goals>
+					<goal>generate</goal>
+				</goals>
+			</execution>
+		</executions>
+	</plugin>
+
+HTML reports will render issue codes as links if you have your issue tracking system is defined in your pom file.
+Currently only Jira and GitHub issue tracking is supported.
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/danielflower/maven-gitlog-plugin/issues</url>
+	</issueManagement>
+
+More configuration options
+--------------------------
+
+The following example shows all the possible configuration values with default values overridden.
+
+	<plugin>
+		<groupId>${project.groupId}</groupId>
+		<artifactId>${project.artifactId}</artifactId>
+		<version>${project.version}</version>
+		<configuration>
+			<reportTitle>Changelog for ${project.name} version ${project.version}</reportTitle>
+			<verbose>true</verbose>
+			<outputDirectory>target/docs</outputDirectory>
+			<generatePlainTextChangeLog>true</generatePlainTextChangeLog>
+			<plainTextChangeLogFilename>changelog-${project.version}.txt</plainTextChangeLogFilename>
+			<generateSimpleHTMLChangeLog>true</generateSimpleHTMLChangeLog>
+			<markdownChangeLogFilename>changelog-${project.version}.md</markdownChangeLogFilename>
+			<generateMarkdownChangeLog>true</generateMarkdownChangeLog>
+			<simpleHTMLChangeLogFilename>changelog-${project.version}.html</simpleHTMLChangeLogFilename>
+			<generateHTMLTableOnlyChangeLog>true</generateHTMLTableOnlyChangeLog>
+			<htmlTableOnlyChangeLogFilename>changelog-${project.version}-tableonly.html</htmlTableOnlyChangeLogFilename>
+			<generateJSONChangeLog>true</generateJSONChangeLog>
+			<jsonChangeLogFilename>changelog-${project.version}.json</jsonChangeLogFilename>
+			<issueManagementSystem>GitHub issue tracker</issueManagementSystem>
+			<issueManagementUrl>https://github.com/danielflower/maven-gitlog-plugin/issues</issueManagementUrl>
+			<fullGitMessage>true</fullGitMessage>
+			<dateFormat>yyyy-MM-dd HH:mm:ss Z</dateFormat>
+			<includeCommitsAfter>2014-04-01 00:00:00.0 AM</includeCommitsAfter>
+		</configuration>
+		<executions>
+			<execution>
+				<goals>
+					<goal>generate</goal>
+				</goals>
+			</execution>
+		</executions>
+		<dependencies>
+			<!-- Maven artifact that contains maven-gitlog-plugin CommitFilter to be used -->
+			<!-- CommitFilters are loaded using the SPI mechanism Provided by the JRE:    -->
+			<!-- http://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html    -->
+			<dependency>
+				<groupId>es.e-ucm.ead</groupId>
+				<artifactId>gitlog-maven-plugin-ext</artifactId>
+				<version>0.1.1</version>
+			</dependency>
+		</dependencies>
+	</plugin>
+
+Including the changelog in your Maven assembly
+----------------------------------------------
+
+If you want to include the changelogs in your assembled package, then you will need to configure the Maven
+assembly plugin to use a custom descriptor.  The following is an example of a descriptor that creates a zip
+file which includes the two changelog reports in the docs folder of the zip file:
+
+	<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+		<id>full</id>
+		<formats>
+			<format>zip</format>
+		</formats>
+		<includeBaseDirectory>false</includeBaseDirectory>
+		<dependencySets>
+			<dependencySet>
+				<outputDirectory>/libs</outputDirectory>
+				<useProjectArtifact>true</useProjectArtifact>
+				<scope>runtime</scope>
+			</dependencySet>
+		</dependencySets>
+		<fileSets>
+			<fileSet>
+				<directory>target</directory>
+				<includes>
+					<include>changelog.*</include>
+				</includes>
+				<outputDirectory>docs</outputDirectory>
+			</fileSet>
+		</fileSets>
+	</assembly>
+
+Showing the git changelog for your current project
+--------------------------------------------------
+
+If your project has a reference to the gitlog plugin already, the following command will print
+a changelog to the command line:
+
+	$ mvn gitlog:show
+
+If you want to see a git log without having the plugin defined in your pom, you can run:
+
+	$ mvn com.github.danielflower.mavenplugins:maven-gitlog-plugin:show

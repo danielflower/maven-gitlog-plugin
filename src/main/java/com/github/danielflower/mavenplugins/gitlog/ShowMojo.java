@@ -5,6 +5,7 @@ import com.github.danielflower.mavenplugins.gitlog.renderers.MavenLoggerRenderer
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -12,9 +13,10 @@ import java.util.List;
 
 /**
  * Displays the git log in the maven build log.  Use the generate goal to generate reports.
- *
- * @goal show
  */
+@Mojo(
+		name = "show"
+)
 public class ShowMojo extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException, MojoFailureException {
