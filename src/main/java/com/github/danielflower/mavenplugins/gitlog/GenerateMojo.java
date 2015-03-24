@@ -123,6 +123,17 @@ public class GenerateMojo extends AbstractMojo {
 	private String issueManagementUrl;
 
 	/**
+         * Regexp pattern to extract the number from the message.
+         *
+         * The default is: "Bug (\\d+)".
+         * Group 1 (the number) is used in links, so "?:" must be used any non relevant group,
+         * ex.:
+	 * (?:Bug|UPDATE|FIX|ADD|NEW|#) ?#?(\d+)
+	 */
+	@Parameter(defaultValue = "Bug (\\d+)")
+	private String bugzillaPattern;
+
+	/**
 	 * Used to set date format in log messages.
 	 */
 	@Parameter(defaultValue = "yyyy-MM-dd HH:mm:ss Z")
@@ -224,7 +235,8 @@ public class GenerateMojo extends AbstractMojo {
 				} else if (system.toLowerCase().contains("github")) {
 					converter = new GitHubIssueLinkConverter(getLog(), issueManagementUrl);
 				} else if (system.toLowerCase().contains("bugzilla")) {
-					converter = new BugzillaIssueLinkConverter(getLog(), issueManagementUrl);
+                                    converter = new BugzillaIssueLinkConverter(getLog(), issueManagementUrl,
+                                        bugzillaPattern);
 				}
 			}
 		} catch (Exception ex) {

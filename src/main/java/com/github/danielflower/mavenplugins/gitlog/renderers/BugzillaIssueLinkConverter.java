@@ -25,13 +25,13 @@ public class BugzillaIssueLinkConverter implements MessageConverter {
 	private final String urlPrefix;
 	private final String urlSufix ="/show_bug.cgi?id=";
 
-	public BugzillaIssueLinkConverter(Log log, String urlPrefix) {
+	public BugzillaIssueLinkConverter(Log log, String urlPrefix, String bugzillaPattern) {
 		this.log = log;
 		// strip off trailing slash
 		urlPrefix = urlPrefix.endsWith("/") ? urlPrefix.substring(0, urlPrefix.length() - 1) : urlPrefix;
 		// strip off jira project code
 		this.urlPrefix = !urlPrefix.endsWith(urlSufix) ? (urlPrefix + urlSufix) : urlPrefix;
-		this.pattern = Pattern.compile("Bug (\\d+)");
+		this.pattern = Pattern.compile(bugzillaPattern, Pattern.CASE_INSENSITIVE);
 	}
 
 	@Override

@@ -7,7 +7,9 @@ import org.junit.Test;
 public class BugzillaIssueLinkConverterTest {
 
 	private static final String PREFIX = "https://bugzilla.mozilla.org/show_bug.cgi?id=";
-	private BugzillaIssueLinkConverter converter = new BugzillaIssueLinkConverter(new SystemStreamLog(), PREFIX);
+	private static final String bugzillaPattern = "Bug (\\d+)";
+	private BugzillaIssueLinkConverter converter =
+            new BugzillaIssueLinkConverter(new SystemStreamLog(), PREFIX, bugzillaPattern);
 
 	@Test
 	public void emptyMessagesAreUnchanged() {
@@ -43,8 +45,16 @@ public class BugzillaIssueLinkConverterTest {
 	@Test
 	public void urlWithTrailingSlashHasItRemovedCorrectly() {
 		BugzillaIssueLinkConverter converter = new BugzillaIssueLinkConverter(new SystemStreamLog(),
-				PREFIX+"/");
+				PREFIX+"/", bugzillaPattern);
 		String actual = converter.formatCommitMessage("Bug 1123 Some commit message");
+		assertEquals("<a href=\""+PREFIX+"1123\">Bug 1123</a> Some commit message", actual);
+	}
+
+	@Test
+	public void customPAttern() {
+		BugzillaIssueLinkConverter converter = new BugzillaIssueLinkConverter(new SystemStreamLog(),
+				PREFIX+"/", "(?:Bug|UPDATE) ?#?(\\d+)");
+		String actual = converter.formatCommitMessage("UPDATE #1123 Some commit message");
 		assertEquals("<a href=\""+PREFIX+"1123\">Bug 1123</a> Some commit message", actual);
 	}
 
