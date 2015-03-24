@@ -48,7 +48,7 @@ public class SimpleHtmlRenderer extends FileRenderer {
 
 	@Override
 	public void renderTag(RevTag tag) throws IOException {
-		tableHtml.append("\t\t<tr class=\"tag\"><td colspan=3>")
+		tableHtml.append("\t\t<tr class=\"tag\"><td colspan=\"3\">")
 				.append(SimpleHtmlRenderer.htmlEncode(tag.getTagName()))
 				.append("</td></tr>")
 				.append(NEW_LINE);
