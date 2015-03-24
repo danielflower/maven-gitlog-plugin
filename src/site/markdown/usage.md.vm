@@ -18,7 +18,7 @@ in your target folder:
 	</plugin>
 
 HTML reports will render issue codes as links if you have your issue tracking system is defined in your pom file.
-Currently only Jira and GitHub issue tracking is supported.
+Currently only Jira, GitHub and Bugzilla issue tracking is supported.
 
 	<issueManagement>
 		<system>GitHub</system>
