@@ -18,7 +18,7 @@ in your target folder:
 	</plugin>
 
 HTML reports will render issue codes as links if you have your issue tracking system is defined in your pom file.
-Currently only Jira and GitHub issue tracking is supported.
+Currently only Jira, GitHub and Bugzilla issue tracking is supported.
 
 	<issueManagement>
 		<system>GitHub</system>
@@ -53,6 +53,7 @@ The following example shows all the possible configuration values with default v
 			<fullGitMessage>true</fullGitMessage>
 			<dateFormat>yyyy-MM-dd HH:mm:ss Z</dateFormat>
 			<includeCommitsAfter>2014-04-01 00:00:00.0 AM</includeCommitsAfter>
+			<bugzillaPattern>(?:Bug|UPDATE|FIX|ADD|NEW|#) ?#?(\d+)</bugzillaPattern>
 		</configuration>
 		<executions>
 			<execution>
