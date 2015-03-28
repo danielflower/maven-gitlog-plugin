@@ -10,11 +10,9 @@ import java.util.regex.Pattern;
  * ex.:
  *
  * Bug 1123 Some commit message related to Bug 11230
- * ->
+ *
  * <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1123">Bug 1123</a> Some commit message related
  * to <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=11230">Bug 11230</a>
-                                *
- * https://bugzilla.mozilla.org/show_bug.cgi?id=<number>
  *
  * @author hrotkogabor
  */

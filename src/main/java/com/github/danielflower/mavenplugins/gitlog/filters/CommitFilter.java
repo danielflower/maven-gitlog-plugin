@@ -6,7 +6,8 @@ public interface CommitFilter {
 
 	/**
 	 * Returns true if the commit should be rendered; otherwise false.
+	 * @param commit The commit to render
 	 */
-	public boolean renderCommit(RevCommit commit);
+	boolean renderCommit(RevCommit commit);
 
 }
