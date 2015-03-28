@@ -121,7 +121,7 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	@Parameter(property="project.issueManagement.url")
 	private String issueManagementUrl;
-	
+
 	/**
 	 * Used to set date format in log messages.
 	 */
@@ -133,13 +133,13 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	@Parameter(defaultValue="false")
 	private boolean fullGitMessage;
-	
+
 	/**
 	 * Include in the changelog the commits after this parameter value.
 	 */
 	@Parameter(defaultValue="1970-01-01 00:00:00.0 AM")
 	private Date includeCommitsAfter;
-	
+
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("Generating changelog in " + outputDirectory.getAbsolutePath()
 				+ " with title " + reportTitle);
@@ -174,7 +174,7 @@ public class GenerateMojo extends AbstractMojo {
 		if (!"".equals(dateFormat)) {
 			Formatter.setFormat(dateFormat, getLog());
 		}
-		
+
 		try {
 			generator.generate(reportTitle, includeCommitsAfter);
 		} catch (IOException e) {
@@ -219,10 +219,12 @@ public class GenerateMojo extends AbstractMojo {
 		try {
 			if (issueManagementUrl != null && issueManagementUrl.contains("://")) {
 				String system = ("" + issueManagementSystem).toLowerCase();
-				if (system.contains("jira")) {
+				if (system.toLowerCase().contains("jira")) {
 					converter = new JiraIssueLinkConverter(getLog(), issueManagementUrl);
-				} else if (system.contains("github")) {
+				} else if (system.toLowerCase().contains("github")) {
 					converter = new GitHubIssueLinkConverter(getLog(), issueManagementUrl);
+				} else if (system.toLowerCase().contains("bugzilla")) {
+					converter = new BugzillaIssueLinkConverter(getLog(), issueManagementUrl);
 				}
 			}
 		} catch (Exception ex) {
