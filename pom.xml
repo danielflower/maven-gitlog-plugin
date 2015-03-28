@@ -1,93 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.github.danielflower.mavenplugins</groupId>
-	<artifactId>maven-gitlog-plugin</artifactId>
-	<version>1.9-SNAPSHOT</version>
+    <groupId>com.github.danielflower.mavenplugins</groupId>
+    <artifactId>gitlog-maven-plugin</artifactId>
+    <version>1.10-SNAPSHOT</version>
 
-	<packaging>maven-plugin</packaging>
-	<name>Maven Git Log Plugin</name>
-	<description>Generates a changelog based on commits to a git repository in text and HTML format showing the changes
-		that are included in each version. A possible use of this is to include these changelogs when packaging your
-		maven project so that you have an accurate list of commits that the current package includes.
-	</description>
-	<url>http://github.com/danielflower/maven-gitlog-plugin</url>
+    <packaging>maven-plugin</packaging>
+    <name>Maven Git Log Plugin</name>
+    <description>Generates a changelog based on commits to a git repository in text and HTML format showing the changes
+        that are included in each version. A possible use of this is to include these changelogs when packaging your
+        maven project so that you have an accurate list of commits that the current package includes.
+    </description>
+    <url>http://github.com/danielflower/maven-gitlog-plugin</url>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <github.global.server>github</github.global.server>
         <plugin.goal.prefix>gitlog</plugin.goal.prefix>
     </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-plugin-api</artifactId>
-			<version>2.2.1</version>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>2.2.1</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
             <version>3.3</version>
         </dependency>
-		<dependency>
-			<groupId>com.madgag</groupId>
-			<artifactId>org.eclipse.jgit</artifactId>
-			<version>2.99.99.2.0-UNOFFICIAL-ROBERTO-RELEASE</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.jcraft</groupId>
-					<artifactId>jsch</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-core</artifactId>
-			<version>1.3</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.madgag</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+            <version>2.99.99.2.0-UNOFFICIAL-ROBERTO-RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.jcraft</groupId>
+                    <artifactId>jsch</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-plugin-plugin</artifactId>
-				<version>3.4</version>
-				<configuration>
-					<goalPrefix>${plugin.goal.prefix}</goalPrefix>
-				</configuration>
-				<executions>
-					<execution>
-						<id>generated-helpmojo</id>
-						<goals>
-							<goal>helpmojo</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.4</version>
+                <configuration>
+                    <goalPrefix>${plugin.goal.prefix}</goalPrefix>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default-descriptor</id>
+                        <goals>
+                            <goal>descriptor</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                    </execution>
+                    <execution>
+                        <id>generated-helpmojo</id>
+                        <goals>
+                            <goal>helpmojo</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -118,8 +125,8 @@
                     </dependency>
                 </dependencies>
             </plugin>
-		</plugins>
-	</build>
+        </plugins>
+    </build>
 
 
     <profiles>
@@ -257,40 +264,40 @@
         </plugins>
     </reporting>
 
-	<licenses>
-		<license>
-			<name>Apache 2</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-			<comments>A business-friendly OSS license</comments>
-		</license>
-	</licenses>
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
 
-	<scm>
-		<url>git://github.com/danielflower/maven-gitlog-plugin.git</url>
-		<connection>scm:git:git@github.com/danielflower/maven-gitlog-plugin.git</connection>
-		<developerConnection>scm:git:git@github.com:/danielflower/maven-gitlog-plugin.git</developerConnection>
-	</scm>
+    <scm>
+        <url>git://github.com/danielflower/maven-gitlog-plugin.git</url>
+        <connection>scm:git:git@github.com/danielflower/maven-gitlog-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:/danielflower/maven-gitlog-plugin.git</developerConnection>
+    </scm>
 
-	<developers>
-		<developer>
-			<id>danielflower</id>
-			<name>Daniel Flower</name>
-			<url>http://github.com/danielflower/</url>
-			<timezone>8</timezone>
-		</developer>
-	</developers>
+    <developers>
+        <developer>
+            <id>danielflower</id>
+            <name>Daniel Flower</name>
+            <url>http://github.com/danielflower/</url>
+            <timezone>8</timezone>
+        </developer>
+    </developers>
 
-	<inceptionYear>2011</inceptionYear>
+    <inceptionYear>2011</inceptionYear>
 
     <ciManagement>
         <system>travis-ci</system>
         <url>https://travis-ci.org/danielflower/maven-gitlog-plugin</url>
     </ciManagement>
 
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/danielflower/maven-gitlog-plugin/issues</url>
-	</issueManagement>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/danielflower/maven-gitlog-plugin/issues</url>
+    </issueManagement>
 
 </project>
