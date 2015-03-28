@@ -34,7 +34,7 @@ Performing a release
 The plugin uses the [Multi-module Maven Release Plugin](http://danielflower.github.io/2015/03/08/The-Multi-Module-Maven-Release-Plugin-for-Git.html)
 for releases. Releases are signed and deployed to the Sonatype Open Source Nexus repo.
 
-    mvn releaser:release -P release,gpg
+    mvn releaser:release
 
 Note that for site generation you will need access to write to the Git repo and the following in your `settings.xml`:
 
