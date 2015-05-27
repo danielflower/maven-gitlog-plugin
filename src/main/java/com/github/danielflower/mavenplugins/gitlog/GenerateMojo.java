@@ -1,5 +1,7 @@
 package com.github.danielflower.mavenplugins.gitlog;
 
+import com.github.danielflower.mavenplugins.gitlog.filters.CommitFilter;
+import com.github.danielflower.mavenplugins.gitlog.filters.CommiterFilter;
 import com.github.danielflower.mavenplugins.gitlog.renderers.*;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -119,15 +121,15 @@ public class GenerateMojo extends AbstractMojo {
 	 * Used to create links to your issue tracking system for HTML reports. If unspecified, it will try to use the value
 	 * specified in the issueManagement section of your project's POM.
 	 */
-	@Parameter(property="project.issueManagement.url")
+	@Parameter(property = "project.issueManagement.url")
 	private String issueManagementUrl;
 
 	/**
-         * Regexp pattern to extract the number from the message.
-         *
-         * The default is: "Bug (\\d+)".
-         * Group 1 (the number) is used in links, so "?:" must be used any non relevant group,
-         * ex.:
+	 * Regexp pattern to extract the number from the message.
+	 * <p>
+	 * The default is: "Bug (\\d+)".
+	 * Group 1 (the number) is used in links, so "?:" must be used any non relevant group,
+	 * ex.:
 	 * (?:Bug|UPDATE|FIX|ADD|NEW|#) ?#?(\d+)
 	 */
 	@Parameter(defaultValue = "Bug (\\d+)")
@@ -142,14 +144,20 @@ public class GenerateMojo extends AbstractMojo {
 	/**
 	 * If true, the changelog will include the full git message rather that the short git message
 	 */
-	@Parameter(defaultValue="false")
+	@Parameter(defaultValue = "false")
 	private boolean fullGitMessage;
 
 	/**
 	 * Include in the changelog the commits after this parameter value.
 	 */
-	@Parameter(defaultValue="1970-01-01 00:00:00.0 AM")
+	@Parameter(defaultValue = "1970-01-01 00:00:00.0 AM")
 	private Date includeCommitsAfter;
+
+	/**
+	 * Exclude in the changelog all commits by a given commiter
+	 */
+	@Parameter
+	private List<String> excludeCommiters;
 
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("Generating changelog in " + outputDirectory.getAbsolutePath()
@@ -168,7 +176,13 @@ public class GenerateMojo extends AbstractMojo {
 			return;
 		}
 
-		Generator generator = new Generator(renderers, Defaults.COMMIT_FILTERS, getLog());
+		List<CommitFilter> commitFilters = new ArrayList<CommitFilter>(Defaults.COMMIT_FILTERS);
+
+		if (excludeCommiters != null && !excludeCommiters.isEmpty()) {
+			commitFilters.add(new CommiterFilter(excludeCommiters));
+		}
+
+		Generator generator = new Generator(renderers, commitFilters, getLog());
 
 		try {
 			generator.openRepository();
@@ -235,8 +249,8 @@ public class GenerateMojo extends AbstractMojo {
 				} else if (system.toLowerCase().contains("github")) {
 					converter = new GitHubIssueLinkConverter(getLog(), issueManagementUrl);
 				} else if (system.toLowerCase().contains("bugzilla")) {
-                                    converter = new BugzillaIssueLinkConverter(getLog(), issueManagementUrl,
-                                        bugzillaPattern);
+					converter = new BugzillaIssueLinkConverter(getLog(), issueManagementUrl,
+							bugzillaPattern);
 				}
 			}
 		} catch (Exception ex) {
