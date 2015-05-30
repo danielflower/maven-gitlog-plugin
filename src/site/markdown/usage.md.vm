@@ -54,6 +54,9 @@ The following example shows all the possible configuration values with default v
 			<dateFormat>yyyy-MM-dd HH:mm:ss Z</dateFormat>
 			<includeCommitsAfter>2014-04-01 00:00:00.0 AM</includeCommitsAfter>
 			<bugzillaPattern>(?:Bug|UPDATE|FIX|ADD|NEW|#) ?#?(\d+)</bugzillaPattern>
+			<excludeCommiters>
+				<commiter>jenkins</commiter>
+			</excludeCommiters>
 		</configuration>
 		<executions>
 			<execution>
