@@ -7,12 +7,12 @@ import org.eclipse.jgit.revwalk.RevTag;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 import static com.github.danielflower.mavenplugins.gitlog.renderers.Formatter.NEW_LINE;
 
 public class SimpleHtmlRenderer extends FileRenderer {
 
+	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 	private String title;
 	private String template;
 	protected StringBuilder tableHtml = new StringBuilder();
@@ -34,7 +34,7 @@ public class SimpleHtmlRenderer extends FileRenderer {
 
 	protected static String htmlEncode(String input) {
 		input = StringEscapeUtils.escapeHtml4(input);
-		return input.replaceAll("\n", "<br/>");
+		return input.replaceAll(System.getProperty("line.separator"), "<br/>");
 	}
 
 	@Override
@@ -59,9 +59,9 @@ public class SimpleHtmlRenderer extends FileRenderer {
 		String date = Formatter.formatDateTime(commit.getCommitTime());
 		String message = null;
 		if (fullGitMessage){
-			message = messageConverter.formatCommitMessage(SimpleHtmlRenderer.htmlEncode(commit.getFullMessage()));
+			message = messageConverter.formatCommitMessage(formatLongMessage(commit.getFullMessage()));
 		} else {
-			message = messageConverter.formatCommitMessage(SimpleHtmlRenderer.htmlEncode(commit.getShortMessage()));	
+			message = messageConverter.formatCommitMessage(htmlEncode(commit.getShortMessage()));
 		}
 
 		String author = SimpleHtmlRenderer.htmlEncode(commit.getCommitterIdent().getName());
@@ -73,9 +73,25 @@ public class SimpleHtmlRenderer extends FileRenderer {
 
 		tableHtml.append("\t\t<tr>")
 				.append("<td class=\"date\">").append(date).append("</td>")
-				.append("<td>").append(message).append("</td>")
 				.append("<td>").append(authorHtml).append("</td>")
+				.append("<td>").append(message).append("</td>")
 				.append("</tr>").append(NEW_LINE);
+	}
+
+	private String formatLongMessage(String gitMessage) {
+		String lines[] = StringEscapeUtils.escapeHtml4(gitMessage).split(LINE_SEPARATOR);
+		if (lines.length <=1) {
+			return gitMessage;
+		}
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < lines.length; i++) {
+			if (i == 0) {
+				builder.append(lines[i]).append("</br><span class='commitDetails'>");
+			} else {
+				builder.append(lines[i]).append("</br>");
+			}
+		}
+		return builder.append("</span>").toString();
 	}
 
 	@Override

@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8"/>
-	<title>{title}</title>
-	<style type="text/css">
-		body {
-		font-family: Arial;
-		}
-		table {
-		border-collapse: collapse;
-		}
-		td {
-		border: 1px solid #CCCCCC;
-		}
-		td.date, .author, .committer {
-		white-space: nowrap;
-		}
-		.tag td {
-		border-width: 0px;
-		font-weight: bold;
-		padding-top: 30px;
-		padding-bottom: 7px;
-		}
-	</style>
+    <meta charset="UTF-8"/>
+    <title>{title}</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+        }
+
+        .committer, .author {
+            font-style: italic;
+        }
+
+        .commitDetails {
+            font-size: 90%;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 2px 7px 2px 0px;
+            border-bottom: 1px solid #cecece;
+        }
+
+        td.date, .author, .committer {
+            white-space: nowrap;
+        }
+
+        .tag td {
+            border-width: 0px;
+            font-weight: bold;
+            padding-top: 30px;
+            padding-bottom: 7px;
+        }
+    </style>
 </head>
 <body>
 <h1>{title}</h1>
