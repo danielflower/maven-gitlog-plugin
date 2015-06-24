@@ -37,7 +37,7 @@ public class ShowMojo extends AbstractMojo {
 		try {
 			generator.generate("Git log");
 		} catch (IOException e) {
-			throw new MojoExecutionException("Error while generating changelog.  Some changelogs may be incomplete or corrupt.", e);
+			throw new MojoExecutionException("Error while generating gitlog.  Some changelogs may be incomplete or corrupt.", e);
 		}
 	}
 

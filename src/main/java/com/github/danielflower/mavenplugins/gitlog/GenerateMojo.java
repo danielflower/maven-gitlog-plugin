@@ -15,6 +15,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import org.apache.maven.reporting.MavenReport;
+import org.apache.maven.reporting.MavenReportException;
+import org.codehaus.doxia.sink.Sink;
 
 /**
  * Goal which generates a changelog based on commits made to the current git repo.
@@ -24,10 +28,12 @@ import java.util.List;
 		defaultPhase = LifecyclePhase.PREPARE_PACKAGE,
 		aggregator = true // the plugin should only run once against the aggregator pom
 )
-public class GenerateMojo extends AbstractMojo {
+public class GenerateMojo extends AbstractMojo implements MavenReport {
 
 	/**
 	 * The directory to put the reports in.  Defaults to the project build directory (normally target).
+         *
+         * When running as a reporting plugin, the output directory is fixed, set by the reporting cycle.
 	 */
 	@Parameter(property = "project.build.directory")
 	private File outputDirectory;
@@ -35,7 +41,7 @@ public class GenerateMojo extends AbstractMojo {
 	/**
 	 * The title of the reports. Defaults to: ${project.name} v${project.version} changelog
 	 */
-	@Parameter(defaultValue = "${project.name} v${project.version} changelog")
+	@Parameter(defaultValue = "${project.name} v${project.version} git changelog")
 	private String reportTitle;
 
 	/**
@@ -47,7 +53,7 @@ public class GenerateMojo extends AbstractMojo {
 	/**
 	 * The filename of the plain text changelog, if generated.
 	 */
-	@Parameter(defaultValue = "changelog.txt")
+	@Parameter(defaultValue = "gitlog.txt")
 	private String plainTextChangeLogFilename;
 
 
@@ -60,7 +66,7 @@ public class GenerateMojo extends AbstractMojo {
 	/**
 	 * The filename of the markdown changelog, if generated.
 	 */
-	@Parameter(defaultValue = "changelog.md")
+	@Parameter(defaultValue = "gitlog.md")
 	private String markdownChangeLogFilename;
 
 	/**
@@ -72,7 +78,7 @@ public class GenerateMojo extends AbstractMojo {
 	/**
 	 * The filename of the simple HTML changelog, if generated.
 	 */
-	@Parameter(defaultValue = "changelog.html")
+	@Parameter(defaultValue = "gitlog.html")
 	private String simpleHTMLChangeLogFilename;
 
 	/**
@@ -86,7 +92,7 @@ public class GenerateMojo extends AbstractMojo {
 	/**
 	 * The filename of the HTML table changelog, if generated.
 	 */
-	@Parameter(defaultValue = "changelogtable.html")
+	@Parameter(defaultValue = "gitlogtable.html")
 	private String htmlTableOnlyChangeLogFilename;
 
 	/**
@@ -98,7 +104,7 @@ public class GenerateMojo extends AbstractMojo {
 	/**
 	 * The filename of the JSON changelog, if generated.
 	 */
-	@Parameter(defaultValue = "changelog.json")
+	@Parameter(defaultValue = "gitlog.json")
 	private String jsonChangeLogFilename;
 
 	/**
@@ -159,8 +165,9 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter
 	private List<String> excludeCommiters;
 
+        @Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
-		getLog().info("Generating changelog in " + outputDirectory.getAbsolutePath()
+		getLog().info("Generating gitlog in " + outputDirectory.getAbsolutePath()
 				+ " with title " + reportTitle);
 
 		File f = outputDirectory;
@@ -203,7 +210,7 @@ public class GenerateMojo extends AbstractMojo {
 		try {
 			generator.generate(reportTitle, includeCommitsAfter);
 		} catch (IOException e) {
-			getLog().warn("Error while generating changelog.  Some changelogs may be incomplete or corrupt.", e);
+			getLog().warn("Error while generating gitlog.  Some changelogs may be incomplete or corrupt.", e);
 		}
 	}
 
@@ -262,5 +269,70 @@ public class GenerateMojo extends AbstractMojo {
 		getLog().debug("Using tracker " + converter.getClass().getSimpleName());
 		return converter;
 	}
+
+    @Override
+    public void generate(Sink sink, Locale locale)
+        throws MavenReportException
+    {
+            try {
+                execute();
+            } catch (MojoExecutionException ex) {
+                getLog().error(ex.getMessage(), ex);
+            } catch (MojoFailureException ex) {
+                getLog().error(ex.getMessage(), ex);
+            }
+    }
+
+    @Override
+    public String getOutputName()
+    {
+        return "gitlog";
+    }
+
+    @Override
+    public String getCategoryName()
+    {
+        return CATEGORY_PROJECT_REPORTS;
+    }
+
+    @Override
+    public String getName(Locale locale)
+    {
+        return "GitLog";
+    }
+
+    @Override
+    public String getDescription(Locale locale)
+    {
+        return "Generate changelog from git SCM.";
+    }
+
+    /**
+     * When running as a reporting plugin, the output directory is fixed, set by the reporting cycle.
+     * @param file
+     */
+    @Override
+    public void setReportOutputDirectory(File file)
+    {
+        outputDirectory = file;
+    }
+
+    @Override
+    public File getReportOutputDirectory()
+    {
+        return outputDirectory;
+    }
+
+    @Override
+    public boolean isExternalReport()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean canGenerateReport()
+    {
+        return true;
+    }
 
 }
