@@ -44,6 +44,14 @@ public class GeneratorTest {
 	}
 
 	@Test
+	public void writeSimpleHtmlFullLogToFile() throws Exception {
+		Log log = new SystemStreamLog();
+		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, THIS_PLUGIN_ISSUES);
+		ChangeLogRenderer renderer = new SimpleHtmlRenderer(log, new File(TARGET_DIR), "changelogFullMessage.html", true, messageConverter, false);
+		generateReport(log, renderer);
+	}
+
+	@Test
 	public void writeHtmlTableOnlyLogToFile() throws Exception {
 		Log log = new SystemStreamLog();
 		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, THIS_PLUGIN_ISSUES);
