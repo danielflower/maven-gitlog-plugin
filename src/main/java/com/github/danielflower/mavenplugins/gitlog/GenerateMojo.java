@@ -53,7 +53,7 @@ public class GenerateMojo extends AbstractMojo implements MavenReport {
 	/**
 	 * The filename of the plain text changelog, if generated.
 	 */
-	@Parameter(defaultValue = "gitlog.txt")
+	@Parameter(defaultValue = "changelog.txt")
 	private String plainTextChangeLogFilename;
 
 
@@ -66,7 +66,7 @@ public class GenerateMojo extends AbstractMojo implements MavenReport {
 	/**
 	 * The filename of the markdown changelog, if generated.
 	 */
-	@Parameter(defaultValue = "gitlog.md")
+	@Parameter(defaultValue = "changelog.md")
 	private String markdownChangeLogFilename;
 
 	/**
@@ -78,7 +78,7 @@ public class GenerateMojo extends AbstractMojo implements MavenReport {
 	/**
 	 * The filename of the simple HTML changelog, if generated.
 	 */
-	@Parameter(defaultValue = "gitlog.html")
+	@Parameter(defaultValue = "changelog.html")
 	private String simpleHTMLChangeLogFilename;
 
 	/**
@@ -92,7 +92,7 @@ public class GenerateMojo extends AbstractMojo implements MavenReport {
 	/**
 	 * The filename of the HTML table changelog, if generated.
 	 */
-	@Parameter(defaultValue = "gitlogtable.html")
+	@Parameter(defaultValue = "changelogtable.html")
 	private String htmlTableOnlyChangeLogFilename;
 
 	/**
@@ -104,7 +104,7 @@ public class GenerateMojo extends AbstractMojo implements MavenReport {
 	/**
 	 * The filename of the JSON changelog, if generated.
 	 */
-	@Parameter(defaultValue = "gitlog.json")
+	@Parameter(defaultValue = "changelog.json")
 	private String jsonChangeLogFilename;
 
 	/**
