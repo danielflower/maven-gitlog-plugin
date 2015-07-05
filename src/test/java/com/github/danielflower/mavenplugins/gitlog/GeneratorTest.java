@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import org.junit.Ignore;
 
 // Not unit tests as such, but a way to manually observe the output during maven test phase
 public class GeneratorTest {
@@ -33,6 +34,13 @@ public class GeneratorTest {
 		Log log = new SystemStreamLog();
 		ChangeLogRenderer renderer = new PlainTextRenderer(log, new File(TARGET_DIR), "changelogFull.txt", true);
 		generateReport(log, renderer);
+	}
+
+        @Ignore
+	public void writePlainTextFullLogToFileCustomDir() throws Exception {
+		Log log = new SystemStreamLog();
+		ChangeLogRenderer renderer = new PlainTextRenderer(log, new File(TARGET_DIR), "changelogFullCustomDir.txt", true);
+		generateReport(log, renderer, new File("/home/myUser/myRepo"));
 	}
 
 	@Test
@@ -75,8 +83,12 @@ public class GeneratorTest {
 	}
 
 	private void generateReport(Log log, ChangeLogRenderer renderer) throws IOException, NoGitRepositoryException {
+            generateReport(log, renderer, null);
+        }
+
+	private void generateReport(Log log, ChangeLogRenderer renderer, File gitdir) throws IOException, NoGitRepositoryException {
 		Generator generator = new Generator(Arrays.asList(renderer), Defaults.COMMIT_FILTERS, log);
-		generator.openRepository();
+		generator.openRepository(gitdir);
 		generator.generate("Maven GitLog Plugin changelog");
 	}
 

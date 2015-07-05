@@ -2,6 +2,7 @@ package com.github.danielflower.mavenplugins.gitlog;
 
 import com.github.danielflower.mavenplugins.gitlog.filters.CommitFilter;
 import com.github.danielflower.mavenplugins.gitlog.renderers.ChangeLogRenderer;
+import java.io.File;
 import org.apache.maven.plugin.logging.Log;
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.lib.ObjectId;
@@ -34,10 +35,18 @@ class Generator {
 	}
 
 	public void openRepository() throws IOException, NoGitRepositoryException {
+            openRepository(null);
+        }
+
+	public void openRepository(File gitdir) throws IOException, NoGitRepositoryException {
 		log.debug("About to open git repository.");
 		Repository repository;
 		try {
+                    if ( gitdir == null ) {
 			repository = new RepositoryBuilder().findGitDir().build();
+                    } else {
+			repository = new RepositoryBuilder().findGitDir(gitdir).build();
+                    }
 		} catch (IllegalArgumentException iae) {
 			throw new NoGitRepositoryException();
 		}
@@ -51,7 +60,7 @@ class Generator {
 	public void generate(String reportTitle) throws IOException {
 		generate(reportTitle, new Date(0l));
 	}
-	
+
 	public void generate(String reportTitle, Date includeCommitsAfter) throws IOException {
 		for (ChangeLogRenderer renderer : renderers) {
 			renderer.renderHeader(reportTitle);
