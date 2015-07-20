@@ -121,3 +121,21 @@ a changelog to the command line:
 If you want to see a git log without having the plugin defined in your pom, you can run:
 
 	$ mvn ${project.groupId}:${project.artifactId}:show
+
+Gitlog report at site generation
+--------------------------------
+
+The gitlog can be the part of the site report generation. For this, add tis section to your pom:
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>${project.artifactId}</artifactId>
+				<version>${project.version}</version>
+				<configuration>
+					<simpleHTMLChangeLogFilename>gitlog.html</simpleHTMLChangeLogFilename>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
