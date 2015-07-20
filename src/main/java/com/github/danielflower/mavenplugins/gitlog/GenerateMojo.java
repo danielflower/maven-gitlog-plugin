@@ -15,10 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import org.apache.maven.reporting.MavenReport;
-import org.apache.maven.reporting.MavenReportException;
-import org.codehaus.doxia.sink.Sink;
 
 /**
  * Goal which generates a changelog based on commits made to the current git repo.
@@ -28,7 +24,7 @@ import org.codehaus.doxia.sink.Sink;
 		defaultPhase = LifecyclePhase.PREPARE_PACKAGE,
 		aggregator = true // the plugin should only run once against the aggregator pom
 )
-public class GenerateMojo extends AbstractMojo implements MavenReport {
+public class GenerateMojo extends AbstractMojo {
 
 	/**
 	 * The directory to put the reports in.  Defaults to the project build directory (normally target).
@@ -36,7 +32,7 @@ public class GenerateMojo extends AbstractMojo implements MavenReport {
          * When running as a reporting plugin, the output directory is fixed, set by the reporting cycle.
 	 */
 	@Parameter(property = "project.build.directory")
-	private File outputDirectory;
+	protected File outputDirectory;
 
 	/**
 	 * The title of the reports. Defaults to: ${project.name} v${project.version} changelog
@@ -269,70 +265,5 @@ public class GenerateMojo extends AbstractMojo implements MavenReport {
 		getLog().debug("Using tracker " + converter.getClass().getSimpleName());
 		return converter;
 	}
-
-    @Override
-    public void generate(Sink sink, Locale locale)
-        throws MavenReportException
-    {
-            try {
-                execute();
-            } catch (MojoExecutionException ex) {
-                getLog().error(ex.getMessage(), ex);
-            } catch (MojoFailureException ex) {
-                getLog().error(ex.getMessage(), ex);
-            }
-    }
-
-    @Override
-    public String getOutputName()
-    {
-        return "gitlog";
-    }
-
-    @Override
-    public String getCategoryName()
-    {
-        return CATEGORY_PROJECT_REPORTS;
-    }
-
-    @Override
-    public String getName(Locale locale)
-    {
-        return "GitLog";
-    }
-
-    @Override
-    public String getDescription(Locale locale)
-    {
-        return "Generate changelog from git SCM.";
-    }
-
-    /**
-     * When running as a reporting plugin, the output directory is fixed, set by the reporting cycle.
-     * @param file
-     */
-    @Override
-    public void setReportOutputDirectory(File file)
-    {
-        outputDirectory = file;
-    }
-
-    @Override
-    public File getReportOutputDirectory()
-    {
-        return outputDirectory;
-    }
-
-    @Override
-    public boolean isExternalReport()
-    {
-        return true;
-    }
-
-    @Override
-    public boolean canGenerateReport()
-    {
-        return true;
-    }
 
 }
