@@ -2,6 +2,7 @@ package com.github.danielflower.mavenplugins.gitlog;
 
 import com.github.danielflower.mavenplugins.gitlog.filters.CommitFilter;
 import com.github.danielflower.mavenplugins.gitlog.filters.CommiterFilter;
+import com.github.danielflower.mavenplugins.gitlog.filters.RegexpFilter;
 import com.github.danielflower.mavenplugins.gitlog.renderers.*;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -161,7 +162,14 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter
 	private List<String> excludeCommiters;
 
-        @Override
+	/**
+	 * Regexp pattern to filter out commits (using Matcher.matches())
+	 */
+	@Parameter
+	private String excludeCommitsPattern;
+
+
+	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("Generating gitlog in " + outputDirectory.getAbsolutePath()
 				+ " with title " + reportTitle);
@@ -183,6 +191,9 @@ public class GenerateMojo extends AbstractMojo {
 
 		if (excludeCommiters != null && !excludeCommiters.isEmpty()) {
 			commitFilters.add(new CommiterFilter(excludeCommiters));
+		}
+		if (excludeCommitsPattern != null) {
+			commitFilters.add(new RegexpFilter(excludeCommitsPattern));
 		}
 
 		Generator generator = new Generator(renderers, commitFilters, getLog());

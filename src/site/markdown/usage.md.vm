@@ -57,6 +57,7 @@ The following example shows all the possible configuration values with default v
 			<excludeCommiters>
 				<commiter>jenkins</commiter>
 			</excludeCommiters>
+			<excludeCommitsPattern>.*\b(without|Upgraded)\b.*</excludeCommitsPattern>
 		</configuration>
 		<executions>
 			<execution>
