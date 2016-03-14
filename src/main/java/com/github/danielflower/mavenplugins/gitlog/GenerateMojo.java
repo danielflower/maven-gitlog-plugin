@@ -168,6 +168,11 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter
 	private String excludeCommitsPattern;
 
+	/**
+	 * If set only displays commits related to files found under this path.
+	 */
+	@Parameter
+	private String path;
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
@@ -196,7 +201,7 @@ public class GenerateMojo extends AbstractMojo {
 			commitFilters.add(new RegexpFilter(excludeCommitsPattern));
 		}
 
-		Generator generator = new Generator(renderers, commitFilters, getLog());
+		Generator generator = new Generator(renderers, commitFilters, path, getLog());
 
 		try {
 			generator.openRepository();
