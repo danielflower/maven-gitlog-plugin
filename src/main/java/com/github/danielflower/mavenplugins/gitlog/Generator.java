@@ -3,9 +3,6 @@ package com.github.danielflower.mavenplugins.gitlog;
 import com.github.danielflower.mavenplugins.gitlog.filters.CommitFilter;
 import com.github.danielflower.mavenplugins.gitlog.renderers.ChangeLogRenderer;
 import org.apache.maven.plugin.logging.Log;
-import org.eclipse.jgit.diff.DiffEntry;
-import org.eclipse.jgit.diff.DiffFormatter;
-import org.eclipse.jgit.diff.RawTextComparator;
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
@@ -14,7 +11,6 @@ import org.eclipse.jgit.lib.RepositoryBuilder;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTag;
 import org.eclipse.jgit.revwalk.RevWalk;
-import org.eclipse.jgit.util.io.DisabledOutputStream;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,27 +23,20 @@ class Generator {
 	private Map<String, List<RevTag>> commitIDToTagsMap;
 	private final List<CommitFilter> commitFilters;
 	private final Log log;
-	private final String path;
-	private Repository repository;
 
-	public Generator(List<ChangeLogRenderer> renderers, List<CommitFilter> commitFilters, String path, Log log) {
+	public Generator(List<ChangeLogRenderer> renderers, List<CommitFilter> commitFilters, Log log) {
 		this.renderers = renderers;
 		this.commitFilters = (commitFilters == null) ? new ArrayList<CommitFilter>() : commitFilters;
-		this.path = path;
 		this.log = log;
 	}
 
-	public Generator(List<ChangeLogRenderer> renderers, List<CommitFilter> commitFilters, Log log) {
-		this(renderers, commitFilters, null, log);
+	public Repository openRepository() throws IOException, NoGitRepositoryException {
+		return openRepository(null);
 	}
 
-	public void openRepository() throws IOException, NoGitRepositoryException {
-		openRepository(null);
-	}
-
-	public void openRepository(File gitdir) throws IOException, NoGitRepositoryException {
+	public Repository openRepository(File gitdir) throws IOException, NoGitRepositoryException {
 		log.debug("About to open git repository.");
-
+		Repository repository;
 		try {
                     if ( gitdir == null ) {
 			repository = new RepositoryBuilder().findGitDir().build();
@@ -62,6 +51,8 @@ class Generator {
 		log.debug("Loaded commits. about to load the tags.");
 		commitIDToTagsMap = createCommitIDToTagsMap(repository, walk);
 		log.debug("Loaded tag map: " + commitIDToTagsMap);
+
+		return repository;
 	}
 
 	public void generate(String reportTitle) throws IOException {
@@ -75,10 +66,6 @@ class Generator {
 
 		long dateInSecondsSinceEpoch = includeCommitsAfter.getTime() / 1000;
 		for (RevCommit commit : walk) {
-			if (path != null && commit.getParentCount() == 1 && !isFoundInPath(commit)) {
-				continue;
-			}
-
 			int commitTimeInSecondsSinceEpoch = commit.getCommitTime();
 			if (dateInSecondsSinceEpoch < commitTimeInSecondsSinceEpoch) {
 				List<RevTag> revTags = commitIDToTagsMap.get(commit.name());
@@ -103,25 +90,6 @@ class Generator {
 			renderer.renderFooter();
 			renderer.close();
 		}
-	}
-
-	private boolean isFoundInPath(RevCommit commit) throws IOException {
-		for (DiffEntry diff : getDiffs(commit, commit.getParent(0))) {
-            if (diff.getNewPath().startsWith(path)) {
-                return true;
-            }
-        }
-
-		return false;
-	}
-
-	private List<DiffEntry> getDiffs(RevCommit commit, RevCommit parent) throws IOException {
-		DiffFormatter df = new DiffFormatter(DisabledOutputStream.INSTANCE);
-		df.setRepository(repository);
-		df.setDiffComparator(RawTextComparator.DEFAULT);
-		df.setDetectRenames(true);
-
-		return df.scan(parent.getTree(), commit.getTree());
 	}
 
 	private boolean show(RevCommit commit) {
