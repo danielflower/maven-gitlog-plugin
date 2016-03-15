@@ -59,11 +59,11 @@ public class PathCommitFilter implements CommitFilter {
     }
 
     private List<DiffEntry> getDiffs(RevCommit commit, RevCommit parent) throws IOException {
-        DiffFormatter df = new DiffFormatter(DisabledOutputStream.INSTANCE);
-        df.setRepository(repository);
-        df.setDiffComparator(RawTextComparator.DEFAULT);
-        df.setDetectRenames(true);
+        DiffFormatter formatter = new DiffFormatter(DisabledOutputStream.INSTANCE);
+        formatter.setRepository(repository);
+        formatter.setDiffComparator(RawTextComparator.DEFAULT);
+        formatter.setDetectRenames(true);
 
-        return df.scan(parent.getTree(), commit.getTree());
+        return formatter.scan(parent.getTree(), commit.getTree());
     }
 }
