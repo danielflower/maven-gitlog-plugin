@@ -36,10 +36,6 @@ public class PathCommitFilter implements CommitFilter {
 
     @Override
     public boolean renderCommit(RevCommit commit) {
-        if (commit.getParentCount() != 1) {
-            return false;
-        }
-
         try {
             return isFoundInPath(commit);
         } catch (IOException e) {
