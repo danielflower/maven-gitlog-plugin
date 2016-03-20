@@ -2,6 +2,7 @@ package com.github.danielflower.mavenplugins.gitlog;
 
 import com.github.danielflower.mavenplugins.gitlog.filters.CommitFilter;
 import com.github.danielflower.mavenplugins.gitlog.filters.CommiterFilter;
+import com.github.danielflower.mavenplugins.gitlog.filters.PathCommitFilter;
 import com.github.danielflower.mavenplugins.gitlog.filters.RegexpFilter;
 import com.github.danielflower.mavenplugins.gitlog.renderers.*;
 import org.apache.maven.plugin.AbstractMojo;
@@ -10,6 +11,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.eclipse.jgit.lib.Repository;
 
 import java.io.File;
 import java.io.IOException;
@@ -168,6 +170,11 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter
 	private String excludeCommitsPattern;
 
+	/**
+	 * If set only displays commits related to files found under this path.
+	 */
+	@Parameter
+	private String path;
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
@@ -197,9 +204,10 @@ public class GenerateMojo extends AbstractMojo {
 		}
 
 		Generator generator = new Generator(renderers, commitFilters, getLog());
+		Repository repository;
 
 		try {
-			generator.openRepository();
+			 repository = generator.openRepository();
 		} catch (IOException e) {
 			getLog().warn("Error opening git repository.  Is this Maven project hosted in a git repository? " +
 					"No changelog will be generated.", e);
@@ -208,6 +216,10 @@ public class GenerateMojo extends AbstractMojo {
 			getLog().warn("This maven project does not appear to be in a git repository, " +
 					"therefore no git changelog will be generated.");
 			return;
+		}
+
+		if (path != null) {
+			commitFilters.add(new PathCommitFilter(repository, path, getLog()));
 		}
 
 		if (!"".equals(dateFormat)) {

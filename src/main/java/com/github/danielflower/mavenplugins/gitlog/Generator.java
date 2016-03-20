@@ -30,11 +30,11 @@ class Generator {
 		this.log = log;
 	}
 
-	public void openRepository() throws IOException, NoGitRepositoryException {
-            openRepository(null);
-        }
+	public Repository openRepository() throws IOException, NoGitRepositoryException {
+		return openRepository(null);
+	}
 
-	public void openRepository(File gitdir) throws IOException, NoGitRepositoryException {
+	public Repository openRepository(File gitdir) throws IOException, NoGitRepositoryException {
 		log.debug("About to open git repository.");
 		Repository repository;
 		try {
@@ -51,6 +51,8 @@ class Generator {
 		log.debug("Loaded commits. about to load the tags.");
 		commitIDToTagsMap = createCommitIDToTagsMap(repository, walk);
 		log.debug("Loaded tag map: " + commitIDToTagsMap);
+
+		return repository;
 	}
 
 	public void generate(String reportTitle) throws IOException {
