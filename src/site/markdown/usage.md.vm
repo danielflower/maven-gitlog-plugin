@@ -43,6 +43,8 @@ The following example shows all the possible configuration values with default v
 			<generateSimpleHTMLChangeLog>true</generateSimpleHTMLChangeLog>
 			<markdownChangeLogFilename>changelog-${project.version}.md</markdownChangeLogFilename>
 			<generateMarkdownChangeLog>true</generateMarkdownChangeLog>
+			<asciidocChangeLogFilename>changelog-${project.version}.adoc</asciidocChangeLogFilename>
+			<generateAsciidocChangeLog>true</generateAsciidocChangeLog>
 			<simpleHTMLChangeLogFilename>changelog-${project.version}.html</simpleHTMLChangeLogFilename>
 			<generateHTMLTableOnlyChangeLog>true</generateHTMLTableOnlyChangeLog>
 			<htmlTableOnlyChangeLogFilename>changelog-${project.version}-tableonly.html</htmlTableOnlyChangeLogFilename>
