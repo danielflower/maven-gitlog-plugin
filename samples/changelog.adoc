@@ -1,0 +1,157 @@
+= Maven GitLog Plugin changelog
+
+
+*gitlog-maven-plugin-1.13.0* +
+*gitlog-maven-plugin-1.13.1* +
+*gitlog-maven-plugin-1.13.2* +
+2016-03-20 14:12:39 +0100    Bumped minor version (Daniel Flower) +
+2016-03-20 14:11:30 +0100    Updated release plugin version (Daniel Flower) +
+
+*gitlog-maven-plugin-1.12.4* +
+2016-03-16 13:26:41 +0100    Remove unnecessay check (Oliver Weiler) +
+2016-03-15 12:03:00 +0100    Update PathCommitFilter.java (Oliver Weiler) +
+2016-03-15 10:25:22 +0100    Add support for specifiying absolute paths (helpermethod) +
+2016-03-15 09:17:43 +0100    Extract path filtering login into PathCommitFilter to introduce as few changes a possible (helpermethod) +
+2016-03-14 13:48:00 +0100    Add path option to filter out commits only related to files found under this path (helpermethod) +
+
+*gitlog-maven-plugin-1.12.1* +
+*gitlog-maven-plugin-1.12.2* +
+*gitlog-maven-plugin-1.12.3* +
+2015-10-26 17:14:57 +0100    Implement filtering commit messages basing on regexp (dziesio) +
+
+*gitlog-maven-plugin-1.12.0* +
+2015-07-20 14:12:30 +0200    add "Gitlog report at site generation" section to the usage (Hrotkó Gábor) +
+2015-07-15 22:23:28 +0200    reporintg without aggregate (hrotkog) +
+
+*gitlog-maven-plugin-1.11.0* +
+2015-07-05 14:13:36 +0200    Upgraded release plugin version (Daniel Flower) +
+2015-07-05 14:07:22 +0200    Fixing merge conflicts (Daniel Flower) +
+2015-06-28 22:28:10 +0200    add note about possible reporting plugin conflict (hrotkog) +
+2015-06-28 22:22:36 +0200    revert default filenames (hrotkog) +
+2015-06-24 14:57:27 +0200    able to test custom git dir (hrotkog) +
+2015-06-24 14:52:22 +0200    can be used as a reporting plugin (hrotkog) +
+2015-06-16 20:25:26 +0200    Change HTML format style (Grzegorz Poznachowski) +
+
+*gitlog-maven-plugin-1.10.1* +
+2015-05-30 18:27:23 +0200    Exclude commiters sample configuration added to site usage file (Grzegorz Poznachowski) +
+2015-05-28 01:25:45 +0200    Enable to filter commits by a commiter name (Grzegorz Poznachowski) +
+
+*gitlog-maven-plugin-1.10.0* +
+2015-03-28 13:58:10 +0100    Fixing javadoc errors (Daniel Flower) +
+2015-03-28 11:09:25 +0100    Updated the release plugin (Daniel Flower) +
+2015-03-28 11:07:35 +0100    Fixed formatting (Daniel Flower) +
+2015-03-24 16:31:48 +0100    Update usage.md.vm (hrotkogabor) +
+2015-03-24 16:14:57 +0100    ability to configure the regexp pattern for bugzilla (hrotkog) +
+2015-03-24 14:59:14 +0100    original pom.xml (hrotkog) +
+2015-03-24 14:35:15 +0100    maven 3.1 artifactId change, add default plugin execution (hrotkog) +
+2015-03-24 14:00:29 +0100    add bugzilla link converter (hrotkog) +
+2015-03-24 11:06:12 +0100    maven 3.1 artifactId change, add default plugin execution (hrotkog) +
+2015-03-23 12:14:38 +0100    Generate clean HTML (Manuel) +
+
+*maven-gitlog-plugin-1.9.0* +
+*maven-gitlog-plugin-1.9.1* +
+2015-03-14 13:11:30 +0100    Fixed the version (Daniel Flower) +
+
+*maven-gitlog-plugin-1.8.0.0* +
+2015-03-14 13:04:07 +0100    Fixed SCM typo (Daniel Flower) +
+2015-03-14 12:59:04 +0100    Updated documentation (Daniel Flower) +
+2015-03-14 12:46:49 +0100    Updated all the plugins, changed to annotation-based declarations on the mojo, and created a Maven site (Daniel Flower) +
+2015-03-12 13:54:01 +0100    Add escapes for tab "\t", backspace "\b", form feed "\f" and carriage return "\r", may create invalid JSON that can't be parsed otherwise. (Kristoffer Lundén) +
+
+*maven-gitlog-plugin-1.7.0* +
+2014-05-25 14:53:01 +0200    Updated the version in preparation of release (Daniel Flower) +
+2014-04-25 22:54:08 +0200    add json file renderer (Keegan Roth) +
+2014-04-25 21:57:28 +0200    refactor resource loading into method in parent for re-use (Keegan Roth) +
+2014-04-25 21:28:31 +0200    remove resource leak warning in FileRenderer.convertStreamToString() (Keegan Roth) +
+2014-04-25 21:27:11 +0200    move convertStreamToString() to parent class for re-use (Keegan Roth) +
+2014-04-10 16:11:18 +0200    Updated version to use in readme (Daniel Flower) +
+
+*maven-gitlog-plugin-1.6.0* +
+2014-04-10 16:00:15 +0200    Bumping minor version for new feature (Daniel Flower) +
+2014-04-07 17:46:59 +0200    Include example of how to use an artifact that contains additional filters (Ivan Martinez-Ortiz) +
+2014-04-07 17:43:13 +0200    Include example of how to override includeCommitsAfter parameter. (Ivan Martinez-Ortiz) +
+2014-03-31 15:26:10 +0200    Add showCommitsAfter parameter to include in the changelog commits only with a timestamp after the provided parameter value. (Ivan Martinez-Ortiz) +
+2014-03-20 23:25:07 +0100    Add SPI loading mechanism for CommitFilters. (Ivan Martinez-Ortiz) +
+
+*maven-gitlog-plugin-1.5.2* +
+2013-10-21 16:30:31 +0200    Bumping readme version in anticipation of next release (Daniel Flower) +
+
+*maven-gitlog-plugin-1.5.1* +
+2013-10-21 16:05:20 +0200    Bumped version in readme in anticipation of upcoming release (Daniel Flower) +
+2013-10-20 16:39:38 +0200    bump eclipse.jgit version (Artem Koshelev) +
+2013-10-20 12:16:10 +0200    update readme (Artem Koshelev) +
+2013-10-20 12:08:44 +0200    add hamcrest dependency (Artem Koshelev) +
+2013-10-20 11:48:07 +0200    fix - create default date format (Artem Koshelev) +
+2013-10-20 11:42:32 +0200    provide ability to setup date format in Formatter add tests for Formatter bump up junit version to 4.11 use junit4 assertions in all tests (Artem Koshelev) +
+2013-10-19 13:47:17 +0200    move hardcoded strings to constants (Artem Koshelev) +
+2013-01-12 05:59:52 +0100    Removing intellij files from maven repo. Better to be IDE agnostic. (Daniel Flower) +
+2013-01-12 05:53:01 +0100    Fixed typo in markdown link... getting there.... (Daniel Flower) +
+2013-01-12 05:52:01 +0100    Updated plugin verison to use in the readme to 1.5.0 which is the first version to support markdown generation. (Daniel Flower) +
+
+*maven-gitlog-plugin-1.5.0* +
+2013-01-12 05:41:18 +0100    Added link to markdown sample in the readme (Daniel Flower) +
+2013-01-12 05:35:26 +0100    Creating markdown sample (Daniel Flower) +
+2013-01-12 05:31:10 +0100    Adding travis-ci build status to readme (Daniel Flower) +
+2013-01-12 05:24:06 +0100    Adding travis-ci build (Daniel Flower) +
+2013-01-06 22:07:48 +0100    Refactored code for easier testing. Added test cases for the markdown renderer and the markdown link converter. OPEN - task 10: Generate markdown formatted gitlog  https://github.com/danielflower/maven-gitlog-plugin/issues/issue/10 (Gerd Zanker) +
+2013-01-05 14:12:46 +0100    OPEN - task 10: Generate markdown formatted gitlog  https://github.com/danielflower/maven-gitlog-plugin/issues/issue/10 Implemented markdown renderer and simple tests. Updated readme with new available maven plugin parameters. (Gerd Zanker) +
+
+*maven-gitlog-plugin-1.4.11* +
+2012-03-17 07:33:55 +0100    Updated maven version in docs (Daniel Flower) +
+
+*maven-gitlog-plugin-1.4.10* +
+2012-03-17 07:06:40 +0100    Updated maven version in readme (Daniel Flower) +
+2012-03-17 07:02:48 +0100    Random intellij updates (Daniel Flower) +
+2012-03-15 01:21:28 +0100    Added property to configure use of full git message (James Rawlings) +
+
+*maven-gitlog-plugin-1.4.9* +
+2011-09-21 15:56:28 +0200    Allow generation of table-only HTML reports. Closes https://github.com/danielflower/maven-gitlog-plugin/issues/7[#7] (Daniel Flower) +
+
+*maven-gitlog-plugin-1.4.8* +
+2011-09-19 16:17:47 +0200    Added links to example reports (Daniel Flower) +
+
+*maven-gitlog-plugin-1.4.7* +
+2011-09-19 15:17:29 +0200    Preparing for initial release to OSS repository (Daniel Flower) +
+2011-09-18 11:01:05 +0200    https://github.com/danielflower/maven-gitlog-plugin/issues/3[#3] Adding support for issue management tools. Updated documentation. Closes https://github.com/danielflower/maven-gitlog-plugin/issues/3[#3] (Daniel Flower) +
+2011-09-18 10:54:22 +0200    https://github.com/danielflower/maven-gitlog-plugin/issues/3[#3] Adding support for issue management tools (Daniel Flower) +
+2011-09-18 10:52:47 +0200    https://github.com/danielflower/maven-gitlog-plugin/issues/3[#3] Adding support for issue management tools and added config as described in https://github.com/danielflower/maven-gitlog-plugin/issues/4[gh-4] (a.k.a https://github.com/danielflower/maven-gitlog-plugin/issues/4[GH-4]/https://github.com/danielflower/maven-gitlog-plugin/issues/4[#4]) (Daniel Flower) +
+2011-09-18 10:48:14 +0200    https://github.com/danielflower/maven-gitlog-plugin/issues/3[#3] Adding support for issue management tools (Daniel Flower) +
+2011-09-18 09:17:45 +0200    Added author to plaintext renderer (Daniel Flower) +
+2011-09-18 08:50:07 +0200    https://github.com/danielflower/maven-gitlog-plugin/issues/3[#3] Fix whitespace issues in HTML (Daniel Flower) +
+2011-09-18 08:36:21 +0200    https://github.com/danielflower/maven-gitlog-plugin/issues/3[#3] The HTML renderer should HTML-encode tags like <this>, or < or > signs, or & => &amp;, and also " => &quot; etc (Daniel Flower) +
+
+*maven-gitlog-plugin-1.4.5* +
+2011-09-18 08:12:09 +0200    Added instructions on how to run the show goal (Daniel Flower) +
+2011-09-18 08:06:08 +0200    Rearranged packages (Daniel Flower) +
+2011-09-18 07:58:03 +0200    Filter out merge commits from the changelog.  Closes https://github.com/danielflower/maven-gitlog-plugin/issues/6[#6] (Daniel Flower) +
+2011-09-18 07:49:22 +0200    Fixed comment in unit test (master) (Daniel Flower) +
+2011-09-18 07:47:39 +0200    Cleaned up HTML (Daniel Flower) +
+2011-09-18 07:45:41 +0200    Preparing for release (Daniel Flower) +
+2011-09-18 06:09:54 +0200    Fixed groupid and added new show goal (Daniel Flower) +
+2011-09-17 18:21:12 +0200    https://github.com/danielflower/maven-gitlog-plugin/issues/4[#4] Fixed name of README file (Daniel Flower) +
+2011-09-17 18:19:57 +0200    https://github.com/danielflower/maven-gitlog-plugin/issues/4[#4] Allow configuration of renderers (Daniel Flower) +
+2011-09-17 16:21:36 +0200    https://github.com/danielflower/maven-gitlog-plugin/issues/3[#3] Added Simple HTML formatter (Daniel Flower) +
+2011-09-17 15:23:30 +0200    Cleaned up access modifiers (Daniel Flower) +
+2011-09-17 12:17:16 +0200    https://github.com/danielflower/maven-gitlog-plugin/issues/4[gh-4] Fixed bug in filtering when there are multiple renderers (Daniel Flower) +
+2011-09-17 11:48:10 +0200    https://github.com/danielflower/maven-gitlog-plugin/issues/4[GH-4] Improve the error reporting for when no git repository is found (Daniel Flower) +
+2011-09-17 11:30:35 +0200    https://github.com/danielflower/maven-gitlog-plugin/issues/4[#4] Set up the GenerateMojo to execute the plugin (Daniel Flower) +
+2011-09-17 11:15:12 +0200    Fixed issue management node (Daniel Flower) +
+2011-09-17 11:06:07 +0200    Do not show maven release plugin messages.  Closes https://github.com/danielflower/maven-gitlog-plugin/issues/1[GH-1] (Daniel Flower) +
+2011-09-17 11:00:46 +0200    Do not show duplicate commit messages.  Closes https://github.com/danielflower/maven-gitlog-plugin/issues/2[#2] (Daniel Flower) +
+2011-09-17 10:47:53 +0200    Fixed some project setup issues (Daniel Flower) +
+
+*maven-gitlog-plugin-1.2* +
+2011-09-17 10:09:37 +0200    Temporarily adding local repository for deployments (Daniel Flower) +
+
+*maven-gitlog-plugin-1.1* +
+2011-09-17 09:54:53 +0200    Fixing maven release issues (Daniel Flower) +
+2011-09-17 09:53:21 +0200    Fixed github repo URLs (Daniel Flower) +
+2011-09-17 09:42:49 +0200    Got PlainText renderer working (Daniel Flower) +
+2011-09-17 09:18:59 +0200    Refactored sout logger to use the maven log interface (Daniel Flower) +
+2011-09-17 09:03:09 +0200    Added support for reading annotated tags (Daniel Flower) +
+2011-09-17 07:10:35 +0200    Renaming project (Daniel Flower) +
+2011-09-16 20:42:36 +0200    Can write the list of commits (Daniel Flower) +
+2011-09-16 20:31:45 +0200    Initial attempt to use jgit (Daniel Flower) +
+2011-09-16 19:38:24 +0200    Got initial mojo set up to write to a text file (Daniel Flower) +
+2011-09-16 18:58:33 +0200    Initial maven setup (Daniel Flower) +
+2011-09-16 18:26:19 +0200    first commit (Daniel Flower) +
