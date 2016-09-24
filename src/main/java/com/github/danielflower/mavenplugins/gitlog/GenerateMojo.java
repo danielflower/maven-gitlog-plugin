@@ -63,10 +63,22 @@ public class GenerateMojo extends AbstractMojo {
 	private boolean generateMarkdownChangeLog;
 
 	/**
+	 * If true, then an Asciidoc changelog will be generated.
+	 */
+	@Parameter(defaultValue = "false")
+	private boolean generatAsciidocChangeLog;
+
+	/**
 	 * The filename of the markdown changelog, if generated.
 	 */
 	@Parameter(defaultValue = "changelog.md")
 	private String markdownChangeLogFilename;
+
+	/**
+	 * The filename of the Asciidoc changelog, if generated.
+	 */
+	@Parameter(defaultValue = "changelog.adoc")
+	private String asciidocChangeLogFilename;
 
 	/**
 	 * If true, then a simple HTML changelog will be generated.
@@ -240,7 +252,7 @@ public class GenerateMojo extends AbstractMojo {
 			renderers.add(new PlainTextRenderer(getLog(), outputDirectory, plainTextChangeLogFilename, fullGitMessage));
 		}
 
-		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog || generateMarkdownChangeLog) {
+		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog || generateMarkdownChangeLog || generatAsciidocChangeLog) {
 			MessageConverter messageConverter = getCommitMessageConverter();
 			if (generateSimpleHTMLChangeLog) {
 				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, simpleHTMLChangeLogFilename, fullGitMessage, messageConverter, false));
@@ -250,6 +262,9 @@ public class GenerateMojo extends AbstractMojo {
 			}
 			if (generateMarkdownChangeLog) {
 				renderers.add(new MarkdownRenderer(getLog(), outputDirectory, markdownChangeLogFilename, fullGitMessage, messageConverter));
+			}
+			if (generatAsciidocChangeLog) {
+				renderers.add(new AsciidocRenderer(getLog(), outputDirectory, asciidocChangeLogFilename, fullGitMessage, messageConverter));
 			}
 		}
 

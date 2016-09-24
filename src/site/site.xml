@@ -29,6 +29,7 @@
 			<item name="HTML" href="samples/changelog.html" />
 			<item name="HTML table" href="samples/changelogtable.html" />
 			<item name="Markdown" href="samples/changelog.md" />
+			<item name="Asciidoc" href="samples/changelog.adoc" />
 			<item name="JSON" href="samples/changelog.json" />
 			<item name="Plain text" href="samples/changelog.txt" />
 		</menu>

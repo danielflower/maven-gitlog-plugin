@@ -91,7 +91,16 @@ public class GeneratorTest {
         generateReport(log, renderer);
     }
 
-    @Test
+	@Test
+	public void writeAsciidocLogToFile() throws Exception {
+		Log log = new SystemStreamLog();
+		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, THIS_PLUGIN_ISSUES);
+		ChangeLogRenderer renderer = new AsciidocRenderer(log, new File(TARGET_DIR), "changelog.adoc", false, messageConverter);
+		generateReport(log, renderer);
+	}
+
+
+	@Test
     public void writeJsonLogToFile() throws Exception {
         Log log = new SystemStreamLog();
         ChangeLogRenderer renderer = new JsonRenderer(log, new File(TARGET_DIR), "changelog.json", false);
