@@ -83,14 +83,26 @@ public class GenerateMojo extends AbstractMojo {
 	/**
 	 * If true, then a simple HTML changelog will be generated.
 	 */
-	@Parameter(defaultValue = "true")
+	@Parameter(defaultValue = "false")
 	private boolean generateSimpleHTMLChangeLog;
+	
+	/**
+	 * If true, then a full HTML changelog will be generated.
+	 */
+	@Parameter(defaultValue = "true")
+	private boolean generateFullHTMLChangeLog;
 
 	/**
 	 * The filename of the simple HTML changelog, if generated.
 	 */
-	@Parameter(defaultValue = "changelog.html")
+	@Parameter(defaultValue = "simplechangelog.html")
 	private String simpleHTMLChangeLogFilename;
+	
+	/**
+	 * The filename of the simple HTML changelog, if generated.
+	 */
+	@Parameter(defaultValue = "changelog.html")
+	private String fullHTMLChangeLogFilename;
 
 	/**
 	 * If true, then an HTML changelog which contains only a table element will be generated.
@@ -187,6 +199,18 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	@Parameter
 	private String path;
+	
+	/**
+	 * Include in the changelog the commits after the last release
+	 */
+	@Parameter(defaultValue = "false")
+	private boolean includeOnlyCommitsAfterRelease;
+	
+	/**
+	 * the tag name of release
+	 */
+	@Parameter(defaultValue = "releaseTag_")
+	private String nameTagRelease;
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
@@ -239,7 +263,9 @@ public class GenerateMojo extends AbstractMojo {
 		}
 
 		try {
-			generator.generate(reportTitle, includeCommitsAfter);
+		
+			generator.generate(reportTitle, repository ,includeOnlyCommitsAfterRelease ,nameTagRelease);
+			
 		} catch (IOException e) {
 			getLog().warn("Error while generating gitlog.  Some changelogs may be incomplete or corrupt.", e);
 		}
@@ -252,8 +278,11 @@ public class GenerateMojo extends AbstractMojo {
 			renderers.add(new PlainTextRenderer(getLog(), outputDirectory, plainTextChangeLogFilename, fullGitMessage));
 		}
 
-		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog || generateMarkdownChangeLog || generatAsciidocChangeLog) {
+		if (generateFullHTMLChangeLog || generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog || generateMarkdownChangeLog || generatAsciidocChangeLog) {
 			MessageConverter messageConverter = getCommitMessageConverter();
+			if (generateFullHTMLChangeLog) {
+				renderers.add(new FullHtmlRenderer(getLog(), outputDirectory, fullHTMLChangeLogFilename, fullGitMessage, messageConverter, false));
+			}
 			if (generateSimpleHTMLChangeLog) {
 				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, simpleHTMLChangeLogFilename, fullGitMessage, messageConverter, false));
 			}
