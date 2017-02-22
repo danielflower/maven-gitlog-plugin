@@ -22,8 +22,8 @@ import org.apache.maven.plugins.annotations.Parameter;
  * 
  * @author <a href="mailto:aramirez@apache.org">Allan Ramirez</a>
  */
-@Mojo(name = "deploy", defaultPhase = LifecyclePhase.PACKAGE, aggregator = true)
-public class DeployReportMojo extends AbstractMojo {
+@Mojo(name = "install", defaultPhase = LifecyclePhase.PACKAGE, aggregator = true)
+public class InstallReportMojo extends AbstractMojo {
 
 	/**
 	 * GroupId of the artifact to be deployed. Retrieved from POM file if
