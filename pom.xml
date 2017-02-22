@@ -329,7 +329,7 @@
 							<execution>
 								<goals>
 									<goal>generate</goal>
-									<goal>deploy</goal>
+									<goal>install</goal>
 								</goals>
 							</execution>
 						</executions>
