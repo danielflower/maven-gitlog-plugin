@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0048)http://openweb.eu.org/IMG/article90/annexe2.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<meta charset="UTF-8"/>
+<link rel="stylesheet" type="text/css" href="css/gitlog.css"/>
+<style type="text/css">
+
+
+.changelog{
+
+    width:auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+		table {
+border:3px solid #000000;
+border-collapse:collapse;
+width:90%;
+margin:auto;
+}
+thead, tfoot {
+background-color:#4D4D4D;
+border:1px solid #4D4D4D;
+}
+tbody {
+background-color:#FFFFFF;
+border:1px solid #333;
+}
+th {
+font-family:monospace;
+border:1px dotted #333;
+padding:5px;
+color: white;
+width:auto;
+}
+td {
+font-family:sans-serif;
+font-size:80%;
+border:1px solid #333;
+padding:5px;
+text-align:left;
+}
+caption {
+font-family:sans-serif;
+}
+
+		details {
+	display:block;  
+}
+summary {
+	display:block; 
+	background:#FFFFFF;
+	color: #663300 ;
+	
+	cursor:pointer;font-weight:bold;
+}
+h1 {
+    font-family: Times New Roman, Times, serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14pt;
+    color: #000;
+    text-align: center;
+    border-style: none;
+}
+footer {
+text-align: center;
+}
+
+.tag td {
+            border-width: 0px;
+            font-weight: bold;
+            padding-top: 7px;
+            padding-bottom: 7px;
+        }
+	</style>
+</head>
+<body>
+<h1>Projet : com.github.danielflower.mavenplugins:gitlog-maven-plugin <br/> Version : 2.0.0-SNAPSHOT </h1>
+
+	<table >
+		<tbody>
+<thead>		<tr><th>Date</th><th>Author</th><th>Message</th><th>Files</th></tr></thead>
+		<tr><td class="date">2017-02-27 10:44:00</td><td><span class="committer">EDENE Moh</span></td><td>change version to 2.0.0-SNAPSHOT</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2017-02-22 10:28:47</td><td><span class="committer">EDENE Moh</span></td><td>change name of goal</td><td>[RENAME src/main/java/com/github/danielflower/mavenplugins/gitlog/DeployReportMojo.java->src/main/java/com/github/danielflower/mavenplugins/gitlog/InstallReportMojo.java]</td></tr>
+		<tr><td class="date">2017-02-22 10:27:35</td><td><span class="committer">EDENE Moh</span></td><td>change name of goal</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2017-02-17 15:25:20</td><td><span class="committer">EDENE Moh</span></td><td>[evol] Add a new report type FullHTML + Add the parameter includeOnlyCommitsAfterRelease to display only the commits of the last release
+</td><td>[MODIFY pom.xml]</br><details> <summary>Show all files: </summary>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/ConfigProperties.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/DeployReportMojo.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Generator.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/filters/DuplicateCommitMessageFilter.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/ChangeLogRenderer.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/FileRenderer.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/FullHtmlRenderer.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/MavenLoggerRenderer.java]</br>[ADD src/main/resources/configuration.properties]</br>[ADD src/main/resources/html/FullHtmlTemplate.html]</br>[ADD src/main/resources/html/css/gitlog.css]</br></details></td></tr>
+		<tr class="tag"><td colspan="4">Tag : gitlog-maven-plugin-1.13.3</td></tr>
+		<tr><td class="date">2016-09-24 08:40:27</td><td><span class="committer">Daniel Flower</span></td><td>Bumped release plugin version
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2016-09-22 16:33:27</td><td><span class="committer">Olivier Revial</span></td><td>Add Asciidoc converter support
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br><details> <summary>Show all files: </summary>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/AsciidocLinkConverter.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/AsciidocRenderer.java]</br>[MODIFY src/site/markdown/index.md]</br>[MODIFY src/site/markdown/usage.md.vm]</br>[ADD src/site/resources/samples/changelog.adoc]</br>[MODIFY src/site/site.xml]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br>[ADD src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/AsciidocLinkConverterTest.java]</br></details></td></tr>
+		<tr class="tag"><td colspan="4">Tag : gitlog-maven-plugin-1.13.0</td></tr>
+		<tr class="tag"><td colspan="4">Tag : gitlog-maven-plugin-1.13.1</td></tr>
+		<tr class="tag"><td colspan="4">Tag : gitlog-maven-plugin-1.13.2</td></tr>
+		<tr><td class="date">2016-03-20 14:12:39</td><td><span class="committer">Daniel Flower</span></td><td>Bumped minor version
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2016-03-20 14:11:30</td><td><span class="committer">Daniel Flower</span></td><td>Updated release plugin version
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr class="tag"><td colspan="4">Tag : gitlog-maven-plugin-1.12.4</td></tr>
+		<tr><td class="date">2016-03-16 13:26:41</td><td><span class="committer">Oliver Weiler</span></td><td>Remove unnecessay check
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/filters/PathCommitFilter.java]</td></tr>
+		<tr><td class="date">2016-03-15 12:03:00</td><td><span class="committer">Oliver Weiler</span></td><td>Update PathCommitFilter.java</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/filters/PathCommitFilter.java]</td></tr>
+		<tr><td class="date">2016-03-15 10:25:22</td><td><span class="committer">helpermethod</span></td><td>Add support for specifiying absolute paths
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/filters/PathCommitFilter.java]</td></tr>
+		<tr><td class="date">2016-03-15 09:17:43</td><td><span class="committer">helpermethod</span></td><td>Extract path filtering login into PathCommitFilter to introduce as few changes a possible
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Generator.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/filters/PathCommitFilter.java]</br></details></td></tr>
+		<tr><td class="date">2016-03-14 13:48:00</td><td><span class="committer">helpermethod</span></td><td>Add path option to filter out commits only related to files found under this path
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Generator.java]</br></details></td></tr>
+		<tr class="tag"><td colspan="4">Tag : gitlog-maven-plugin-1.12.1</td></tr>
+		<tr class="tag"><td colspan="4">Tag : gitlog-maven-plugin-1.12.2</td></tr>
+		<tr class="tag"><td colspan="4">Tag : gitlog-maven-plugin-1.12.3</td></tr>
+		<tr><td class="date">2015-10-26 17:14:57</td><td><span class="committer">dziesio</span></td><td>Implement filtering commit messages basing on regexp
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br><details> <summary>Show all files: </summary>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/filters/RegexpFilter.java]</br>[MODIFY src/site/markdown/usage.md.vm]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr class="tag"><td colspan="4">Tag : gitlog-maven-plugin-1.12.0</td></tr>
+		<tr><td class="date">2015-07-20 14:12:30</td><td><span class="committer">Hrotkó Gábor</span></td><td>add "Gitlog report at site generation" section to the usage</td><td>[MODIFY src/site/markdown/usage.md.vm]</td></tr>
+		<tr><td class="date">2015-07-15 22:23:28</td><td><span class="committer">hrotkog</span></td><td>reporintg without aggregate</td><td>[MODIFY pom.xml]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateReport.java]</br></details></td></tr>
+		<tr class="tag"><td colspan="4">Tag : gitlog-maven-plugin-1.11.0</td></tr>
+		<tr><td class="date">2015-07-05 14:13:36</td><td><span class="committer">Daniel Flower</span></td><td>Upgraded release plugin version
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2015-07-05 14:07:22</td><td><span class="committer">Daniel Flower</span></td><td>Fixing merge conflicts
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Generator.java]</td></tr>
+		<tr><td class="date">2015-06-28 22:28:10</td><td><span class="committer">hrotkog</span></td><td>add note about possible reporting plugin conflict</td><td>[MODIFY README.md]</td></tr>
+		<tr><td class="date">2015-06-28 22:22:36</td><td><span class="committer">hrotkog</span></td><td>revert default filenames</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</td></tr>
+		<tr><td class="date">2015-06-24 14:57:27</td><td><span class="committer">hrotkog</span></td><td>able to test custom git dir</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Generator.java]</br><details> <summary>Show all files: </summary>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr><td class="date">2015-06-24 14:52:22</td><td><span class="committer">hrotkog</span></td><td>can be used as a reporting plugin</td><td>[MODIFY README.md]</br><details> <summary>Show all files: </summary>[MODIFY pom.xml]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/ShowMojo.java]</br></details></td></tr>
+		<tr><td class="date">2015-06-16 20:25:26</td><td><span class="committer">Grzegorz Poznachowski</span></td><td>Change HTML format style
+
+Modified css style to made html format more concise. Tweak, when using full git commit message, to make it look more readible.
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/SimpleHtmlRenderer.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/resources/html/SimpleHtmlTemplate.html]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr class="tag"><td colspan="4">Tag : gitlog-maven-plugin-1.10.1</td></tr>
+		<tr><td class="date">2015-05-30 18:27:23</td><td><span class="committer">Grzegorz Poznachowski</span></td><td>Exclude commiters sample configuration added to site usage file
+</td><td>[MODIFY src/site/markdown/usage.md.vm]</td></tr>
+		<tr><td class="date">2015-05-28 01:25:45</td><td><span class="committer">Grzegorz Poznachowski</span></td><td>Enable to filter commits by a commiter name
+
+Rationale: maven-jgitflow-plugin in contrary to maven-release-plugin does not provide any marker in the commit message.
+It's not uncommon to have an artificial user handle project building and releasing (i.e. 'jenkins'). With this change, I can easily
+filter commit messages by user name.
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br><details> <summary>Show all files: </summary>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/filters/CommiterFilter.java]</br></details></td></tr>
+		<tr class="tag"><td colspan="4">Tag : gitlog-maven-plugin-1.10.0</td></tr>
+		<tr><td class="date">2015-03-28 13:58:10</td><td><span class="committer">Daniel Flower</span></td><td>Fixing javadoc errors
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/filters/CommitFilter.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/BugzillaIssueLinkConverter.java]</br>[MODIFY src/site/markdown/usage.md.vm]</br></details></td></tr>
+		<tr><td class="date">2015-03-28 11:09:25</td><td><span class="committer">Daniel Flower</span></td><td>Updated the release plugin
+</td><td>[MODIFY CONTRIBUTING.md]</br><details> <summary>Show all files: </summary>[MODIFY pom.xml]</br></details></td></tr>
+		<tr><td class="date">2015-03-28 11:07:35</td><td><span class="committer">Daniel Flower</span></td><td>Fixed formatting
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2015-03-24 16:31:48</td><td><span class="committer">hrotkogabor</span></td><td>Update usage.md.vm
+
+add custom bugzilla pattern example to usage</td><td>[MODIFY src/site/markdown/usage.md.vm]</td></tr>
+		<tr><td class="date">2015-03-24 16:30:42</td><td><span class="committer">hrotkogabor</span></td><td>Update usage.md.vm
+
+add buzilla to usage</td><td>[MODIFY src/site/markdown/usage.md.vm]</td></tr>
+		<tr><td class="date">2015-03-24 16:14:57</td><td><span class="committer">hrotkog</span></td><td>ability to configure the regexp pattern for bugzilla</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/BugzillaIssueLinkConverter.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/BugzillaIssueLinkConverterTest.java]</br></details></td></tr>
+		<tr><td class="date">2015-03-24 14:59:14</td><td><span class="committer">hrotkog</span></td><td>original pom.xml</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2015-03-24 14:35:15</td><td><span class="committer">hrotkog</span></td><td>maven 3.1 artifactId change, add default plugin execution</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2015-03-24 14:00:29</td><td><span class="committer">hrotkog</span></td><td>add bugzilla link converter</td><td>[MODIFY pom.xml]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/BugzillaIssueLinkConverter.java]</br>[ADD src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/BugzillaIssueLinkConverterTest.java]</br></details></td></tr>
+		<tr><td class="date">2015-03-24 11:06:12</td><td><span class="committer">hrotkog</span></td><td>maven 3.1 artifactId change, add default plugin execution</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2015-03-23 12:14:38</td><td><span class="committer">Manuel</span></td><td>Generate clean HTML</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/SimpleHtmlRenderer.java]</td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.9.0</td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.9.1</td></tr>
+		<tr><td class="date">2015-03-14 13:11:30</td><td><span class="committer">Daniel Flower</span></td><td>Fixed the version
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.8.0.0</td></tr>
+		<tr><td class="date">2015-03-14 13:04:07</td><td><span class="committer">Daniel Flower</span></td><td>Fixed SCM typo
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2015-03-14 13:02:29</td><td><span class="committer">Daniel Flower</span></td><td>Fixed SCM typo
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2015-03-14 12:59:04</td><td><span class="committer">Daniel Flower</span></td><td>Updated documentation
+</td><td>[ADD CONTRIBUTING.md]</br><details> <summary>Show all files: </summary>[MODIFY README.md]</br></details></td></tr>
+		<tr><td class="date">2015-03-14 12:46:49</td><td><span class="committer">Daniel Flower</span></td><td>Updated all the plugins, changed to annotation-based declarations on the mojo, and created a Maven site
+</td><td>[ADD .editorconfig]</br><details> <summary>Show all files: </summary>[MODIFY pom.xml]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/ShowMojo.java]</br>[ADD src/site/markdown/index.md]</br>[ADD src/site/markdown/usage.md.vm]</br>[ADD src/site/resources/samples/changelog.html]</br>[ADD src/site/resources/samples/changelog.json]</br>[ADD src/site/resources/samples/changelog.md]</br>[ADD src/site/resources/samples/changelog.txt]</br>[ADD src/site/resources/samples/changelogFull.txt]</br>[ADD src/site/resources/samples/changelogtable.html]</br>[ADD src/site/site.xml]</br></details></td></tr>
+		<tr><td class="date">2015-03-12 13:54:01</td><td><span class="committer">Kristoffer Lundén</span></td><td>Add escapes for tab "\t", backspace "\b", form feed "\f" and carriage return "\r", may create invalid JSON that can't be parsed otherwise.
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/JsonRenderer.java]</td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.7.0</td></tr>
+		<tr><td class="date">2014-05-25 14:53:01</td><td><span class="committer">Daniel Flower</span></td><td>Updated the version in preparation of release
+</td><td>[MODIFY README.md]</br><details> <summary>Show all files: </summary>[MODIFY pom.xml]</br></details></td></tr>
+		<tr><td class="date">2014-04-25 22:54:08</td><td><span class="committer">Keegan Roth</span></td><td>add json file renderer
+</td><td>[MODIFY README.md]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/JsonRenderer.java]</br>[ADD src/main/resources/json/JsonItemTemplate.html]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr><td class="date">2014-04-25 21:57:28</td><td><span class="committer">Keegan Roth</span></td><td>refactor resource loading into method in parent for re-use
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/FileRenderer.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/SimpleHtmlRenderer.java]</br></details></td></tr>
+		<tr><td class="date">2014-04-25 21:28:31</td><td><span class="committer">Keegan Roth</span></td><td>remove resource leak warning in FileRenderer.convertStreamToString()
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/FileRenderer.java]</td></tr>
+		<tr><td class="date">2014-04-25 21:27:11</td><td><span class="committer">Keegan Roth</span></td><td>move convertStreamToString() to parent class for re-use
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/FileRenderer.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/SimpleHtmlRenderer.java]</br></details></td></tr>
+		<tr><td class="date">2014-04-10 16:11:18</td><td><span class="committer">Daniel Flower</span></td><td>Updated version to use in readme
+</td><td>[MODIFY README.md]</td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.6.0</td></tr>
+		<tr><td class="date">2014-04-10 16:00:15</td><td><span class="committer">Daniel Flower</span></td><td>Bumping minor version for new feature
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2014-04-07 17:46:59</td><td><span class="committer">Ivan Martinez-Ortiz</span></td><td>Include example of how to use an artifact that contains additional filters
+</td><td>[MODIFY README.md]</td></tr>
+		<tr><td class="date">2014-04-07 17:43:13</td><td><span class="committer">Ivan Martinez-Ortiz</span></td><td>Include example of how to override includeCommitsAfter parameter.
+</td><td>[MODIFY README.md]</td></tr>
+		<tr><td class="date">2014-03-31 15:26:10</td><td><span class="committer">Ivan Martinez-Ortiz</span></td><td>Add showCommitsAfter parameter to include in the changelog commits only with a timestamp after the provided parameter value.
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Generator.java]</br></details></td></tr>
+		<tr><td class="date">2014-03-20 23:25:07</td><td><span class="committer">Ivan Martinez-Ortiz</span></td><td>Add SPI loading mechanism for CommitFilters.
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Defaults.java]</td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.5.2</td></tr>
+		<tr><td class="date">2013-10-21 16:30:31</td><td><span class="committer">Daniel Flower</span></td><td>Bumping readme version in anticipation of next release
+</td><td>[MODIFY README.md]</td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.5.1</td></tr>
+		<tr><td class="date">2013-10-21 16:05:20</td><td><span class="committer">Daniel Flower</span></td><td>Bumped version in readme in anticipation of upcoming release
+</td><td>[MODIFY README.md]</td></tr>
+		<tr><td class="date">2013-10-20 16:39:38</td><td><span class="committer">Artem Koshelev</span></td><td>bump eclipse.jgit version
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2013-10-20 12:16:10</td><td><span class="committer">Artem Koshelev</span></td><td>update readme
+</td><td>[MODIFY README.md]</td></tr>
+		<tr><td class="date">2013-10-20 12:08:44</td><td><span class="committer">Artem Koshelev</span></td><td>add hamcrest dependency
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2013-10-20 11:48:07</td><td><span class="committer">Artem Koshelev</span></td><td>fix - create default date format
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/Formatter.java]</td></tr>
+		<tr><td class="date">2013-10-20 11:42:32</td><td><span class="committer">Artem Koshelev</span></td><td>provide ability to setup date format in Formatter
+add tests for Formatter
+bump up junit version to 4.11
+use junit4 assertions in all tests
+</td><td>[MODIFY pom.xml]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/Formatter.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/GitHubIssueLinkConverter.java]</br>[ADD src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/FormatterTest.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/GitHubIssueLinkConverterTest.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/JiraIssueLinkConverterTest.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/MarkdownLinkConverterTest.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/MarkdownRendererTest.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/NullMessageConverterTest.java]</br></details></td></tr>
+		<tr><td class="date">2013-10-19 13:47:17</td><td><span class="committer">Artem Koshelev</span></td><td>move hardcoded strings to constants
+</td><td>[MODIFY .gitignore]</br><details> <summary>Show all files: </summary>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr><td class="date">2013-01-12 05:59:52</td><td><span class="committer">Daniel Flower</span></td><td>Removing intellij files from maven repo. Better to be IDE agnostic.
+</td><td>[MODIFY .gitignore]</br><details> <summary>Show all files: </summary>[DELETE .idea/.name]</br>[DELETE .idea/ant.xml]</br>[DELETE .idea/compiler.xml]</br>[DELETE .idea/encodings.xml]</br>[DELETE .idea/inspectionProfiles/Project_Default.xml]</br>[DELETE .idea/inspectionProfiles/profiles_settings.xml]</br>[DELETE .idea/libraries/Maven__com_madgag_org_eclipse_jgit_1_0_99_0_2_UNOFFICIAL_ROBERTO_RELEASE.xml]</br>[DELETE .idea/libraries/Maven__junit_junit_4_8_2.xml]</br>[DELETE .idea/libraries/Maven__org_apache_commons_commons_lang3_3_0_1.xml]</br>[DELETE .idea/libraries/Maven__org_apache_maven_maven_plugin_api_2_0.xml]</br>[DELETE .idea/misc.xml]</br>[DELETE .idea/modules.xml]</br>[DELETE .idea/scopes/scope_settings.xml]</br>[DELETE .idea/uiDesigner.xml]</br>[DELETE .idea/vcs.xml]</br>[MODIFY README.md]</br>[DELETE maven-gitlog-plugin.iml]</br></details></td></tr>
+		<tr><td class="date">2013-01-12 05:53:01</td><td><span class="committer">Daniel Flower</span></td><td>Fixed typo in markdown link... getting there....
+</td><td>[MODIFY README.md]</td></tr>
+		<tr><td class="date">2013-01-12 05:52:01</td><td><span class="committer">Daniel Flower</span></td><td>Updated plugin verison to use in the readme to 1.5.0 which is the first version to support markdown generation.
+</td><td>[MODIFY README.md]</br><details> <summary>Show all files: </summary>[MODIFY maven-gitlog-plugin.iml]</br></details></td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.5.0</td></tr>
+		<tr><td class="date">2013-01-12 05:41:18</td><td><span class="committer">Daniel Flower</span></td><td>Added link to markdown sample in the readme
+</td><td>[MODIFY README.md]</br><details> <summary>Show all files: </summary>[MODIFY maven-gitlog-plugin.iml]</br></details></td></tr>
+		<tr><td class="date">2013-01-12 05:35:26</td><td><span class="committer">Daniel Flower</span></td><td>Creating markdown sample
+</td><td>[MODIFY README.md]</td></tr>
+		<tr><td class="date">2013-01-12 05:31:10</td><td><span class="committer">Daniel Flower</span></td><td>Adding travis-ci build status to readme
+</td><td>[MODIFY README.md]</td></tr>
+		<tr><td class="date">2013-01-12 05:24:06</td><td><span class="committer">Daniel Flower</span></td><td>Adding travis-ci build
+</td><td>[MODIFY .idea/compiler.xml]</br><details> <summary>Show all files: </summary>[MODIFY .idea/encodings.xml]</br>[ADD .travis.yml]</br>[MODIFY maven-gitlog-plugin.iml]</br></details></td></tr>
+		<tr><td class="date">2013-01-06 22:07:48</td><td><span class="committer">Gerd Zanker</span></td><td>Refactored code for easier testing.
+Added test cases for the markdown renderer and the markdown link
+converter.
+OPEN - task 10: Generate markdown formatted gitlog 
+https://github.com/danielflower/maven-gitlog-plugin/issues/issue/10</td><td>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/MarkdownLinkConverter.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/MarkdownRenderer.java]</br>[ADD src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/MarkdownLinkConverterTest.java]</br>[ADD src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/MarkdownRendererTest.java]</br></details></td></tr>
+		<tr><td class="date">2013-01-05 14:12:46</td><td><span class="committer">Gerd Zanker</span></td><td>OPEN - task 10: Generate markdown formatted gitlog 
+https://github.com/danielflower/maven-gitlog-plugin/issues/issue/10
+Implemented markdown renderer and simple tests.
+Updated readme with new available maven plugin parameters.</td><td>[MODIFY README.md]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/MarkdownRenderer.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.4.11</td></tr>
+		<tr><td class="date">2012-03-17 07:33:55</td><td><span class="committer">Daniel Flower</span></td><td>Updated maven version in docs
+</td><td>[MODIFY README.md]</td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.4.10</td></tr>
+		<tr><td class="date">2012-03-17 07:06:40</td><td><span class="committer">Daniel Flower</span></td><td>Updated maven version in readme
+</td><td>[MODIFY README.md]</td></tr>
+		<tr><td class="date">2012-03-17 07:02:48</td><td><span class="committer">Daniel Flower</span></td><td>Random intellij updates
+</td><td>[MODIFY .idea/misc.xml]</br><details> <summary>Show all files: </summary>[MODIFY maven-gitlog-plugin.iml]</br></details></td></tr>
+		<tr><td class="date">2012-03-17 07:00:20</td><td><span class="committer">Daniel Flower</span></td><td>Random intellij updates
+</td><td>[MODIFY maven-gitlog-plugin.iml]</td></tr>
+		<tr><td class="date">2012-03-17 06:58:19</td><td><span class="committer">Daniel Flower</span></td><td>Random intellij updates
+</td><td>[MODIFY .idea/misc.xml]</br><details> <summary>Show all files: </summary>[ADD .idea/scopes/scope_settings.xml]</br>[MODIFY maven-gitlog-plugin.iml]</br></details></td></tr>
+		<tr><td class="date">2012-03-15 01:21:28</td><td><span class="committer">James Rawlings</span></td><td>Added property to configure use of full git message
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/PlainTextRenderer.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/SimpleHtmlRenderer.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.4.9</td></tr>
+		<tr><td class="date">2011-09-21 15:56:28</td><td><span class="committer">Daniel Flower</span></td><td>Allow generation of table-only HTML reports. Closes <a href="https://github.com/danielflower/maven-gitlog-plugin/issues/7">#7</a>
+</td><td>[MODIFY README.md]</br><details> <summary>Show all files: </summary>[MODIFY maven-gitlog-plugin.iml]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/SimpleHtmlRenderer.java]</br>[MODIFY src/main/resources/html/SimpleHtmlTemplate.html]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.4.8</td></tr>
+		<tr><td class="date">2011-09-19 16:17:47</td><td><span class="committer">Daniel Flower</span></td><td>Added links to example reports
+</td><td>[MODIFY README.md]</td></tr>
+		<tr><td class="date">2011-09-19 16:15:37</td><td><span class="committer">Daniel Flower</span></td><td>Added links to example reports
+</td><td>[MODIFY README.md]</br><details> <summary>Show all files: </summary>[MODIFY maven-gitlog-plugin.iml]</br></details></td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.4.7</td></tr>
+		<tr><td class="date">2011-09-19 15:17:29</td><td><span class="committer">Daniel Flower</span></td><td>Preparing for initial release to OSS repository
+</td><td>[MODIFY README.md]</br><details> <summary>Show all files: </summary>[MODIFY pom.xml]</br></details></td></tr>
+		<tr><td class="date">2011-09-18 11:01:05</td><td><span class="committer">Daniel Flower</span></td><td><a href="https://github.com/danielflower/maven-gitlog-plugin/issues/3">#3</a> Adding support for issue management tools. Updated documentation. Closes <a href="https://github.com/danielflower/maven-gitlog-plugin/issues/3">#3</a>
+</td><td>[MODIFY README.md]</td></tr>
+		<tr><td class="date">2011-09-18 10:54:22</td><td><span class="committer">Daniel Flower</span></td><td><a href="https://github.com/danielflower/maven-gitlog-plugin/issues/3">#3</a> Adding support for issue management tools
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2011-09-18 10:52:47</td><td><span class="committer">Daniel Flower</span></td><td><a href="https://github.com/danielflower/maven-gitlog-plugin/issues/3">#3</a> Adding support for issue management tools and added config as described in <a href="https://github.com/danielflower/maven-gitlog-plugin/issues/4">gh-4</a> (a.k.a <a href="https://github.com/danielflower/maven-gitlog-plugin/issues/4">GH-4</a>/<a href="https://github.com/danielflower/maven-gitlog-plugin/issues/4">#4</a>)
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/GitHubIssueLinkConverter.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/GitHubIssueLinkConverterTest.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-18 10:48:14</td><td><span class="committer">Daniel Flower</span></td><td><a href="https://github.com/danielflower/maven-gitlog-plugin/issues/3">#3</a> Adding support for issue management tools
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/JiraIssueLinkConverter.java]</br><details> <summary>Show all files: </summary>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/GitHubIssueLinkConverterTest.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/JiraIssueLinkConverterTest.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-18 10:38:16</td><td><span class="committer">Daniel Flower</span></td><td><a href="https://github.com/danielflower/maven-gitlog-plugin/issues/3">#3</a> Adding support for issue management tools
+</td><td>[MODIFY pom.xml]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/GitHubIssueLinkConverter.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/JiraIssueLinkConverter.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/MessageConverter.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/NullMessageConverter.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/SimpleHtmlRenderer.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br>[ADD src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/GitHubIssueLinkConverterTest.java]</br>[ADD src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/JiraIssueLinkConverterTest.java]</br>[ADD src/test/java/com/github/danielflower/mavenplugins/gitlog/renderers/NullMessageConverterTest.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-18 09:17:45</td><td><span class="committer">Daniel Flower</span></td><td>Added author to plaintext renderer
+</td><td>[MODIFY README.md]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/PlainTextRenderer.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-18 08:50:07</td><td><span class="committer">Daniel Flower</span></td><td><a href="https://github.com/danielflower/maven-gitlog-plugin/issues/3">#3</a> Fix whitespace issues in HTML
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/SimpleHtmlRenderer.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/resources/html/SimpleHtmlTemplate.html]</br></details></td></tr>
+		<tr><td class="date">2011-09-18 08:36:21</td><td><span class="committer">Daniel Flower</span></td><td><a href="https://github.com/danielflower/maven-gitlog-plugin/issues/3">#3</a> The HTML renderer should HTML-encode tags like <this>, or < or > signs, or & => &amp;, and also " => &quot; etc
+</td><td>[ADD .idea/libraries/Maven__org_apache_commons_commons_lang3_3_0_1.xml]</br><details> <summary>Show all files: </summary>[MODIFY maven-gitlog-plugin.iml]</br>[MODIFY pom.xml]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/SimpleHtmlRenderer.java]</br></details></td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.4.5</td></tr>
+		<tr><td class="date">2011-09-18 08:12:09</td><td><span class="committer">Daniel Flower</span></td><td>Added instructions on how to run the show goal
+</td><td>[MODIFY README.md]</td></tr>
+		<tr><td class="date">2011-09-18 08:06:08</td><td><span class="committer">Daniel Flower</span></td><td>Rearranged packages
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Defaults.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Generator.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/ShowMojo.java]</br>[RENAME src/main/java/com/github/danielflower/mavenplugins/gitlog/CommitFilter.java->src/main/java/com/github/danielflower/mavenplugins/gitlog/filters/CommitFilter.java]</br>[RENAME src/main/java/com/github/danielflower/mavenplugins/gitlog/DuplicateCommitMessageFilter.java->src/main/java/com/github/danielflower/mavenplugins/gitlog/filters/DuplicateCommitMessageFilter.java]</br>[RENAME src/main/java/com/github/danielflower/mavenplugins/gitlog/MavenReleasePluginMessageFilter.java->src/main/java/com/github/danielflower/mavenplugins/gitlog/filters/MavenReleasePluginMessageFilter.java]</br>[RENAME src/main/java/com/github/danielflower/mavenplugins/gitlog/MergeCommitFilter.java->src/main/java/com/github/danielflower/mavenplugins/gitlog/filters/MergeCommitFilter.java]</br>[RENAME src/main/java/com/github/danielflower/mavenplugins/gitlog/ChangeLogRenderer.java->src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/ChangeLogRenderer.java]</br>[RENAME src/main/java/com/github/danielflower/mavenplugins/gitlog/FileRenderer.java->src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/FileRenderer.java]</br>[RENAME src/main/java/com/github/danielflower/mavenplugins/gitlog/Formatter.java->src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/Formatter.java]</br>[RENAME src/main/java/com/github/danielflower/mavenplugins/gitlog/MavenLoggerRenderer.java->src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/MavenLoggerRenderer.java]</br>[RENAME src/main/java/com/github/danielflower/mavenplugins/gitlog/PlainTextRenderer.java->src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/PlainTextRenderer.java]</br>[RENAME src/main/java/com/github/danielflower/mavenplugins/gitlog/SimpleHtmlRenderer.java->src/main/java/com/github/danielflower/mavenplugins/gitlog/renderers/SimpleHtmlRenderer.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-18 07:58:03</td><td><span class="committer">Daniel Flower</span></td><td>Filter out merge commits from the changelog.  Closes <a href="https://github.com/danielflower/maven-gitlog-plugin/issues/6">#6</a>
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Defaults.java]</br><details> <summary>Show all files: </summary>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/MergeCommitFilter.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-18 07:49:22</td><td><span class="committer">Daniel Flower</span></td><td>Fixed comment in unit test (master)
+</td><td>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</td></tr>
+		<tr><td class="date">2011-09-18 07:47:39</td><td><span class="committer">Daniel Flower</span></td><td>Cleaned up HTML
+</td><td>[MODIFY src/main/resources/html/SimpleHtmlTemplate.html]</td></tr>
+		<tr><td class="date">2011-09-18 07:45:41</td><td><span class="committer">Daniel Flower</span></td><td>Preparing for release
+</td><td>[MODIFY maven-gitlog-plugin.iml]</br><details> <summary>Show all files: </summary>[MODIFY pom.xml]</br></details></td></tr>
+		<tr><td class="date">2011-09-18 06:09:54</td><td><span class="committer">Daniel Flower</span></td><td>Fixed groupid and added new show goal
+</td><td>[MODIFY maven-gitlog-plugin.iml]</br><details> <summary>Show all files: </summary>[MODIFY pom.xml]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/ShowMojo.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-17 18:21:12</td><td><span class="committer">Daniel Flower</span></td><td><a href="https://github.com/danielflower/maven-gitlog-plugin/issues/4">#4</a> Fixed name of README file
+</td><td>[RENAME README.me->README.md]</td></tr>
+		<tr><td class="date">2011-09-17 18:19:57</td><td><span class="committer">Daniel Flower</span></td><td><a href="https://github.com/danielflower/maven-gitlog-plugin/issues/4">#4</a> Allow configuration of renderers
+</td><td>[DELETE README]</br><details> <summary>Show all files: </summary>[ADD README.me]</br>[MODIFY maven-gitlog-plugin.iml]</br>[MODIFY pom.xml]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/ChangeLogRenderer.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Generator.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/MavenLoggerRenderer.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/PlainTextRenderer.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/SimpleHtmlRenderer.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-17 16:21:36</td><td><span class="committer">Daniel Flower</span></td><td><a href="https://github.com/danielflower/maven-gitlog-plugin/issues/3">#3</a> Added Simple HTML formatter
+</td><td>[MODIFY maven-gitlog-plugin.iml]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/ChangeLogRenderer.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/FileRenderer.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Generator.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/MavenLoggerRenderer.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/PlainTextRenderer.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/SimpleHtmlRenderer.java]</br>[ADD src/main/resources/html/SimpleHtmlTemplate.html]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-17 15:23:30</td><td><span class="committer">Daniel Flower</span></td><td>Cleaned up access modifiers
+</td><td>[MODIFY maven-gitlog-plugin.iml]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/CommitFilter.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Defaults.java]</br>[RENAME src/main/java/com/github/danielflower/mavenplugins/gitlog/DuplicateCommitFilter.java->src/main/java/com/github/danielflower/mavenplugins/gitlog/DuplicateCommitMessageFilter.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/MavenReleasePluginMessageFilter.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/NoGitRepositoryException.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-17 12:17:16</td><td><span class="committer">Daniel Flower</span></td><td><a href="https://github.com/danielflower/maven-gitlog-plugin/issues/4">gh-4</a> Fixed bug in filtering when there are multiple renderers
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</td></tr>
+		<tr><td class="date">2011-09-17 12:06:22</td><td><span class="committer">Daniel Flower</span></td><td><a href="https://github.com/danielflower/maven-gitlog-plugin/issues/4">gh-4</a> Fixed bug in filtering when there are multiple renderers
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Generator.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/PlainTextRenderer.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-17 11:48:10</td><td><span class="committer">Daniel Flower</span></td><td><a href="https://github.com/danielflower/maven-gitlog-plugin/issues/4">GH-4</a> Improve the error reporting for when no git repository is found
+</td><td>[MODIFY .idea/.name]</br><details> <summary>Show all files: </summary>[MODIFY pom.xml]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Generator.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/NoGitRepositoryException.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-17 11:30:35</td><td><span class="committer">Daniel Flower</span></td><td><a href="https://github.com/danielflower/maven-gitlog-plugin/issues/4">#4</a> Set up the GenerateMojo to execute the plugin
+</td><td>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/Defaults.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-17 11:15:12</td><td><span class="committer">Daniel Flower</span></td><td>Fixed issue management node
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2011-09-17 11:06:07</td><td><span class="committer">Daniel Flower</span></td><td>Do not show maven release plugin messages.  Closes <a href="https://github.com/danielflower/maven-gitlog-plugin/issues/1">GH-1</a>
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/MavenLoggerRenderer.java]</br><details> <summary>Show all files: </summary>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/MavenReleasePluginMessageFilter.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-17 11:00:46</td><td><span class="committer">Daniel Flower</span></td><td>Do not show duplicate commit messages.  Closes <a href="https://github.com/danielflower/maven-gitlog-plugin/issues/2">#2</a>
+</td><td>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/CommitFilter.java]</br><details> <summary>Show all files: </summary>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/DuplicateCommitFilter.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Generator.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-17 10:47:53</td><td><span class="committer">Daniel Flower</span></td><td>Fixed some project setup issues
+</td><td>[MODIFY .idea/compiler.xml]</br><details> <summary>Show all files: </summary>[DELETE .idea/libraries/Maven__com_jcraft_jsch_0_1_44_1.xml]</br>[MODIFY maven-gitlog-plugin.iml]</br>[MODIFY pom.xml]</br></details></td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.2</td></tr>
+		<tr><td class="date">2011-09-17 10:09:37</td><td><span class="committer">Daniel Flower</span></td><td>Temporarily adding local repository for deployments
+</td><td>[MODIFY maven-gitlog-plugin.iml]</br><details> <summary>Show all files: </summary>[MODIFY pom.xml]</br></details></td></tr>
+		<tr><td class="date">2011-09-17 10:08:19</td><td><span class="committer">Daniel Flower</span></td><td>Temporarily adding local repository for deployments
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2011-09-17 10:06:55</td><td><span class="committer">Daniel Flower</span></td><td>Temporarily adding local repository for deployments
+</td><td>[MODIFY maven-gitlog-plugin.iml]</br><details> <summary>Show all files: </summary>[MODIFY pom.xml]</br></details></td></tr>
+		<tr class="tag"><td colspan="4">Tag : maven-gitlog-plugin-1.1</td></tr>
+		<tr><td class="date">2011-09-17 09:54:53</td><td><span class="committer">Daniel Flower</span></td><td>Fixing maven release issues
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2011-09-17 09:53:21</td><td><span class="committer">Daniel Flower</span></td><td>Fixed github repo URLs
+</td><td>[MODIFY pom.xml]</td></tr>
+		<tr><td class="date">2011-09-17 09:50:34</td><td><span class="committer">Daniel Flower</span></td><td>Fixed github repo URLs
+</td><td>[MODIFY maven-gitlog-plugin.iml]</br><details> <summary>Show all files: </summary>[MODIFY pom.xml]</br></details></td></tr>
+		<tr><td class="date">2011-09-17 09:42:49</td><td><span class="committer">Daniel Flower</span></td><td>Got PlainText renderer working
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Formatter.java]</br><details> <summary>Show all files: </summary>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Generator.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/MavenLoggerRenderer.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/PlainTextRenderer.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-17 09:18:59</td><td><span class="committer">Daniel Flower</span></td><td>Refactored sout logger to use the maven log interface
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/Generator.java]</br><details> <summary>Show all files: </summary>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/MavenLoggerRenderer.java]</br>[DELETE src/main/java/com/github/danielflower/mavenplugins/gitlog/StandardOutputRenderer.java]</br>[MODIFY src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-17 09:03:09</td><td><span class="committer">Daniel Flower</span></td><td>Added support for reading annotated tags
+</td><td>[ADD .idea/ant.xml]</br><details> <summary>Show all files: </summary>[ADD .idea/libraries/Maven__junit_junit_4_8_2.xml]</br>[MODIFY maven-gitlog-plugin.iml]</br>[MODIFY pom.xml]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/ChangeLogRenderer.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/Formatter.java]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/Generator.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/PlainTextRenderer.java]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/StandardOutputRenderer.java]</br>[ADD src/test/java/com/github/danielflower/mavenplugins/gitlog/GeneratorTest.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-17 07:10:35</td><td><span class="committer">Daniel Flower</span></td><td>Renaming project
+</td><td>[ADD maven-gitlog-plugin.iml]</td></tr>
+		<tr><td class="date">2011-09-17 07:10:25</td><td><span class="committer">Daniel Flower</span></td><td>Renaming project
+</td><td>[MODIFY .idea/modules.xml]</br><details> <summary>Show all files: </summary>[DELETE git-log-maven-plugin.iml]</br></details></td></tr>
+		<tr><td class="date">2011-09-16 20:42:36</td><td><span class="committer">Daniel Flower</span></td><td>Can write the list of commits
+</td><td>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</td></tr>
+		<tr><td class="date">2011-09-16 20:31:45</td><td><span class="committer">Daniel Flower</span></td><td>Initial attempt to use jgit
+</td><td>[ADD .idea/libraries/Maven__com_jcraft_jsch_0_1_44_1.xml]</br><details> <summary>Show all files: </summary>[ADD .idea/libraries/Maven__com_madgag_org_eclipse_jgit_1_0_99_0_2_UNOFFICIAL_ROBERTO_RELEASE.xml]</br>[DELETE .idea/libraries/Maven__junit_junit_4_8_2.xml]</br>[MODIFY git-log-maven-plugin.iml]</br>[MODIFY pom.xml]</br>[MODIFY src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-16 19:38:24</td><td><span class="committer">Daniel Flower</span></td><td>Got initial mojo set up to write to a text file
+</td><td>[ADD .gitignore]</br><details> <summary>Show all files: </summary>[ADD .idea/.name]</br>[ADD .idea/compiler.xml]</br>[ADD .idea/encodings.xml]</br>[ADD .idea/inspectionProfiles/Project_Default.xml]</br>[ADD .idea/inspectionProfiles/profiles_settings.xml]</br>[ADD .idea/libraries/Maven__junit_junit_4_8_2.xml]</br>[ADD .idea/libraries/Maven__org_apache_maven_maven_plugin_api_2_0.xml]</br>[ADD .idea/misc.xml]</br>[ADD .idea/modules.xml]</br>[ADD .idea/uiDesigner.xml]</br>[ADD .idea/vcs.xml]</br>[MODIFY git-log-maven-plugin.iml]</br>[MODIFY pom.xml]</br>[ADD src/main/java/com/github/danielflower/mavenplugins/gitlog/GenerateMojo.java]</br></details></td></tr>
+		<tr><td class="date">2011-09-16 18:58:33</td><td><span class="committer">Daniel Flower</span></td><td>Initial maven setup
+</td><td>[ADD git-log-maven-plugin.iml]</br><details> <summary>Show all files: </summary>[ADD pom.xml]</br></details></td></tr>
+		<tr><td class="date">2011-09-16 18:26:19</td><td><span class="committer">Daniel Flower</span></td><td>first commit
+</td><td></td></tr>
+		</tbody>
+	</table>
+
+
+</body>
+<footer><p></p>Changelog  Projet : com.github.danielflower.mavenplugins:gitlog-maven-plugin <br/> Version : 2.0.0-SNAPSHOT </footer>
+</html>

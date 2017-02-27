@@ -103,7 +103,7 @@ public class InstallReportMojo extends AbstractMojo {
 	 * The filename of the simple HTML changelog, if generated.
 	 * 
 	 */
-	@Parameter(defaultValue = "changelog.html")
+	@Parameter(defaultValue = "changelogfull.html")
 	private String fullHTMLChangeLogFilename;
 
 	/**

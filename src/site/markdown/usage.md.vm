@@ -80,6 +80,34 @@ The following example shows all the possible configuration values with default v
 		</dependencies>
 	</plugin>
 
+The following example shows only the commits of the last release (with the option includeOnlyCommitsAfterRelease)  and install the report in the local repository of Maven (with the the goal install).
+
+	<plugin>
+						<groupId>com.github.danielflower.mavenplugins</groupId>
+						<artifactId>gitlog-maven-plugin</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<inherited>false</inherited>
+						<configuration>
+							<reportTitle>Projet : ${project.groupId}:${project.artifactId} Version : ${project.version}</reportTitle>
+							<verbose>true</verbose>
+							<outputDirectory>${project.build.directory}/docs</outputDirectory>
+							<generateSimpleHTMLChangeLog>true</generateSimpleHTMLChangeLog>
+							<simpleHTMLChangeLogFilename>simplechangelog.html</simpleHTMLChangeLogFilename>
+							<includeOnlyCommitsAfterRelease>false</includeOnlyCommitsAfterRelease>
+							<fullGitMessage>true</fullGitMessage>
+							<dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>generate</goal>
+									<goal>install</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					
+
 Including the changelog in your Maven assembly
 ----------------------------------------------
 

@@ -95,13 +95,13 @@ public class GenerateMojo extends AbstractMojo {
 	/**
 	 * The filename of the simple HTML changelog, if generated.
 	 */
-	@Parameter(defaultValue = "simplechangelog.html")
+	@Parameter(defaultValue = "changelog.html")
 	private String simpleHTMLChangeLogFilename;
 	
 	/**
 	 * The filename of the simple HTML changelog, if generated.
 	 */
-	@Parameter(defaultValue = "changelog.html")
+	@Parameter(defaultValue = "changelogfull.html")
 	private String fullHTMLChangeLogFilename;
 
 	/**
