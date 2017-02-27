@@ -9,7 +9,7 @@ public class DuplicateCommitMessageFilter implements CommitFilter {
 	@Override
 	public boolean renderCommit(RevCommit commit) {
 		boolean isDuplicate = previous != null
-				&& messagesEquivalent(commit.getShortMessage(), previous.getShortMessage());
+				&& messagesEquivalent(commit.getName(), previous.getName());
 		previous = commit;
 		return !isDuplicate;
 	}

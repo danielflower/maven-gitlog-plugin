@@ -8,11 +8,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.util.Scanner;
+import org.eclipse.jgit.diff.DiffEntry;
+import java.util.List;
 
 public abstract class FileRenderer implements ChangeLogRenderer {
 
 	protected Writer writer;
 	protected final Log log;
+	protected List <DiffEntry> listDiffEntry;
 
 	public FileRenderer(Log log, File targetFolder, String filename) throws IOException {
 		this.log = log;
@@ -50,4 +53,13 @@ public abstract class FileRenderer implements ChangeLogRenderer {
 		return s;
 	}
 
+	public void setListDiffEntry(List<DiffEntry> i_listDiffEntry)
+
+	{
+		listDiffEntry = i_listDiffEntry;
+	}
+
+	public List<DiffEntry> getListDiffEntry() {
+		return listDiffEntry;
+	}
 }

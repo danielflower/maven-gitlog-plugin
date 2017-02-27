@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.danielflower.mavenplugins</groupId>
   <artifactId>gitlog-maven-plugin</artifactId>
-  <version>1.13-SNAPSHOT</version>
+  <version>2.0.0-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
   <name>Maven Git Log Plugin</name>
   <description>Generates a changelog based on commits to a git repository in text and HTML format showing the changes
@@ -110,6 +110,21 @@
       <artifactId>xml-apis</artifactId>
       <version>1.3.04</version>
     </dependency>
+    
+<!--  dependency of maven deploy -->
+      
+       <dependency>
+	       <groupId>org.apache.maven</groupId>
+	       <artifactId>maven-artifact</artifactId>
+	       <version>2.2.1</version>
+     </dependency>
+	
+	<dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+      <version>1.5.15</version>
+</dependency>
+
   </dependencies>
   <build>
     <plugins>
@@ -291,5 +306,36 @@
         </plugins>
       </build>
     </profile>
+   	<profile>
+			<id>CHANGE-LOG</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.github.danielflower.mavenplugins</groupId>
+						<artifactId>gitlog-maven-plugin</artifactId>
+						<version>2.0.0-SNAPSHOT</version>
+						<inherited>false</inherited>
+						<configuration>
+							<reportTitle>Projet : ${project.groupId}:${project.artifactId} Version : ${project.version}</reportTitle>
+							<verbose>true</verbose>
+							<outputDirectory>${project.build.directory}/docs</outputDirectory>
+							<generateSimpleHTMLChangeLog>true</generateSimpleHTMLChangeLog>
+							<simpleHTMLChangeLogFilename>simplechangelog.html</simpleHTMLChangeLogFilename>
+							<includeOnlyCommitsAfterRelease>false</includeOnlyCommitsAfterRelease>
+							<fullGitMessage>true</fullGitMessage>
+							<dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>generate</goal>
+									<goal>install</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
   </profiles>
 </project>

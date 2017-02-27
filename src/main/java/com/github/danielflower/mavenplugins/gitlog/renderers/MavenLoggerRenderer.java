@@ -2,10 +2,12 @@ package com.github.danielflower.mavenplugins.gitlog.renderers;
 
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugin.logging.SystemStreamLog;
+import org.eclipse.jgit.diff.DiffEntry;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTag;
 
 import java.io.IOException;
+import java.util.List;
 
 public class MavenLoggerRenderer implements ChangeLogRenderer {
 
@@ -45,5 +47,17 @@ public class MavenLoggerRenderer implements ChangeLogRenderer {
 	}
 
 	public void close() {
+	}
+
+	@Override
+	public void setListDiffEntry(List<DiffEntry> listDiffEntry) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<DiffEntry> getListDiffEntry() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
