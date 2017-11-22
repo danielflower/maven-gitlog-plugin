@@ -1,9 +1,6 @@
 package com.github.danielflower.mavenplugins.gitlog;
 
-import com.github.danielflower.mavenplugins.gitlog.filters.CommitFilter;
-import com.github.danielflower.mavenplugins.gitlog.filters.CommiterFilter;
-import com.github.danielflower.mavenplugins.gitlog.filters.PathCommitFilter;
-import com.github.danielflower.mavenplugins.gitlog.filters.RegexpFilter;
+import com.github.danielflower.mavenplugins.gitlog.filters.*;
 import com.github.danielflower.mavenplugins.gitlog.renderers.*;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -159,12 +156,6 @@ public class GenerateMojo extends AbstractMojo {
 	private String dateFormat;
 
 	/**
-	 * If true, the changelog will include the full git message rather that the short git message
-	 */
-	@Parameter(defaultValue = "false")
-	private boolean fullGitMessage;
-
-	/**
 	 * Include in the changelog the commits after this parameter value.
 	 */
 	@Parameter(defaultValue = "1970-01-01 00:00:00.0 AM")
@@ -175,6 +166,9 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	@Parameter
 	private List<String> excludeCommiters;
+
+	@Parameter(defaultValue = "false")
+	private boolean fullGitMessage;
 
 	/**
 	 * Regexp pattern to filter out commits (using Matcher.matches())
@@ -187,6 +181,13 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	@Parameter
 	private String path;
+
+	/**
+	 * If true, the merge commit filter will be configured.
+	 */
+	@Parameter(defaultValue = "true")
+	private boolean mergeCommitFilter;
+
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
@@ -207,6 +208,10 @@ public class GenerateMojo extends AbstractMojo {
 		}
 
 		List<CommitFilter> commitFilters = new ArrayList<CommitFilter>(Defaults.COMMIT_FILTERS);
+
+		if (this.mergeCommitFilter) {
+			commitFilters.add(new MergeCommitFilter());
+		}
 
 		if (excludeCommiters != null && !excludeCommiters.isEmpty()) {
 			commitFilters.add(new CommiterFilter(excludeCommiters));

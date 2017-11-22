@@ -17,3 +17,19 @@ Usage instructions and Documentation
 ====================================
 
 See the **[Maven Gitlog Plugin documentation](http://danielflower.github.io/maven-gitlog-plugin/)** for usage and more information.
+
+
+FORK UPDATE
+===========
+
+For release notes with only merged branches.
+
+```$xslt
+                 <configuration>
+                 
+                        <fullGitMessage>false</fullGitMessage>
+                        <mergeCommitFilter>false</mergeCommitFilter>
+                        <excludeCommitsPattern>^(?!Merge branch.*).*$</excludeCommitsPattern>
+                        
+                    </configuration>
+```
