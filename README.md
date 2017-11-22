@@ -19,8 +19,8 @@ Usage instructions and Documentation
 See the **[Maven Gitlog Plugin documentation](http://danielflower.github.io/maven-gitlog-plugin/)** for usage and more information.
 
 
-FORK UPDATE
-===========
+Merge Log Only
+===============
 
 For release notes with only merged branches.
 
