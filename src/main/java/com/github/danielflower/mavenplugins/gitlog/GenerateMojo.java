@@ -188,6 +188,9 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter(defaultValue = "true")
 	private boolean mergeCommitFilter;
 
+	/**
+	 * asciidoc title level
+	 */
 	@Parameter(defaultValue = "=")
 	private String asciidocHeading;
 
@@ -197,9 +200,15 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter(defaultValue = "false")
 	private boolean asciidocTableView;
 
+	/**
+	 * asciidoc table header 1
+	 */
 	@Parameter(defaultValue = "Date")
 	private String asciidocTableViewHeader1;
 
+	/**
+	 * asciidoc table header 2
+	 */
 	@Parameter(defaultValue = "Commit")
 	private String asciidocTableViewHeader2;
 
