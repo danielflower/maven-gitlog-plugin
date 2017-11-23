@@ -95,7 +95,14 @@ public class GeneratorTest {
 	public void writeAsciidocLogToFile() throws Exception {
 		Log log = new SystemStreamLog();
 		GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, THIS_PLUGIN_ISSUES);
-		ChangeLogRenderer renderer = new AsciidocRenderer(log, new File(TARGET_DIR), "changelog.adoc", false, messageConverter);
+		ChangeLogRenderer renderer = new AsciidocRenderer(log, new File(TARGET_DIR), "changelog.adoc", false, messageConverter, null, false,null, null);
+		generateReport(log, renderer);
+	}
+	@Test
+	public void writeAsciidocLogToFileJiraAsTableView() throws Exception {
+		Log log = new SystemStreamLog();
+		JiraIssueLinkConverter messageConverter = new JiraIssueLinkConverter(log, THIS_PLUGIN_ISSUES);
+		ChangeLogRenderer renderer = new AsciidocRenderer(log, new File(TARGET_DIR), "changelog-jira-asTableview.adoc", false, messageConverter, "==", true,"Date", "Merge");
 		generateReport(log, renderer);
 	}
 

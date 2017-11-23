@@ -188,6 +188,20 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter(defaultValue = "true")
 	private boolean mergeCommitFilter;
 
+	@Parameter(defaultValue = "=")
+	private String asciidocHeading;
+
+	/**
+	 * If true, the changelog will be in an asciidoc table
+	 */
+	@Parameter(defaultValue = "false")
+	private boolean asciidocTableView;
+
+	@Parameter(defaultValue = "Date")
+	private String asciidocTableViewHeader1;
+
+	@Parameter(defaultValue = "Commit")
+	private String asciidocTableViewHeader2;
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
@@ -269,7 +283,7 @@ public class GenerateMojo extends AbstractMojo {
 				renderers.add(new MarkdownRenderer(getLog(), outputDirectory, markdownChangeLogFilename, fullGitMessage, messageConverter));
 			}
 			if (generatAsciidocChangeLog) {
-				renderers.add(new AsciidocRenderer(getLog(), outputDirectory, asciidocChangeLogFilename, fullGitMessage, messageConverter));
+				renderers.add(new AsciidocRenderer(getLog(), outputDirectory, asciidocChangeLogFilename, fullGitMessage, messageConverter, asciidocHeading, asciidocTableView, asciidocTableViewHeader1, asciidocTableViewHeader2));
 			}
 		}
 

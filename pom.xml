@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.danielflower.mavenplugins</groupId>
   <artifactId>gitlog-maven-plugin</artifactId>
-  <version>1.13.4-SNAPSHOT</version>
+	<version>1.13.4-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
   <name>Maven Git Log Plugin</name>
   <description>Generates a changelog based on commits to a git repository in text and HTML format showing the changes
