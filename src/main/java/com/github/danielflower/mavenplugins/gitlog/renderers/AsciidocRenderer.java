@@ -11,43 +11,40 @@ import static com.github.danielflower.mavenplugins.gitlog.renderers.Formatter.NE
 
 /**
  * Asciidoc Renderer to get a*.md file.
- * 
+ * <p>
  * The created asciidoc file will have
  * - a document title (level 0),
- * - bold tags 
+ * - bold tags
  * - and commits in each line.
- * 
+ * <p>
  * Asciidoc reference is http://asciidoctor.org/docs/
- *  
+ * <p>
  * Output Example:
- * 		= Maven GitLog Plugin changelog
- * 		*maven-gitlog-plugin-1.4.11*
- * 		2012-03-17 07:33:55 +0100    Updated maven version in docs (Daniel Flower)  
- * 		...
- *
- *
- *
- *
- *  == Maven GitLog Plugin changelog
-
- === version 2
- |===
- |Date | Merge
- |2017-11-23 07:34:02 +0100 |asciidoc also als table view (Marcel Widmer) +
- |2017-11-22 12:24:41 +0100 |update README (Marcel Widmer) +
- |2017-11-22 12:19:21 +0100 |Merge Commits Only (Marcel Widmer) +
- |2016-09-24 08:40:27 +0200 |Bumped release plugin version (Daniel Flower) +
- |===
-
- === version 1
- |===
- |Date | Merge
- |2017-11-23 07:34:02 +0100 |asciidoc also als table view (Marcel Widmer) +
- |2017-11-22 12:24:41 +0100 |update README (Marcel Widmer) +
- |2017-11-22 12:19:21 +0100 |Merge Commits Only (Marcel Widmer) +
- |2016-09-24 08:40:27 +0200 |Bumped release plugin version (Daniel Flower) +
- |===
-
+ * = Maven GitLog Plugin changelog
+ * *maven-gitlog-plugin-1.4.11*
+ * 2012-03-17 07:33:55 +0100    Updated maven version in docs (Daniel Flower)
+ * ...
+ * <p>
+ * Table View example
+ * </p>
+ * == Maven GitLog Plugin changelog
+ * <p>
+ * |===
+ * |Date | Merge
+ * |2017-11-23 07:34:02 +0100 |asciidoc also als table view (Marcel Widmer) +
+ * |2017-11-22 12:24:41 +0100 |update README (Marcel Widmer) +
+ * |2017-11-22 12:19:21 +0100 |Merge Commits Only (Marcel Widmer) +
+ * <p>
+ * |===
+ * == *gitlog-maven-plugin-1.13.3* +
+ * <p>
+ * |===
+ * |Date | Merge
+ * |2016-09-24 08:40:27 +0200 |Bumped release plugin version (Daniel Flower) +
+ * |2016-09-24 08:38:49 +0200 |Merge pull request #42 from orevial/asciidoc-support (GitHub) +
+ * |2016-09-22 16:33:27 +0200 |Add Asciidoc converter support (Olivier Revial) +
+ * <p>
+ * |===
  */
 public class AsciidocRenderer extends FileRenderer {
 
@@ -61,7 +58,7 @@ public class AsciidocRenderer extends FileRenderer {
 	private String asciidocTableViewHeader2; // Commit
 
 	public AsciidocRenderer(Log log, File targetFolder, String filename, boolean fullGitMessage, MessageConverter messageConverter,
-							String asciidocHeading, boolean isAsciidocTableView , String asciidocTableViewHeader1, String asciidocTableViewHeader2 ) throws IOException {
+							String asciidocHeading, boolean isAsciidocTableView, String asciidocTableViewHeader1, String asciidocTableViewHeader2) throws IOException {
 		super(log, targetFolder, filename);
 		this.fullGitMessage = fullGitMessage;
 		this.messageConverter = messageConverter;
@@ -80,7 +77,7 @@ public class AsciidocRenderer extends FileRenderer {
 			writer.write(reportTitle);
 			writer.write(NEW_LINE);
 			writer.write(NEW_LINE);
-			if(isAsciidocTableView) {
+			if (isAsciidocTableView) {
 				writer.write("|===");
 				writer.write(NEW_LINE);
 				writer.write("|" + asciidocTableViewHeader1 + " | " + asciidocTableViewHeader2);
@@ -91,18 +88,14 @@ public class AsciidocRenderer extends FileRenderer {
 	}
 
 	public void renderTag(RevTag tag) throws IOException {
-		if(isAsciidocTableView){
-  				// TODO
-
+		if (isAsciidocTableView) {
 			if (!previousWasTag) {
-//				writer.write(NEW_LINE);
-//			} else {
 				renderFooter();
-				renderHeader("*"+ tag.getTagName() + "*" + " +");
+				renderHeader("*" + tag.getTagName() + "*" + " +");
 				previousWasTag = true;
 			}
 
-		}else {
+		} else {
 			if (!previousWasTag) {
 				writer.write(NEW_LINE);
 			}
@@ -118,20 +111,20 @@ public class AsciidocRenderer extends FileRenderer {
 	public void renderCommit(RevCommit commit) throws IOException {
 		String message = null;
 		// use the message formatter to get a HTML hyperlink
-		if (fullGitMessage){
+		if (fullGitMessage) {
 			message = messageConverter.formatCommitMessage(commit.getFullMessage());
 		} else {
 			message = messageConverter.formatCommitMessage(commit.getShortMessage());
 		}
 		// now convert the HTML hyperlink into an Asciidoc link
 		message = asciidocLinkConverter.formatCommitMessage(message);
-		if(isAsciidocTableView){
+		if (isAsciidocTableView) {
 			writer.write("|");
 			writer.write(Formatter.formatDateTime(commit.getCommitTime()) + " |" + message);
 			writer.write(" (" + commit.getCommitterIdent().getName() + ")");
 			writer.write(" +"); // MD line warp
 			writer.write(NEW_LINE);
-		}else {
+		} else {
 			writer.write(Formatter.formatDateTime(commit.getCommitTime()) + "     " + message);
 			writer.write(" (" + commit.getCommitterIdent().getName() + ")");
 			writer.write(" +"); // MD line warp
@@ -142,7 +135,7 @@ public class AsciidocRenderer extends FileRenderer {
 
 
 	public void renderFooter() throws IOException {
-		if(isAsciidocTableView) {
+		if (isAsciidocTableView) {
 			writer.write(NEW_LINE);
 			writer.write("|===");
 			writer.write(NEW_LINE);
