@@ -33,3 +33,19 @@ For release notes with only merged branches.
                         
                     </configuration>
 ```
+
+
+AsciiDoc Table View and special title hierarchy 
+===============================================
+
+For release notes with only merged branches.
+
+```$xslt
+                 <configuration>
+                 
+                        <asciidocTableView>true</asciidocTableView>
+                        <asciidocTableViewHeader1>Date</asciidocTableViewHeader1>
+                        <asciidocTableViewHeader2>Merge</asciidocTableViewHeader2>
+                        
+                    </configuration>
+```
