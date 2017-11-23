@@ -24,7 +24,30 @@ import static com.github.danielflower.mavenplugins.gitlog.renderers.Formatter.NE
  * 		*maven-gitlog-plugin-1.4.11*
  * 		2012-03-17 07:33:55 +0100    Updated maven version in docs (Daniel Flower)  
  * 		...
- *  
+ *
+ *
+ *
+ *
+ *  == Maven GitLog Plugin changelog
+
+ === version 2
+ |===
+ |Date | Merge
+ |2017-11-23 07:34:02 +0100 |asciidoc also als table view (Marcel Widmer) +
+ |2017-11-22 12:24:41 +0100 |update README (Marcel Widmer) +
+ |2017-11-22 12:19:21 +0100 |Merge Commits Only (Marcel Widmer) +
+ |2016-09-24 08:40:27 +0200 |Bumped release plugin version (Daniel Flower) +
+ |===
+
+ === version 1
+ |===
+ |Date | Merge
+ |2017-11-23 07:34:02 +0100 |asciidoc also als table view (Marcel Widmer) +
+ |2017-11-22 12:24:41 +0100 |update README (Marcel Widmer) +
+ |2017-11-22 12:19:21 +0100 |Merge Commits Only (Marcel Widmer) +
+ |2016-09-24 08:40:27 +0200 |Bumped release plugin version (Daniel Flower) +
+ |===
+
  */
 public class AsciidocRenderer extends FileRenderer {
 
@@ -69,6 +92,15 @@ public class AsciidocRenderer extends FileRenderer {
 
 	public void renderTag(RevTag tag) throws IOException {
 		if(isAsciidocTableView){
+  				// TODO
+
+			if (!previousWasTag) {
+//				writer.write(NEW_LINE);
+//			} else {
+				renderFooter();
+				renderHeader("*"+ tag.getTagName() + "*" + " +");
+				previousWasTag = true;
+			}
 
 		}else {
 			if (!previousWasTag) {
