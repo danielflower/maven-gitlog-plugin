@@ -39,6 +39,11 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	@Parameter(defaultValue = "${project.name} v${project.version} git changelog")
 	private String reportTitle;
+	/**
+	 * The title of the reports. Defaults to: ${project.name} v${project.version} changelog
+	 */
+	@Parameter(defaultValue = "Release Notes ${project.name} v${project.version}")
+	private String reportTitleReleaseNotes;
 
 	/**
 	 * If true, then a plain text changelog will be generated.
@@ -66,6 +71,12 @@ public class GenerateMojo extends AbstractMojo {
 	private boolean generatAsciidocChangeLog;
 
 	/**
+	 * If true, then an Asciidoc changelog will be generated.
+	 */
+	@Parameter(defaultValue = "false")
+	private boolean generatAsciidocReleaseNotes;
+
+	/**
 	 * The filename of the markdown changelog, if generated.
 	 */
 	@Parameter(defaultValue = "changelog.md")
@@ -76,6 +87,12 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	@Parameter(defaultValue = "changelog.adoc")
 	private String asciidocChangeLogFilename;
+
+	/**
+	 * The filename of the Asciidoc changelog, if generated.
+	 */
+	@Parameter(defaultValue = "releaseNotes.adoc")
+	private String asciidocReleaseNotesFilename;
 
 	/**
 	 * If true, then a simple HTML changelog will be generated.
@@ -170,11 +187,20 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter(defaultValue = "false")
 	private boolean fullGitMessage;
 
+	@Parameter(defaultValue = "false")
+	private boolean fullGitMessageReleaseNotes;
+
 	/**
 	 * Regexp pattern to filter out commits (using Matcher.matches())
 	 */
 	@Parameter
 	private String excludeCommitsPattern;
+
+	/**
+	 * Regexp pattern to filter out commits (using Matcher.matches())
+	 */
+	@Parameter
+	private String excludeCommitsPatternReleaseNotes;
 
 	/**
 	 * If set only displays commits related to files found under this path.
@@ -212,6 +238,36 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter(defaultValue = "Commit")
 	private String asciidocTableViewHeader2;
 
+	/**
+	 * If true, the merge commit filter will be configured.
+	 */
+	@Parameter(defaultValue = "true")
+	private boolean mergeCommitFilterReleaseNotes;
+
+	/**
+	 * asciidoc title level
+	 */
+	@Parameter(defaultValue = "=")
+	private String asciidocHeadingReleaseNotes;
+
+	/**
+	 * If true, the changelog will be in an asciidoc table
+	 */
+	@Parameter(defaultValue = "false")
+	private boolean asciidocTableViewReleaseNotes;
+
+	/**
+	 * asciidoc table header 1
+	 */
+	@Parameter(defaultValue = "Date")
+	private String asciidocTableViewHeader1ReleaseNotes;
+
+	/**
+	 * asciidoc table header 2
+	 */
+	@Parameter(defaultValue = "Merge")
+	private String asciidocTableViewHeader2ReleaseNotes;
+
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("Generating gitlog in " + outputDirectory.getAbsolutePath()
@@ -235,12 +291,18 @@ public class GenerateMojo extends AbstractMojo {
 		if (this.mergeCommitFilter) {
 			commitFilters.add(new MergeCommitFilter());
 		}
+		if (this.mergeCommitFilterReleaseNotes) {
+			commitFilters.add(new MergeCommitFilter());
+		}
 
 		if (excludeCommiters != null && !excludeCommiters.isEmpty()) {
 			commitFilters.add(new CommiterFilter(excludeCommiters));
 		}
 		if (excludeCommitsPattern != null) {
 			commitFilters.add(new RegexpFilter(excludeCommitsPattern));
+		}
+		if (excludeCommitsPatternReleaseNotes != null) {
+			commitFilters.add(new RegexpFilter(excludeCommitsPatternReleaseNotes));
 		}
 
 		Generator generator = new Generator(renderers, commitFilters, getLog());
@@ -267,7 +329,11 @@ public class GenerateMojo extends AbstractMojo {
 		}
 
 		try {
-			generator.generate(reportTitle, includeCommitsAfter);
+			if (generatAsciidocReleaseNotes) {
+				generator.generate(reportTitleReleaseNotes, includeCommitsAfter);
+			}else {
+				generator.generate(reportTitle, includeCommitsAfter);
+			}
 		} catch (IOException e) {
 			getLog().warn("Error while generating gitlog.  Some changelogs may be incomplete or corrupt.", e);
 		}
@@ -293,6 +359,9 @@ public class GenerateMojo extends AbstractMojo {
 			}
 			if (generatAsciidocChangeLog) {
 				renderers.add(new AsciidocRenderer(getLog(), outputDirectory, asciidocChangeLogFilename, fullGitMessage, messageConverter, asciidocHeading, asciidocTableView, asciidocTableViewHeader1, asciidocTableViewHeader2));
+			}
+			if (generatAsciidocReleaseNotes) {
+				renderers.add(new AsciidocReleaseNotesRenderer(getLog(), outputDirectory, asciidocReleaseNotesFilename, fullGitMessageReleaseNotes, messageConverter, asciidocHeadingReleaseNotes, asciidocTableViewReleaseNotes, asciidocTableViewHeader1ReleaseNotes, asciidocTableViewHeader2ReleaseNotes));
 			}
 		}
 
