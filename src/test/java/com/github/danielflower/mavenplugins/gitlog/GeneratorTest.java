@@ -102,7 +102,7 @@ public class GeneratorTest {
 	public void writeAsciidocLogToFileJiraAsTableView() throws Exception {
 		Log log = new SystemStreamLog();
 		JiraIssueLinkConverter messageConverter = new JiraIssueLinkConverter(log, THIS_PLUGIN_ISSUES);
-		ChangeLogRenderer renderer = new AsciidocRenderer(log, new File(TARGET_DIR), "changelog-jira-asTableview.adoc", false, messageConverter, "===", true,"Date", "Merge");
+		ChangeLogRenderer renderer = new AsciidocRenderer(log, new File(TARGET_DIR), "changelog-jira-asTableview.adoc", false, messageConverter, "==", true,"Date", "Merge");
 		generateReport(log, renderer);
 	}
 
