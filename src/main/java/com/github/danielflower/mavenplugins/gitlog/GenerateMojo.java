@@ -28,8 +28,8 @@ public class GenerateMojo extends AbstractMojo {
 
 	/**
 	 * The directory to put the reports in.  Defaults to the project build directory (normally target).
-         *
-         * When running as a reporting plugin, the output directory is fixed, set by the reporting cycle.
+	 * <p>
+	 * When running as a reporting plugin, the output directory is fixed, set by the reporting cycle.
 	 */
 	@Parameter(property = "project.build.directory")
 	protected File outputDirectory;
@@ -39,11 +39,7 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	@Parameter(defaultValue = "${project.name} v${project.version} git changelog")
 	private String reportTitle;
-	/**
-	 * The title of the reports. Defaults to: ${project.name} v${project.version} changelog
-	 */
-	@Parameter(defaultValue = "Release Notes ${project.name} v${project.version}")
-	private String reportTitleReleaseNotes;
+
 
 	/**
 	 * If true, then a plain text changelog will be generated.
@@ -197,12 +193,6 @@ public class GenerateMojo extends AbstractMojo {
 	private String excludeCommitsPattern;
 
 	/**
-	 * Regexp pattern to filter out commits (using Matcher.matches())
-	 */
-	@Parameter
-	private String excludeCommitsPatternReleaseNotes;
-
-	/**
 	 * If set only displays commits related to files found under this path.
 	 */
 	@Parameter
@@ -213,6 +203,7 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	@Parameter(defaultValue = "true")
 	private boolean mergeCommitFilter;
+
 
 	/**
 	 * asciidoc title level
@@ -301,15 +292,12 @@ public class GenerateMojo extends AbstractMojo {
 		if (excludeCommitsPattern != null) {
 			commitFilters.add(new RegexpFilter(excludeCommitsPattern));
 		}
-		if (excludeCommitsPatternReleaseNotes != null) {
-			commitFilters.add(new RegexpFilter(excludeCommitsPatternReleaseNotes));
-		}
 
 		Generator generator = new Generator(renderers, commitFilters, getLog());
 		Repository repository;
 
 		try {
-			 repository = generator.openRepository();
+			repository = generator.openRepository();
 		} catch (IOException e) {
 			getLog().warn("Error opening git repository.  Is this Maven project hosted in a git repository? " +
 					"No changelog will be generated.", e);
@@ -329,11 +317,7 @@ public class GenerateMojo extends AbstractMojo {
 		}
 
 		try {
-			if (generatAsciidocReleaseNotes) {
-				generator.generate(reportTitleReleaseNotes, includeCommitsAfter);
-			}else {
-				generator.generate(reportTitle, includeCommitsAfter);
-			}
+			generator.generate(reportTitle, includeCommitsAfter);
 		} catch (IOException e) {
 			getLog().warn("Error while generating gitlog.  Some changelogs may be incomplete or corrupt.", e);
 		}
@@ -346,7 +330,7 @@ public class GenerateMojo extends AbstractMojo {
 			renderers.add(new PlainTextRenderer(getLog(), outputDirectory, plainTextChangeLogFilename, fullGitMessage));
 		}
 
-		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog || generateMarkdownChangeLog || generatAsciidocChangeLog) {
+		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog || generateMarkdownChangeLog || generatAsciidocChangeLog || generatAsciidocReleaseNotes) {
 			MessageConverter messageConverter = getCommitMessageConverter();
 			if (generateSimpleHTMLChangeLog) {
 				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, simpleHTMLChangeLogFilename, fullGitMessage, messageConverter, false));
