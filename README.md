@@ -17,3 +17,35 @@ Usage instructions and Documentation
 ====================================
 
 See the **[Maven Gitlog Plugin documentation](http://danielflower.github.io/maven-gitlog-plugin/)** for usage and more information.
+
+
+Merge Log Only
+===============
+
+For release notes with only merged branches.
+
+```$xslt
+                 <configuration>
+                 
+                        <fullGitMessage>false</fullGitMessage>
+                        <mergeCommitFilter>false</mergeCommitFilter>
+                        <excludeCommitsPattern>^(?!Merge branch.*).*$</excludeCommitsPattern>
+                        
+                    </configuration>
+```
+
+
+AsciiDoc Table View and special title hierarchy 
+===============================================
+
+For release notes with only merged branches.
+
+```$xslt
+                 <configuration>
+                 
+                        <asciidocTableView>true</asciidocTableView>
+                        <asciidocTableViewHeader1>Date</asciidocTableViewHeader1>
+                        <asciidocTableViewHeader2>Merge</asciidocTableViewHeader2>
+                        
+                    </configuration>
+```

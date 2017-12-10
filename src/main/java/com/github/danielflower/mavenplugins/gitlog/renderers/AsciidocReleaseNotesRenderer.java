@@ -46,24 +46,24 @@ import static com.github.danielflower.mavenplugins.gitlog.renderers.Formatter.NE
  * <p>
  * |===
  */
-public class AsciidocRenderer extends FileRenderer {
+public class AsciidocReleaseNotesRenderer extends FileRenderer {
 
 	private boolean previousWasTag = false;
 	private final boolean fullGitMessage;
 	protected final MessageConverter messageConverter;
 	private AsciidocLinkConverter asciidocLinkConverter;
 	private String asciidocHeading; // `=`
-	private boolean isAsciidocTableView;
+	private boolean asciidocTableView;
 	private String asciidocTableViewHeader1; // Date
 	private String asciidocTableViewHeader2; // Commit
 
-	public AsciidocRenderer(Log log, File targetFolder, String filename, boolean fullGitMessage, MessageConverter messageConverter,
-							String asciidocHeading, boolean isAsciidocTableView, String asciidocTableViewHeader1, String asciidocTableViewHeader2) throws IOException {
+	public AsciidocReleaseNotesRenderer(Log log, File targetFolder, String filename, boolean fullGitMessage, MessageConverter messageConverter,
+										String asciidocHeading, boolean asciidocTableView, String asciidocTableViewHeader1, String asciidocTableViewHeader2) throws IOException {
 		super(log, targetFolder, filename);
 		this.fullGitMessage = fullGitMessage;
 		this.messageConverter = messageConverter;
 		this.asciidocHeading = ((asciidocHeading == null) ? "=" : asciidocHeading);
-		this.isAsciidocTableView = isAsciidocTableView;
+		this.asciidocTableView = asciidocTableView;
 		this.asciidocTableViewHeader1 = ((asciidocTableViewHeader1 == null) ? "Date" : asciidocTableViewHeader1);
 		this.asciidocTableViewHeader2 = ((asciidocTableViewHeader2 == null) ? "Commit" : asciidocTableViewHeader2);
 		asciidocLinkConverter = new AsciidocLinkConverter(log);
@@ -71,41 +71,34 @@ public class AsciidocRenderer extends FileRenderer {
 
 
 	public void renderHeader(String reportTitle) throws IOException {
-
 		if (reportTitle != null && reportTitle.length() > 0) {
 			writer.write(this.asciidocHeading + " "); // MD Heading 1
 			writer.write(reportTitle);
 			writer.write(NEW_LINE);
-			writer.write(NEW_LINE);
-			if (isAsciidocTableView) {
-				writer.write("|===");
-				writer.write(NEW_LINE);
-				writer.write("|" + asciidocTableViewHeader1 + " | " + asciidocTableViewHeader2);
-				writer.write(NEW_LINE);
+			if (asciidocTableView) {
+				renderTableHeader();
 			}
-
 		}
 	}
 
 	public void renderTag(RevTag tag) throws IOException {
-		if (isAsciidocTableView) {
 			if (!previousWasTag) {
-				renderFooter();
-				renderHeader("*" + tag.getTagName() + "*" + " +");
-				previousWasTag = true;
+					writer.write(NEW_LINE);
+			}else {
+				if (asciidocTableView) {
+					renderTableFooter();
+					writer.write(asciidocHeading + "= ");
+					writer.write(tag.getTagName());
+					renderTableHeader();
+				}else {
+					writer.write("*"); // MD start bold
+					writer.write(tag.getTagName());
+					writer.write("*"); // MD end bold
+					writer.write(" +"); // MD line warp
+					writer.write(NEW_LINE);
+				}
 			}
-
-		} else {
-			if (!previousWasTag) {
-				writer.write(NEW_LINE);
-			}
-			writer.write("*"); // MD start bold
-			writer.write(tag.getTagName());
-			writer.write("*"); // MD end bold
-			writer.write(" +"); // MD line warp
-			writer.write(NEW_LINE);
 			previousWasTag = true;
-		}
 	}
 
 	public void renderCommit(RevCommit commit) throws IOException {
@@ -118,13 +111,10 @@ public class AsciidocRenderer extends FileRenderer {
 		}
 		// now convert the HTML hyperlink into an Asciidoc link
 		message = asciidocLinkConverter.formatCommitMessage(message);
-		if (isAsciidocTableView) {
-			writer.write("|");
-			writer.write(Formatter.formatDateTime(commit.getCommitTime()) + " |" + message);
-			writer.write(" (" + commit.getCommitterIdent().getName() + ")");
-			writer.write(" +"); // MD line warp
-			writer.write(NEW_LINE);
-		} else {
+
+		if (asciidocTableView) {
+			renderTableCommit(commit, message);
+		}else {
 			writer.write(Formatter.formatDateTime(commit.getCommitTime()) + "     " + message);
 			writer.write(" (" + commit.getCommitterIdent().getName() + ")");
 			writer.write(" +"); // MD line warp
@@ -133,12 +123,38 @@ public class AsciidocRenderer extends FileRenderer {
 		previousWasTag = false;
 	}
 
+	private void renderTableCommit(RevCommit commit, String message) throws IOException {
+		if (asciidocTableView) {
+			writer.write(NEW_LINE);
+			writer.write("|");
+			writer.write(Formatter.formatDateTime(commit.getCommitTime()) + " | " + message);
+			writer.write(" (" + commit.getCommitterIdent().getName() + ")");
+			writer.write(NEW_LINE);
+		}
+	}
 
-	public void renderFooter() throws IOException {
-		if (isAsciidocTableView) {
+	public void renderTableHeader() throws IOException {
+		if (asciidocTableView) {
 			writer.write(NEW_LINE);
 			writer.write("|===");
 			writer.write(NEW_LINE);
+			writer.write("|" + asciidocTableViewHeader1 + " | " + asciidocTableViewHeader2);
+			writer.write(NEW_LINE);
+		}
+	}
+
+	public void renderTableFooter() throws IOException {
+		if (asciidocTableView) {
+			writer.write(NEW_LINE);
+			writer.write("|===");
+			writer.write(NEW_LINE);
+		}
+	}
+
+
+	public void renderFooter() throws IOException {
+		if (asciidocTableView) {
+			renderTableFooter();
 		}
 	}
 }

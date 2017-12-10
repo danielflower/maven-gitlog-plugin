@@ -1,9 +1,6 @@
 package com.github.danielflower.mavenplugins.gitlog;
 
-import com.github.danielflower.mavenplugins.gitlog.filters.CommitFilter;
-import com.github.danielflower.mavenplugins.gitlog.filters.CommiterFilter;
-import com.github.danielflower.mavenplugins.gitlog.filters.PathCommitFilter;
-import com.github.danielflower.mavenplugins.gitlog.filters.RegexpFilter;
+import com.github.danielflower.mavenplugins.gitlog.filters.*;
 import com.github.danielflower.mavenplugins.gitlog.renderers.*;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -31,8 +28,8 @@ public class GenerateMojo extends AbstractMojo {
 
 	/**
 	 * The directory to put the reports in.  Defaults to the project build directory (normally target).
-         *
-         * When running as a reporting plugin, the output directory is fixed, set by the reporting cycle.
+	 * <p>
+	 * When running as a reporting plugin, the output directory is fixed, set by the reporting cycle.
 	 */
 	@Parameter(property = "project.build.directory")
 	protected File outputDirectory;
@@ -42,6 +39,7 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	@Parameter(defaultValue = "${project.name} v${project.version} git changelog")
 	private String reportTitle;
+
 
 	/**
 	 * If true, then a plain text changelog will be generated.
@@ -69,6 +67,12 @@ public class GenerateMojo extends AbstractMojo {
 	private boolean generatAsciidocChangeLog;
 
 	/**
+	 * If true, then an Asciidoc changelog will be generated.
+	 */
+	@Parameter(defaultValue = "false")
+	private boolean generatAsciidocReleaseNotes;
+
+	/**
 	 * The filename of the markdown changelog, if generated.
 	 */
 	@Parameter(defaultValue = "changelog.md")
@@ -79,6 +83,12 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	@Parameter(defaultValue = "changelog.adoc")
 	private String asciidocChangeLogFilename;
+
+	/**
+	 * The filename of the Asciidoc changelog, if generated.
+	 */
+	@Parameter(defaultValue = "releaseNotes.adoc")
+	private String asciidocReleaseNotesFilename;
 
 	/**
 	 * If true, then a simple HTML changelog will be generated.
@@ -159,12 +169,6 @@ public class GenerateMojo extends AbstractMojo {
 	private String dateFormat;
 
 	/**
-	 * If true, the changelog will include the full git message rather that the short git message
-	 */
-	@Parameter(defaultValue = "false")
-	private boolean fullGitMessage;
-
-	/**
 	 * Include in the changelog the commits after this parameter value.
 	 */
 	@Parameter(defaultValue = "1970-01-01 00:00:00.0 AM")
@@ -175,6 +179,12 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	@Parameter
 	private List<String> excludeCommiters;
+
+	@Parameter(defaultValue = "false")
+	private boolean fullGitMessage;
+
+	@Parameter(defaultValue = "false")
+	private boolean fullGitMessageReleaseNotes;
 
 	/**
 	 * Regexp pattern to filter out commits (using Matcher.matches())
@@ -187,6 +197,67 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	@Parameter
 	private String path;
+
+	/**
+	 * If true, the merge commit filter will be configured.
+	 */
+	@Parameter(defaultValue = "true")
+	private boolean mergeCommitFilter;
+
+
+	/**
+	 * asciidoc title level
+	 */
+	@Parameter(defaultValue = "=")
+	private String asciidocHeading;
+
+	/**
+	 * If true, the changelog will be in an asciidoc table
+	 */
+	@Parameter(defaultValue = "false")
+	private boolean asciidocTableView;
+
+	/**
+	 * asciidoc table header 1
+	 */
+	@Parameter(defaultValue = "Date")
+	private String asciidocTableViewHeader1;
+
+	/**
+	 * asciidoc table header 2
+	 */
+	@Parameter(defaultValue = "Commit")
+	private String asciidocTableViewHeader2;
+
+	/**
+	 * If true, the merge commit filter will be configured.
+	 */
+	@Parameter(defaultValue = "true")
+	private boolean mergeCommitFilterReleaseNotes;
+
+	/**
+	 * asciidoc title level
+	 */
+	@Parameter(defaultValue = "=")
+	private String asciidocHeadingReleaseNotes;
+
+	/**
+	 * If true, the changelog will be in an asciidoc table
+	 */
+	@Parameter(defaultValue = "false")
+	private boolean asciidocTableViewReleaseNotes;
+
+	/**
+	 * asciidoc table header 1
+	 */
+	@Parameter(defaultValue = "Date")
+	private String asciidocTableViewHeader1ReleaseNotes;
+
+	/**
+	 * asciidoc table header 2
+	 */
+	@Parameter(defaultValue = "Merge")
+	private String asciidocTableViewHeader2ReleaseNotes;
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
@@ -208,6 +279,13 @@ public class GenerateMojo extends AbstractMojo {
 
 		List<CommitFilter> commitFilters = new ArrayList<CommitFilter>(Defaults.COMMIT_FILTERS);
 
+		if (this.mergeCommitFilter) {
+			commitFilters.add(new MergeCommitFilter());
+		}
+		if (this.mergeCommitFilterReleaseNotes) {
+			commitFilters.add(new MergeCommitFilter());
+		}
+
 		if (excludeCommiters != null && !excludeCommiters.isEmpty()) {
 			commitFilters.add(new CommiterFilter(excludeCommiters));
 		}
@@ -219,7 +297,7 @@ public class GenerateMojo extends AbstractMojo {
 		Repository repository;
 
 		try {
-			 repository = generator.openRepository();
+			repository = generator.openRepository();
 		} catch (IOException e) {
 			getLog().warn("Error opening git repository.  Is this Maven project hosted in a git repository? " +
 					"No changelog will be generated.", e);
@@ -252,7 +330,7 @@ public class GenerateMojo extends AbstractMojo {
 			renderers.add(new PlainTextRenderer(getLog(), outputDirectory, plainTextChangeLogFilename, fullGitMessage));
 		}
 
-		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog || generateMarkdownChangeLog || generatAsciidocChangeLog) {
+		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog || generateMarkdownChangeLog || generatAsciidocChangeLog || generatAsciidocReleaseNotes) {
 			MessageConverter messageConverter = getCommitMessageConverter();
 			if (generateSimpleHTMLChangeLog) {
 				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, simpleHTMLChangeLogFilename, fullGitMessage, messageConverter, false));
@@ -264,7 +342,10 @@ public class GenerateMojo extends AbstractMojo {
 				renderers.add(new MarkdownRenderer(getLog(), outputDirectory, markdownChangeLogFilename, fullGitMessage, messageConverter));
 			}
 			if (generatAsciidocChangeLog) {
-				renderers.add(new AsciidocRenderer(getLog(), outputDirectory, asciidocChangeLogFilename, fullGitMessage, messageConverter));
+				renderers.add(new AsciidocRenderer(getLog(), outputDirectory, asciidocChangeLogFilename, fullGitMessage, messageConverter, asciidocHeading, asciidocTableView, asciidocTableViewHeader1, asciidocTableViewHeader2));
+			}
+			if (generatAsciidocReleaseNotes) {
+				renderers.add(new AsciidocReleaseNotesRenderer(getLog(), outputDirectory, asciidocReleaseNotesFilename, fullGitMessageReleaseNotes, messageConverter, asciidocHeadingReleaseNotes, asciidocTableViewReleaseNotes, asciidocTableViewHeader1ReleaseNotes, asciidocTableViewHeader2ReleaseNotes));
 			}
 		}
 

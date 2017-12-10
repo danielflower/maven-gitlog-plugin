@@ -25,6 +25,20 @@ Currently only Jira, GitHub and Bugzilla issue tracking is supported.
 		<url>https://github.com/danielflower/maven-gitlog-plugin/issues</url>
 	</issueManagement>
 
+
+
+
+Merge logs only configuration
+-----------------------------
+For release notes with only merged branches you a sample configuration.
+
+	<configuration>
+		<fullGitMessage>false</fullGitMessage>
+		<mergeCommitFilter>false</mergeCommitFilter>
+		<excludeCommitsPattern>^(?!Merge branch.*).*$</excludeCommitsPattern>
+	</configuration>
+
+
 More configuration options
 --------------------------
 
@@ -44,6 +58,9 @@ The following example shows all the possible configuration values with default v
 			<markdownChangeLogFilename>changelog-${project.version}.md</markdownChangeLogFilename>
 			<generateMarkdownChangeLog>true</generateMarkdownChangeLog>
 			<asciidocChangeLogFilename>changelog-${project.version}.adoc</asciidocChangeLogFilename>
+			<asciidocTableView>true</asciidocTableView>
+            <asciidocTableViewHeader1>Date</asciidocTableViewHeader1>
+            <asciidocTableViewHeader2>Merge</asciidocTableViewHeader2>
 			<generateAsciidocChangeLog>true</generateAsciidocChangeLog>
 			<simpleHTMLChangeLogFilename>changelog-${project.version}.html</simpleHTMLChangeLogFilename>
 			<generateHTMLTableOnlyChangeLog>true</generateHTMLTableOnlyChangeLog>
