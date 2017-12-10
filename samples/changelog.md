@@ -1,7 +1,7 @@
 # Maven GitLog Plugin changelog
 
-2015-03-12 20:54:01 +0800    Add escapes for tab "\t", backspace "\b", form feed "\f" and carriage return "\r", may create invalid JSON that can't be parsed otherwise. (Kristoffer Lundén)  
-
+2015-03-12 20:54:01 +0800    Add escapes for tab "\t", backspace "\b", form feed "\f" and carriage return "\r", may create invalid JSON that can't be parsed otherwise. (Kristoffer Lundï¿½n)  
+ 
 **maven-gitlog-plugin-1.7.0**  
 2014-05-25 20:53:01 +0800    Updated the version in preparation of release (Daniel Flower)  
 2014-04-26 04:54:08 +0800    add json file renderer (Keegan Roth)  
