@@ -57,7 +57,6 @@ public class GenerateReport extends GenerateMojo implements MavenReport {
 
     /**
      * When running as a reporting plugin, the output directory is fixed, set by the reporting cycle.
-     * @param file
      */
     @Override
     public void setReportOutputDirectory(File file)
