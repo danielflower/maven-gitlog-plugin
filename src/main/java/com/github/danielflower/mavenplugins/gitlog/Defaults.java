@@ -2,6 +2,7 @@ package com.github.danielflower.mavenplugins.gitlog;
 
 import com.github.danielflower.mavenplugins.gitlog.filters.CommitFilter;
 import com.github.danielflower.mavenplugins.gitlog.filters.DuplicateCommitMessageFilter;
+import com.github.danielflower.mavenplugins.gitlog.filters.JGitFlowPluginMessageFilter;
 import com.github.danielflower.mavenplugins.gitlog.filters.MavenReleasePluginMessageFilter;
 
 import java.util.*;
@@ -10,6 +11,7 @@ class Defaults {
 	public static final List<CommitFilter> DEFAULT_COMMIT_FILTERS = Arrays.asList(
 			new MavenReleasePluginMessageFilter(),
 			//new MergeCommitFilter(),
+			new JGitFlowPluginMessageFilter(),
 			new DuplicateCommitMessageFilter()
 	);
 	
