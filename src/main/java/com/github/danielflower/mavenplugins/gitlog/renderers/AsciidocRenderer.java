@@ -118,6 +118,7 @@ public class AsciidocRenderer extends FileRenderer {
 		}
 		// now convert the HTML hyperlink into an Asciidoc link
 		message = asciidocLinkConverter.formatCommitMessage(message);
+		writer.write(NEW_LINE);
 		if (isAsciidocTableView) {
 			writer.write("|");
 			writer.write(Formatter.formatDateTime(commit.getCommitTime()) + " |" + message);
