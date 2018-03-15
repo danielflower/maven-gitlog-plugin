@@ -78,6 +78,9 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter(defaultValue = "changelog.md")
 	private String markdownChangeLogFilename;
 
+	@Parameter(defaultValue = "false")
+	private boolean markdownChangeLogAppend;
+
 	/**
 	 * The filename of the Asciidoc changelog, if generated.
 	 */
@@ -168,11 +171,17 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter(defaultValue = "yyyy-MM-dd HH:mm:ss Z")
 	private String dateFormat;
 
+	@Parameter(defaultValue = "true")
+	private boolean showCommiter;
+
 	/**
 	 * Include in the changelog the commits after this parameter value.
 	 */
 	@Parameter(defaultValue = "1970-01-01 00:00:00.0 AM")
 	private Date includeCommitsAfter;
+
+	@Parameter(defaultValue = "")
+	private String includeCommitsAfterCommit;
 
 	/**
 	 * Exclude in the changelog all commits by a given commiter
@@ -316,8 +325,10 @@ public class GenerateMojo extends AbstractMojo {
 			Formatter.setFormat(dateFormat, getLog());
 		}
 
+		Formatter.setCommiter(showCommiter, getLog());
+
 		try {
-			generator.generate(reportTitle, includeCommitsAfter);
+			generator.generate(reportTitle, includeCommitsAfter, includeCommitsAfterCommit);
 		} catch (IOException e) {
 			getLog().warn("Error while generating gitlog.  Some changelogs may be incomplete or corrupt.", e);
 		}
@@ -339,7 +350,7 @@ public class GenerateMojo extends AbstractMojo {
 				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, htmlTableOnlyChangeLogFilename, fullGitMessage, messageConverter, true));
 			}
 			if (generateMarkdownChangeLog) {
-				renderers.add(new MarkdownRenderer(getLog(), outputDirectory, markdownChangeLogFilename, fullGitMessage, messageConverter));
+				renderers.add(new MarkdownRenderer(getLog(), outputDirectory, markdownChangeLogFilename, fullGitMessage, messageConverter, markdownChangeLogAppend));
 			}
 			if (generatAsciidocChangeLog) {
 				renderers.add(new AsciidocRenderer(getLog(), outputDirectory, asciidocChangeLogFilename, fullGitMessage, messageConverter, asciidocHeading, asciidocTableView, asciidocTableViewHeader1, asciidocTableViewHeader2));

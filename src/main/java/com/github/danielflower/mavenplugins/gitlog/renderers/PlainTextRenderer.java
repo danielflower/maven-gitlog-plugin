@@ -15,7 +15,7 @@ public class PlainTextRenderer extends FileRenderer {
 	private final boolean fullGitMessage;
 
 	public PlainTextRenderer(Log log, File targetFolder, String filename, boolean fullGitMessage) throws IOException {
-		super(log, targetFolder, filename);
+		super(log, targetFolder, filename, false);
 		this.fullGitMessage = fullGitMessage;
 	}
 
@@ -44,7 +44,7 @@ public class PlainTextRenderer extends FileRenderer {
 			message = commit.getShortMessage();
 		}
 		writer.write(Formatter.formatDateTime(commit.getCommitTime()) + "    " + message);
-		writer.write(" (" + commit.getCommitterIdent().getName() + ")");
+		writer.write(" " + Formatter.formatCommiter(commit.getCommitterIdent()));
 		writer.write(NEW_LINE);
 		previousWasTag = false;
 	}

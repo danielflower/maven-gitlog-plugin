@@ -87,7 +87,7 @@ public class GeneratorTest {
     public void writeMarkdownLogToFile() throws Exception {
         Log log = new SystemStreamLog();
         GitHubIssueLinkConverter messageConverter = new GitHubIssueLinkConverter(log, THIS_PLUGIN_ISSUES);
-        ChangeLogRenderer renderer = new MarkdownRenderer(log, new File(TARGET_DIR), "changelog.md", false, messageConverter);
+        ChangeLogRenderer renderer = new MarkdownRenderer(log, new File(TARGET_DIR), "changelog.md", false, messageConverter, false);
         generateReport(log, renderer);
     }
 

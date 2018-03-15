@@ -21,7 +21,7 @@ public class SimpleHtmlRenderer extends FileRenderer {
 	private final boolean fullGitMessage;
 
 	public SimpleHtmlRenderer(Log log, File targetFolder, String filename, boolean fullGitMessage, MessageConverter messageConverter, boolean tableOnly) throws IOException {
-		super(log, targetFolder, filename);
+		super(log, targetFolder, filename, false);
 		this.messageConverter = messageConverter;
 		this.tableOnly = tableOnly;
 		this.fullGitMessage = fullGitMessage;
@@ -66,7 +66,7 @@ public class SimpleHtmlRenderer extends FileRenderer {
 
 		String author = SimpleHtmlRenderer.htmlEncode(commit.getCommitterIdent().getName());
 		String committer = SimpleHtmlRenderer.htmlEncode(commit.getCommitterIdent().getName());
-		String authorHtml = "<span class=\"committer\">" + commit.getAuthorIdent().getName() + "</span>";
+		String authorHtml = "<span class=\"committer\">" + Formatter.formatCommiter(commit.getCommitterIdent()) + "</span>";
 		if (!areSame(author, committer)) {
 			authorHtml += "and <span class=\"author\">" + author + "</span>";
 		}
