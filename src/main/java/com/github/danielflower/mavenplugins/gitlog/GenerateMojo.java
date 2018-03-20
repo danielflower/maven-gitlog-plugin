@@ -64,7 +64,7 @@ public class GenerateMojo extends AbstractMojo {
 	 * If true, then an Asciidoc changelog will be generated.
 	 */
 	@Parameter(defaultValue = "false")
-	private boolean generatAsciidocChangeLog;
+	private boolean generateAsciidocChangeLog;
 
 	/**
 	 * If true, then an Asciidoc changelog will be generated.
@@ -341,7 +341,7 @@ public class GenerateMojo extends AbstractMojo {
 			renderers.add(new PlainTextRenderer(getLog(), outputDirectory, plainTextChangeLogFilename, fullGitMessage));
 		}
 
-		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog || generateMarkdownChangeLog || generatAsciidocChangeLog || generatAsciidocReleaseNotes) {
+		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog || generateMarkdownChangeLog || generateAsciidocChangeLog || generatAsciidocReleaseNotes) {
 			MessageConverter messageConverter = getCommitMessageConverter();
 			if (generateSimpleHTMLChangeLog) {
 				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, simpleHTMLChangeLogFilename, fullGitMessage, messageConverter, false));
@@ -352,7 +352,7 @@ public class GenerateMojo extends AbstractMojo {
 			if (generateMarkdownChangeLog) {
 				renderers.add(new MarkdownRenderer(getLog(), outputDirectory, markdownChangeLogFilename, fullGitMessage, messageConverter, markdownChangeLogAppend));
 			}
-			if (generatAsciidocChangeLog) {
+			if (generateAsciidocChangeLog) {
 				renderers.add(new AsciidocRenderer(getLog(), outputDirectory, asciidocChangeLogFilename, fullGitMessage, messageConverter, asciidocHeading, asciidocTableView, asciidocTableViewHeader1, asciidocTableViewHeader2));
 			}
 			if (generatAsciidocReleaseNotes) {
