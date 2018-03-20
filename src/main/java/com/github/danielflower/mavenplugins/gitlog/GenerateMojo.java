@@ -78,6 +78,9 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter(defaultValue = "changelog.md")
 	private String markdownChangeLogFilename;
 
+	/**
+	 * Append info to existing markdown file (Default: false)
+	 */
 	@Parameter(defaultValue = "false")
 	private boolean markdownChangeLogAppend;
 
@@ -171,6 +174,9 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter(defaultValue = "yyyy-MM-dd HH:mm:ss Z")
 	private String dateFormat;
 
+	/**
+	 * Show the info about commiter (Default: false)
+	 */
 	@Parameter(defaultValue = "true")
 	private boolean showCommiter;
 
@@ -180,6 +186,9 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter(defaultValue = "1970-01-01 00:00:00.0 AM")
 	private Date includeCommitsAfter;
 
+	/**
+	 * Include in the changelog the commits after the commit id of this parameter value.
+	 */
 	@Parameter(defaultValue = "")
 	private String includeCommitsAfterCommit;
 
