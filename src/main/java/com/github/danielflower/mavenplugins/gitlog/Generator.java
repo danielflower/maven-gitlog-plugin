@@ -56,10 +56,10 @@ class Generator {
 	}
 
 	public void generate(String reportTitle) throws IOException {
-		generate(reportTitle, new Date(0l));
+		generate(reportTitle, new Date(0l), "");
 	}
 
-	public void generate(String reportTitle, Date includeCommitsAfter) throws IOException {
+	public void generate(String reportTitle, Date includeCommitsAfter, String includeCommitsAfterCommit) throws IOException {
 		for (ChangeLogRenderer renderer : renderers) {
 			renderer.renderHeader(reportTitle);
 		}
@@ -67,6 +67,9 @@ class Generator {
 		long dateInSecondsSinceEpoch = includeCommitsAfter.getTime() / 1000;
 		for (RevCommit commit : walk) {
 			int commitTimeInSecondsSinceEpoch = commit.getCommitTime();
+			if (isSameCommit(commit.toString(),includeCommitsAfterCommit)){
+				break;
+			}
 			if (dateInSecondsSinceEpoch < commitTimeInSecondsSinceEpoch) {
 				List<RevTag> revTags = commitIDToTagsMap.get(commit.name());
 				for (ChangeLogRenderer renderer : renderers) {
@@ -90,6 +93,14 @@ class Generator {
 			renderer.renderFooter();
 			renderer.close();
 		}
+	}
+
+	private boolean isSameCommit(String commitName, String commitId){
+		if (commitName != null && commitId != null && !commitName.isEmpty() && !commitId.isEmpty()){
+			// Get commit id from commit name
+			return commitName.split(" ")[1].contains(commitId);
+		}
+		return false;
 	}
 
 	private boolean show(RevCommit commit) {

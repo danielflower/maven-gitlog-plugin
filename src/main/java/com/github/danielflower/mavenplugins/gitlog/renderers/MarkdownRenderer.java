@@ -33,8 +33,8 @@ public class MarkdownRenderer extends FileRenderer {
 	protected final MessageConverter messageConverter;
 	private MarkdownLinkConverter markdownLinkConverter;
 	
-	public MarkdownRenderer(Log log, File targetFolder, String filename, boolean fullGitMessage, MessageConverter messageConverter) throws IOException {
-		super(log, targetFolder, filename);
+	public MarkdownRenderer(Log log, File targetFolder, String filename, boolean fullGitMessage, MessageConverter messageConverter, boolean append) throws IOException {
+		super(log, targetFolder, filename, append);
 		this.fullGitMessage = fullGitMessage;
 		this.messageConverter = messageConverter;
 		markdownLinkConverter = new MarkdownLinkConverter(log);
@@ -72,7 +72,7 @@ public class MarkdownRenderer extends FileRenderer {
 		// now convert the HTML hyperlink into a markdown link
 		message = markdownLinkConverter.formatCommitMessage(message);	
 		writer.write(Formatter.formatDateTime(commit.getCommitTime()) + "    " + message);
-		writer.write(" (" + commit.getCommitterIdent().getName() + ")");
+		writer.write(" " + Formatter.formatCommiter(commit.getCommitterIdent()));
 		writer.write("  "); // MD line warp
 		writer.write(NEW_LINE);
 		previousWasTag = false;

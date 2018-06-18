@@ -14,11 +14,12 @@ public abstract class FileRenderer implements ChangeLogRenderer {
 	protected Writer writer;
 	protected final Log log;
 
-	public FileRenderer(Log log, File targetFolder, String filename) throws IOException {
+
+	public FileRenderer(Log log, File targetFolder, String filename, boolean append) throws IOException {
 		this.log = log;
 		File file = new File(targetFolder, filename);
 		log.debug("Creating git changelog at " + file.getAbsolutePath());
-		writer = new FileWriter(file);
+		writer = new FileWriter(file, append);
 	}
 
 	public void close() {

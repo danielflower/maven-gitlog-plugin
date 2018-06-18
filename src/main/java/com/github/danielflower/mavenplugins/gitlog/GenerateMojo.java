@@ -64,11 +64,19 @@ public class GenerateMojo extends AbstractMojo {
 	 * If true, then an Asciidoc changelog will be generated.
 	 */
 	@Parameter(defaultValue = "false")
+	private boolean generateAsciidocChangeLog;
+
+	@Deprecated
+	@Parameter(defaultValue = "false")
 	private boolean generatAsciidocChangeLog;
 
 	/**
 	 * If true, then an Asciidoc changelog will be generated.
 	 */
+	@Parameter(defaultValue = "false")
+	private boolean generateAsciidocReleaseNotes;
+
+	@Deprecated
 	@Parameter(defaultValue = "false")
 	private boolean generatAsciidocReleaseNotes;
 
@@ -77,6 +85,12 @@ public class GenerateMojo extends AbstractMojo {
 	 */
 	@Parameter(defaultValue = "changelog.md")
 	private String markdownChangeLogFilename;
+
+	/**
+	 * Append info to existing markdown file (Default: false)
+	 */
+	@Parameter(defaultValue = "false")
+	private boolean markdownChangeLogAppend;
 
 	/**
 	 * The filename of the Asciidoc changelog, if generated.
@@ -169,10 +183,22 @@ public class GenerateMojo extends AbstractMojo {
 	private String dateFormat;
 
 	/**
+	 * Show the info about commiter (Default: false)
+	 */
+	@Parameter(defaultValue = "true")
+	private boolean showCommiter;
+
+	/**
 	 * Include in the changelog the commits after this parameter value.
 	 */
 	@Parameter(defaultValue = "1970-01-01 00:00:00.0 AM")
 	private Date includeCommitsAfter;
+
+	/**
+	 * Include in the changelog the commits after the commit id of this parameter value.
+	 */
+	@Parameter(defaultValue = "")
+	private String includeCommitsAfterCommit;
 
 	/**
 	 * Exclude in the changelog all commits by a given commiter
@@ -316,8 +342,10 @@ public class GenerateMojo extends AbstractMojo {
 			Formatter.setFormat(dateFormat, getLog());
 		}
 
+		Formatter.setCommiter(showCommiter, getLog());
+
 		try {
-			generator.generate(reportTitle, includeCommitsAfter);
+			generator.generate(reportTitle, includeCommitsAfter, includeCommitsAfterCommit);
 		} catch (IOException e) {
 			getLog().warn("Error while generating gitlog.  Some changelogs may be incomplete or corrupt.", e);
 		}
@@ -330,7 +358,9 @@ public class GenerateMojo extends AbstractMojo {
 			renderers.add(new PlainTextRenderer(getLog(), outputDirectory, plainTextChangeLogFilename, fullGitMessage));
 		}
 
-		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog || generateMarkdownChangeLog || generatAsciidocChangeLog || generatAsciidocReleaseNotes) {
+		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog || generateMarkdownChangeLog ||
+				generateAsciidocChangeLog || generatAsciidocChangeLog || generateAsciidocReleaseNotes ||
+				generatAsciidocReleaseNotes) {
 			MessageConverter messageConverter = getCommitMessageConverter();
 			if (generateSimpleHTMLChangeLog) {
 				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, simpleHTMLChangeLogFilename, fullGitMessage, messageConverter, false));
@@ -339,12 +369,12 @@ public class GenerateMojo extends AbstractMojo {
 				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, htmlTableOnlyChangeLogFilename, fullGitMessage, messageConverter, true));
 			}
 			if (generateMarkdownChangeLog) {
-				renderers.add(new MarkdownRenderer(getLog(), outputDirectory, markdownChangeLogFilename, fullGitMessage, messageConverter));
+				renderers.add(new MarkdownRenderer(getLog(), outputDirectory, markdownChangeLogFilename, fullGitMessage, messageConverter, markdownChangeLogAppend));
 			}
-			if (generatAsciidocChangeLog) {
+			if (generateAsciidocChangeLog || generatAsciidocChangeLog) {
 				renderers.add(new AsciidocRenderer(getLog(), outputDirectory, asciidocChangeLogFilename, fullGitMessage, messageConverter, asciidocHeading, asciidocTableView, asciidocTableViewHeader1, asciidocTableViewHeader2));
 			}
-			if (generatAsciidocReleaseNotes) {
+			if (generateAsciidocReleaseNotes || generatAsciidocReleaseNotes) {
 				renderers.add(new AsciidocReleaseNotesRenderer(getLog(), outputDirectory, asciidocReleaseNotesFilename, fullGitMessageReleaseNotes, messageConverter, asciidocHeadingReleaseNotes, asciidocTableViewReleaseNotes, asciidocTableViewHeader1ReleaseNotes, asciidocTableViewHeader2ReleaseNotes));
 			}
 		}

@@ -2,6 +2,7 @@ package com.github.danielflower.mavenplugins.gitlog.renderers;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.Format;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -19,7 +20,7 @@ public class JsonRenderer extends FileRenderer {
 
 	public JsonRenderer(Log log, File targetFolder, String filename, boolean fullGitMessage)
 			throws IOException {
-		super(log, targetFolder, filename);
+		super(log, targetFolder, filename, false);
 		this.fullGitMessage = fullGitMessage;
 
 		this.template = loadResourceToString("/json/JsonItemTemplate.html");
@@ -70,12 +71,20 @@ public class JsonRenderer extends FileRenderer {
 		jsonItem = template
 				.replace("{id}", encode(commit.getName()))
 				.replace("{message}", encode(message))
-				.replace("{authorName}", encode(commit.getAuthorIdent().getName()))
-				.replace("{authorEmail}", encode(commit.getAuthorIdent().getEmailAddress()))
-				.replace("{committerName}", encode(commit.getCommitterIdent().getName()))
-				.replace("{committerEmail}", encode(commit.getCommitterIdent().getEmailAddress()))
 				.replace("{tagItems}", tagsJson.toString())
 				.replace("{date}", encode(date));
+		if (Formatter.showCommiter()){
+			jsonItem = jsonItem.replace("{authorName}", encode(commit.getAuthorIdent().getName()))
+					.replace("{authorEmail}", encode(commit.getAuthorIdent().getEmailAddress()))
+					.replace("{committerName}", encode(commit.getCommitterIdent().getName()))
+					.replace("{committerEmail}", encode(commit.getCommitterIdent().getEmailAddress()));
+		}
+		else {
+			jsonItem = jsonItem.replace("{authorName}", "")
+					.replace("{authorEmail}", "")
+					.replace("{committerName}", "")
+					.replace("{committerEmail}", "");
+		}
 		json.append(jsonItem);
 		json.append("\n");
 	}

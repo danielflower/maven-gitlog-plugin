@@ -59,7 +59,7 @@ public class AsciidocReleaseNotesRenderer extends FileRenderer {
 
 	public AsciidocReleaseNotesRenderer(Log log, File targetFolder, String filename, boolean fullGitMessage, MessageConverter messageConverter,
 										String asciidocHeading, boolean asciidocTableView, String asciidocTableViewHeader1, String asciidocTableViewHeader2) throws IOException {
-		super(log, targetFolder, filename);
+		super(log, targetFolder, filename, false);
 		this.fullGitMessage = fullGitMessage;
 		this.messageConverter = messageConverter;
 		this.asciidocHeading = ((asciidocHeading == null) ? "=" : asciidocHeading);
@@ -116,7 +116,7 @@ public class AsciidocReleaseNotesRenderer extends FileRenderer {
 			renderTableCommit(commit, message);
 		}else {
 			writer.write(Formatter.formatDateTime(commit.getCommitTime()) + "     " + message);
-			writer.write(" (" + commit.getCommitterIdent().getName() + ")");
+			writer.write(" " + Formatter.formatCommiter(commit.getCommitterIdent()));
 			writer.write(" +"); // MD line warp
 			writer.write(NEW_LINE);
 		}
