@@ -64,11 +64,11 @@ public class SimpleHtmlRenderer extends FileRenderer {
 			message = messageConverter.formatCommitMessage(htmlEncode(commit.getShortMessage()));
 		}
 
-		String author = SimpleHtmlRenderer.htmlEncode(commit.getCommitterIdent().getName());
+		String author = SimpleHtmlRenderer.htmlEncode(commit.getAuthorIdent().getName());
 		String committer = SimpleHtmlRenderer.htmlEncode(commit.getCommitterIdent().getName());
 		String authorHtml = "<span class=\"committer\">" + Formatter.formatCommiter(commit.getCommitterIdent()) + "</span>";
 		if (!areSame(author, committer)) {
-			authorHtml += "and <span class=\"author\">" + author + "</span>";
+			authorHtml = "<span class=\"author\">" + author + "</span> by " + authorHtml;
 		}
 
 		tableHtml.append("\t\t<tr>")
