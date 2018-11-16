@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.danielflower.mavenplugins</groupId>
   <artifactId>gitlog-maven-plugin</artifactId>
-	<version>1.13-SNAPSHOT</version>
+  <version>1.13-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
   <name>Maven Git Log Plugin</name>
   <description>Generates a changelog based on commits to a git repository in text and HTML format showing the changes
-        that are included in each version. A possible use of this is to include these changelogs when packaging your
-        maven project so that you have an accurate list of commits that the current package includes.</description>
+    that are included in each version. A possible use of this is to include these changelogs when packaging your
+    maven project so that you have an accurate list of commits that the current package includes.</description>
   <url>http://github.com/danielflower/maven-gitlog-plugin</url>
   <inceptionYear>2011</inceptionYear>
   <licenses>
@@ -186,6 +186,14 @@
             <version>1.6</version>
           </dependency>
         </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>8</source>
+          <target>8</target>
+        </configuration>
       </plugin>
     </plugins>
   </build>

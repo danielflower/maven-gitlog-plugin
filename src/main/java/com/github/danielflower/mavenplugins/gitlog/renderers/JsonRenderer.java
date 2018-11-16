@@ -12,6 +12,7 @@ import org.eclipse.jgit.revwalk.RevTag;
 
 public class JsonRenderer extends FileRenderer {
 
+    private  MessageConverter messageConverter;
 	private String template;
 	protected StringBuilder json = new StringBuilder();
 	private final boolean fullGitMessage;
@@ -26,6 +27,11 @@ public class JsonRenderer extends FileRenderer {
 		this.template = loadResourceToString("/json/JsonItemTemplate.html");
 	}
 
+    public JsonRenderer(Log log, File targetFolder, String filename, boolean fullGitMessage,MessageConverter messageConverter)
+        throws IOException {
+        this(log, targetFolder, filename, fullGitMessage);
+        this.messageConverter = messageConverter;
+    }
 	@Override
 	public void renderHeader(String reportTitle) throws IOException {
 		json.append("[\n");
@@ -45,6 +51,9 @@ public class JsonRenderer extends FileRenderer {
 		} else {
 			message = commit.getShortMessage();
 		}
+		if (messageConverter!=null){
+		    message=messageConverter.formatCommitMessage(message);
+        }
 		StringBuffer tagsJson = new StringBuffer();
 		boolean firstTag = true;
 		for (RevTag tag : this.tags) {
