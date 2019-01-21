@@ -2,6 +2,7 @@ package com.github.danielflower.mavenplugins.gitlog;
 
 import com.github.danielflower.mavenplugins.gitlog.filters.*;
 import com.github.danielflower.mavenplugins.gitlog.renderers.*;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -189,6 +190,12 @@ public class GenerateMojo extends AbstractMojo {
 	private boolean showCommiter;
 
 	/**
+	 * Include in the changelog the commits which are newer than the given amount of days.
+	 */
+	@Parameter
+	private Integer includeCommitsDuringTheLastDays;
+
+	/**
 	 * Include in the changelog the commits after this parameter value.
 	 */
 	@Parameter(defaultValue = "1970-01-01 00:00:00.0 AM")
@@ -344,8 +351,13 @@ public class GenerateMojo extends AbstractMojo {
 
 		Formatter.setCommiter(showCommiter, getLog());
 
+		Date startDate = includeCommitsAfter;
+		if (includeCommitsDuringTheLastDays != null && includeCommitsDuringTheLastDays > 0) {
+			startDate = DateUtils.addDays(new Date(), -includeCommitsDuringTheLastDays);
+		}
+
 		try {
-			generator.generate(reportTitle, includeCommitsAfter, includeCommitsAfterCommit);
+			generator.generate(reportTitle, startDate, includeCommitsAfterCommit);
 		} catch (IOException e) {
 			getLog().warn("Error while generating gitlog.  Some changelogs may be incomplete or corrupt.", e);
 		}
