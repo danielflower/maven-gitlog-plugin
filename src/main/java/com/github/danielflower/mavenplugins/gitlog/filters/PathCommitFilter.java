@@ -45,10 +45,12 @@ public class PathCommitFilter implements CommitFilter {
     }
 
     private boolean isFoundInPath(RevCommit commit) throws IOException {
-        for (DiffEntry diff : getDiffs(commit, commit.getParent(0))) {
-            if (diff.getNewPath().startsWith(relativizedPath)) {
-                return true;
-            }
+        if (commit.getParentCount() > 0) {
+		  for (DiffEntry diff : getDiffs(commit, commit.getParent(0))) {
+              if (diff.getNewPath().startsWith(relativizedPath)) {
+                  return true;
+              }
+		  }
         }
 
         return false;
