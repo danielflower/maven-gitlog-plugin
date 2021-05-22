@@ -292,7 +292,11 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter(defaultValue = "Merge")
 	private String asciidocTableViewHeader2ReleaseNotes;
 
-	@Override
+
+    @Parameter(defaultValue = "")
+    private String messageRegexFilter;
+
+    @Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		getLog().info("Generating gitlog in " + outputDirectory.getAbsolutePath()
 				+ " with title " + reportTitle);
@@ -366,14 +370,14 @@ public class GenerateMojo extends AbstractMojo {
 	private List<ChangeLogRenderer> createRenderers() throws IOException {
 		ArrayList<ChangeLogRenderer> renderers = new ArrayList<ChangeLogRenderer>();
 
+        MessageConverter messageConverter = getCommitMessageConverter();
 		if (generatePlainTextChangeLog) {
-			renderers.add(new PlainTextRenderer(getLog(), outputDirectory, plainTextChangeLogFilename, fullGitMessage));
+			renderers.add(new PlainTextRenderer(getLog(), outputDirectory, plainTextChangeLogFilename, fullGitMessage, messageConverter));
 		}
 
 		if (generateSimpleHTMLChangeLog || generateHTMLTableOnlyChangeLog || generateMarkdownChangeLog ||
 				generateAsciidocChangeLog || generatAsciidocChangeLog || generateAsciidocReleaseNotes ||
 				generatAsciidocReleaseNotes) {
-			MessageConverter messageConverter = getCommitMessageConverter();
 			if (generateSimpleHTMLChangeLog) {
 				renderers.add(new SimpleHtmlRenderer(getLog(), outputDirectory, simpleHTMLChangeLogFilename, fullGitMessage, messageConverter, false));
 			}
@@ -392,7 +396,7 @@ public class GenerateMojo extends AbstractMojo {
 		}
 
 		if (generateJSONChangeLog) {
-			renderers.add(new JsonRenderer(getLog(), outputDirectory, jsonChangeLogFilename, fullGitMessage));
+			renderers.add(new JsonRenderer(getLog(), outputDirectory, jsonChangeLogFilename, fullGitMessage, messageConverter));
 		}
 
 		if (verbose) {
@@ -420,6 +424,9 @@ public class GenerateMojo extends AbstractMojo {
 		} catch (Exception ex) {
 			getLog().warn("Could not load issue management system information; no HTML links will be generated.", ex);
 		}
+		if (messageRegexFilter!=null && !messageRegexFilter.isEmpty()){
+		    converter=new RegexFilterMessageConverter(messageRegexFilter,converter);
+        }
 		if (converter == null) {
 			converter = new NullMessageConverter();
 		}
