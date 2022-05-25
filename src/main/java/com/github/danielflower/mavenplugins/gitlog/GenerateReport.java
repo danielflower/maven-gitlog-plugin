@@ -1,5 +1,6 @@
 package com.github.danielflower.mavenplugins.gitlog;
 
+import org.apache.maven.doxia.sink.Sink;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -8,7 +9,6 @@ import java.io.File;
 import java.util.Locale;
 import org.apache.maven.reporting.MavenReport;
 import org.apache.maven.reporting.MavenReportException;
-import org.codehaus.doxia.sink.Sink;
 
 /**
  * Goal which generates a changelog based on commits made to the current git repo.
@@ -31,7 +31,7 @@ public class GenerateReport extends GenerateMojo implements MavenReport {
             }
     }
 
-    @Override
+	@Override
     public String getOutputName()
     {
         return "gitlog";

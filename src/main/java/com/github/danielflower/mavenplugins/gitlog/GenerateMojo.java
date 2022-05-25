@@ -41,6 +41,11 @@ public class GenerateMojo extends AbstractMojo {
 	@Parameter(defaultValue = "${project.name} v${project.version} git changelog")
 	private String reportTitle;
 
+	/**
+	 * The GIT directory to scan.  Defaults to the project base directory.
+	 */
+	@Parameter()
+	protected File gitDirectory;
 
 	/**
 	 * If true, then a plain text changelog will be generated.
@@ -330,7 +335,8 @@ public class GenerateMojo extends AbstractMojo {
 		Repository repository;
 
 		try {
-			repository = generator.openRepository();
+			getLog().info("Reading GIT repository at " + (gitDirectory != null ? gitDirectory : System.getProperty("user.dir")));
+			repository = generator.openRepository(gitDirectory);
 		} catch (IOException e) {
 			getLog().warn("Error opening git repository.  Is this Maven project hosted in a git repository? " +
 					"No changelog will be generated.", e);
