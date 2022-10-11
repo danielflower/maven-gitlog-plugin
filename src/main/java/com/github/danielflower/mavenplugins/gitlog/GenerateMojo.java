@@ -178,6 +178,15 @@ public class GenerateMojo extends AbstractMojo {
 	private String bugzillaPattern;
 
 	/**
+	 * Regexp pattern to extract the number from the message.
+	 * <p>
+	 * The default is: "[A-Z]+-[0-9]+".
+	 * Group 1 (the number) is used in links, so "?:" must be used any non relevant group,
+	 */
+	@Parameter(defaultValue = "[A-Z]+-[0-9]+")
+	private String jiraPattern;
+
+	/**
 	 * Used to set date format in log messages.
 	 */
 	@Parameter(defaultValue = "yyyy-MM-dd HH:mm:ss Z")
@@ -409,7 +418,7 @@ public class GenerateMojo extends AbstractMojo {
 			if (issueManagementUrl != null && issueManagementUrl.contains("://")) {
 				String system = ("" + issueManagementSystem).toLowerCase();
 				if (system.toLowerCase().contains("jira")) {
-					converter = new JiraIssueLinkConverter(getLog(), issueManagementUrl);
+					converter = new JiraIssueLinkConverter(getLog(), issueManagementUrl, jiraPattern);
 				} else if (system.toLowerCase().contains("github")) {
 					converter = new GitHubIssueLinkConverter(getLog(), issueManagementUrl);
 				} else if (system.toLowerCase().contains("bugzilla")) {

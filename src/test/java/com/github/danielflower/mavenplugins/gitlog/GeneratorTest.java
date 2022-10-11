@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.github.danielflower.mavenplugins.gitlog.renderers.JiraIssueLinkConverterTest.JIRA_PATTERN;
+
 // Not unit tests as such, but a way to manually observe the output during maven test phase
 public class GeneratorTest {
     private static final String THIS_PLUGIN_ISSUES = "https://github.com/danielflower/maven-gitlog-plugin/issues/";
@@ -101,7 +103,7 @@ public class GeneratorTest {
 	@Test
 	public void writeAsciidocLogToFileJiraAsTableView() throws Exception {
 		Log log = new SystemStreamLog();
-		JiraIssueLinkConverter messageConverter = new JiraIssueLinkConverter(log, THIS_PLUGIN_ISSUES);
+		JiraIssueLinkConverter messageConverter = new JiraIssueLinkConverter(log, THIS_PLUGIN_ISSUES, JIRA_PATTERN);
 		ChangeLogRenderer renderer = new AsciidocRenderer(log, new File(TARGET_DIR), "changelog-jira-asTableview.adoc", false, messageConverter, "==", true,"Date", "Commit");
 		generateReport(log, renderer);
 	}
