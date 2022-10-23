@@ -47,6 +47,16 @@ public class GeneratorTest {
         generateReport(log, renderer);
     }
 
+
+    @Test
+    public void writePlainTextLogToFileWRegexFilter() throws Exception {
+        Log log = new SystemStreamLog();
+        RegexFilterMessageConverter converter = new RegexFilterMessageConverter("((Merge pull request #)\\d+)&&&((update)\\s+\\w+)",null);
+        ChangeLogRenderer renderer = new PlainTextRenderer(log, new File(TARGET_DIR), "changelog_w_regexfilter.txt", false,converter);
+        generateReport(log, renderer);
+    }
+
+
     @Test
     public void writePlainTextFullLogToFile() throws Exception {
         Log log = new SystemStreamLog();

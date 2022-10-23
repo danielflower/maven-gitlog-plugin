@@ -11,7 +11,8 @@ import static com.github.danielflower.mavenplugins.gitlog.renderers.Formatter.NE
 
 public class PlainTextRenderer extends FileRenderer {
 
-	private boolean previousWasTag = false;
+    private MessageConverter messageConverter;
+    private boolean previousWasTag = false;
 	private final boolean fullGitMessage;
 
 	public PlainTextRenderer(Log log, File targetFolder, String filename, boolean fullGitMessage) throws IOException {
@@ -19,7 +20,13 @@ public class PlainTextRenderer extends FileRenderer {
 		this.fullGitMessage = fullGitMessage;
 	}
 
-	public void renderHeader(String reportTitle) throws IOException {
+    public PlainTextRenderer(Log log, File targetFolder, String filename, boolean fullGitMessage,MessageConverter messageConverter) throws IOException {
+        this(log, targetFolder, filename, fullGitMessage);
+        this.messageConverter = messageConverter;
+    }
+
+
+    public void renderHeader(String reportTitle) throws IOException {
 		if (reportTitle != null && reportTitle.length() > 0) {
 			writer.write(reportTitle);
 			writer.write(NEW_LINE);
@@ -43,6 +50,10 @@ public class PlainTextRenderer extends FileRenderer {
 		} else {
 			message = commit.getShortMessage();
 		}
+		if (messageConverter!=null){
+		    message=messageConverter.formatCommitMessage(message);
+        }
+
 		writer.write(Formatter.formatDateTime(commit.getCommitTime()) + "    " + message);
 		writer.write(" " + Formatter.formatCommiter(commit.getCommitterIdent()));
 		writer.write(NEW_LINE);
