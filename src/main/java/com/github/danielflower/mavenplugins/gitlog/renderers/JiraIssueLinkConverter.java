@@ -11,13 +11,13 @@ public class JiraIssueLinkConverter implements MessageConverter {
 	private final Log log;
 	private final String urlPrefix;
 
-	public JiraIssueLinkConverter(Log log, String urlPrefix) {
+	public JiraIssueLinkConverter(Log log, String urlPrefix, String jiraPattern) {
 		this.log = log;
 		// strip off trailing slash
 		urlPrefix = urlPrefix.endsWith("/") ? urlPrefix.substring(0, urlPrefix.length() - 2) : urlPrefix;
 		// strip off jira project code
 		this.urlPrefix = urlPrefix.substring(0, urlPrefix.lastIndexOf("/") + 1);
-		this.pattern = Pattern.compile("[A-Z]+-[0-9]+");
+		this.pattern = Pattern.compile(jiraPattern);
 	}
 
 	@Override

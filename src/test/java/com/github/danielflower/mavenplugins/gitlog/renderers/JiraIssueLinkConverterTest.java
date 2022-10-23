@@ -7,7 +7,8 @@ import org.junit.Test;
 public class JiraIssueLinkConverterTest {
 
 	private static final String PREFIX = "https://jira.atlassian.com/browse/CONF";
-	private JiraIssueLinkConverter converter = new JiraIssueLinkConverter(new SystemStreamLog(), PREFIX);
+	public static final String JIRA_PATTERN = "[A-Z]+-[0-9]+";
+	private final JiraIssueLinkConverter converter = new JiraIssueLinkConverter(new SystemStreamLog(), PREFIX, JIRA_PATTERN);
 
 	@Test
 	public void emptyMessagesAreUnchanged() {
@@ -46,7 +47,7 @@ public class JiraIssueLinkConverterTest {
 	@Test
 	public void urlWithTrailingSlashHasItRemovedCorrectly() {
 		JiraIssueLinkConverter converter = new JiraIssueLinkConverter(new SystemStreamLog(),
-				"https://jira.atlassian.com/browse/CONF/");
+				"https://jira.atlassian.com/browse/CONF/", JIRA_PATTERN);
 		String actual = converter.formatCommitMessage("CONF-10 Some commit message");
 		assertEquals("<a href=\"https://jira.atlassian.com/browse/CONF-10\">CONF-10</a> Some commit message", actual);
 	}
