@@ -18,20 +18,18 @@ import org.codehaus.doxia.sink.Sink;
 )
 public class GenerateReport extends GenerateMojo implements MavenReport {
 
-    @Override
-    public void generate(Sink sink, Locale locale)
-        throws MavenReportException
-    {
-            try {
-                execute();
-            } catch (MojoExecutionException ex) {
-                getLog().error(ex.getMessage(), ex);
-            } catch (MojoFailureException ex) {
-                getLog().error(ex.getMessage(), ex);
-            }
-    }
+	@Override
+	public void generate(org.apache.maven.doxia.sink.Sink sink, Locale locale) throws MavenReportException {
+		try {
+			execute();
+		} catch (MojoExecutionException ex) {
+			getLog().error(ex.getMessage(), ex);
+		} catch (MojoFailureException ex) {
+			getLog().error(ex.getMessage(), ex);
+		}
+	}
 
-    @Override
+	@Override
     public String getOutputName()
     {
         return "gitlog";
