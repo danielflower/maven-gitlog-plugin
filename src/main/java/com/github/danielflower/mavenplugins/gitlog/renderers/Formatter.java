@@ -13,7 +13,7 @@ public class Formatter {
 
 	private static final String DEFAULT_FORMAT = "yyyy-MM-dd HH:mm:ss Z";
 
-	private static boolean showCommiter = true;
+	private static boolean showCommitter = true;
 
 	private static DateFormat dateFormat = new SimpleDateFormat(DEFAULT_FORMAT);
 
@@ -42,20 +42,20 @@ public class Formatter {
 		}
 	}
 
-	public static void setCommiter(boolean showCommiter, Log log) {
-		log.info(String.format("Setting show commiter to '%b'", showCommiter));
-		Formatter.showCommiter = showCommiter;
+	public static void setCommitter(boolean showCommitter, Log log) {
+		log.info(String.format("Setting show committer to '%b'", showCommitter));
+		Formatter.showCommitter = showCommitter;
 	}
 
-	public static String formatCommiter(PersonIdent commiter) {
-		if (Formatter.showCommiter) {
-			return "(" + commiter.getName() + ")";
+	public static String formatCommitter(PersonIdent committer) {
+		if (Formatter.showCommitter) {
+			return "(" + committer.getName() + ")";
 		} else {
 			return "";
 		}
 	}
 
-	public static boolean showCommiter(){
-		return Formatter.showCommiter;
+	public static boolean showCommitter(){
+		return Formatter.showCommitter;
 	}
 }

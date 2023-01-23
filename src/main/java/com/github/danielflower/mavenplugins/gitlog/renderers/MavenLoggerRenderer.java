@@ -35,7 +35,7 @@ public class MavenLoggerRenderer implements ChangeLogRenderer {
 
 	public void renderCommit(RevCommit commit) throws IOException {
 		log.info(Formatter.formatDateTime(commit.getCommitTime()) + " "
-				+ commit.getShortMessage() + " " + Formatter.formatCommiter(commit.getCommitterIdent()));
+				+ commit.getShortMessage() + " " + Formatter.formatCommitter(commit.getCommitterIdent()));
 		previousWasTag = false;
 	}
 

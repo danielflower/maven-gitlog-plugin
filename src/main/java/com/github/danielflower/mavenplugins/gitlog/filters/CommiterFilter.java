@@ -4,18 +4,18 @@ import org.eclipse.jgit.revwalk.RevCommit;
 
 import java.util.List;
 
-public class CommiterFilter implements CommitFilter {
+public class CommitterFilter implements CommitFilter {
 
-	private final List<String> commiters;
+	private final List<String> committers;
 
-	public CommiterFilter(List<String> commiters) {
-		this.commiters = commiters;
+	public CommitterFilter(List<String> committers) {
+		this.committers = committers;
 	}
 
 	@Override
 	public boolean renderCommit(RevCommit commit) {
-		for (String commiter : commiters) {
-			if (commiter.equalsIgnoreCase(commit.getCommitterIdent().getName())) {
+		for (String committer : committers) {
+			if (committer.equalsIgnoreCase(commit.getCommitterIdent().getName())) {
 				return false;
 			}
 		}

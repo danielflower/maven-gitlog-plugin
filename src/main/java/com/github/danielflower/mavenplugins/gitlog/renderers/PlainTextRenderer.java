@@ -44,7 +44,7 @@ public class PlainTextRenderer extends FileRenderer {
 			message = commit.getShortMessage();
 		}
 		writer.write(Formatter.formatDateTime(commit.getCommitTime()) + "    " + message);
-		writer.write(" " + Formatter.formatCommiter(commit.getCommitterIdent()));
+		writer.write(" " + Formatter.formatCommitter(commit.getCommitterIdent()));
 		writer.write(NEW_LINE);
 		previousWasTag = false;
 	}

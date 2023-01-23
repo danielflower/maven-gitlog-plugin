@@ -66,7 +66,7 @@ public class SimpleHtmlRenderer extends FileRenderer {
 
 		String author = SimpleHtmlRenderer.htmlEncode(commit.getAuthorIdent().getName());
 		String committer = SimpleHtmlRenderer.htmlEncode(commit.getCommitterIdent().getName());
-		String authorHtml = "<span class=\"committer\">" + Formatter.formatCommiter(commit.getCommitterIdent()) + "</span>";
+		String authorHtml = "<span class=\"committer\">" + Formatter.formatCommitter(commit.getCommitterIdent()) + "</span>";
 		if (!areSame(author, committer)) {
 			authorHtml = "<span class=\"author\">" + author + "</span> by " + authorHtml;
 		}

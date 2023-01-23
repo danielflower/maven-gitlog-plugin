@@ -193,10 +193,10 @@ public class GenerateMojo extends AbstractMojo {
 	private String dateFormat;
 
 	/**
-	 * Show the info about commiter (Default: false)
+	 * Show the info about committer (Default: false)
 	 */
 	@Parameter(defaultValue = "true")
-	private boolean showCommiter;
+	private boolean showCommitter;
 
 	/**
 	 * Include in the changelog the commits which are newer than the given amount of days.
@@ -217,10 +217,10 @@ public class GenerateMojo extends AbstractMojo {
 	private String includeCommitsAfterCommit;
 
 	/**
-	 * Exclude in the changelog all commits by a given commiter
+	 * Exclude in the changelog all commits by a given committer
 	 */
 	@Parameter
-	private List<String> excludeCommiters;
+	private List<String> excludeCommitters;
 
 	@Parameter(defaultValue = "false")
 	private boolean fullGitMessage;
@@ -328,8 +328,8 @@ public class GenerateMojo extends AbstractMojo {
 			commitFilters.add(new MergeCommitFilter());
 		}
 
-		if (excludeCommiters != null && !excludeCommiters.isEmpty()) {
-			commitFilters.add(new CommiterFilter(excludeCommiters));
+		if (excludeCommitters != null && !excludeCommitters.isEmpty()) {
+			commitFilters.add(new CommitterFilter(excludeCommitters));
 		}
 		if (excludeCommitsPattern != null) {
 			commitFilters.add(new RegexpFilter(excludeCommitsPattern));
@@ -358,7 +358,7 @@ public class GenerateMojo extends AbstractMojo {
 			Formatter.setFormat(dateFormat, getLog());
 		}
 
-		Formatter.setCommiter(showCommiter, getLog());
+		Formatter.setCommitter(showCommitter, getLog());
 
 		Date startDate = includeCommitsAfter;
 		if (includeCommitsDuringTheLastDays != null && includeCommitsDuringTheLastDays > 0) {

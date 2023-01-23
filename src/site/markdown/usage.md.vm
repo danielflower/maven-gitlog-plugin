@@ -74,9 +74,9 @@ The following example shows all the possible configuration values with default v
 			<includeCommitsAfter>2014-04-01 00:00:00.0 AM</includeCommitsAfter>
 			<includeCommitsDuringTheLastDays>120</includeCommitsDuringTheLastDays>
 			<bugzillaPattern>(?:Bug|UPDATE|FIX|ADD|NEW|#) ?#?(\d+)</bugzillaPattern>
-			<excludeCommiters>
-				<commiter>jenkins</commiter>
-			</excludeCommiters>
+			<excludeCommitters>
+				<committer>jenkins</committer>
+			</excludeCommitters>
 			<excludeCommitsPattern>.*\b(without|Upgraded)\b.*</excludeCommitsPattern>
 		</configuration>
 		<executions>

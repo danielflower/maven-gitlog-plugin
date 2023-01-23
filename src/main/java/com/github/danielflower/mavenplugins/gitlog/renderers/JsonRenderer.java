@@ -73,7 +73,7 @@ public class JsonRenderer extends FileRenderer {
 				.replace("{message}", encode(message))
 				.replace("{tagItems}", tagsJson.toString())
 				.replace("{date}", encode(date));
-		if (Formatter.showCommiter()){
+		if (Formatter.showCommitter()){
 			jsonItem = jsonItem.replace("{authorName}", encode(commit.getAuthorIdent().getName()))
 					.replace("{authorEmail}", encode(commit.getAuthorIdent().getEmailAddress()))
 					.replace("{committerName}", encode(commit.getCommitterIdent().getName()))

@@ -72,7 +72,7 @@ public class MarkdownRenderer extends FileRenderer {
 		// now convert the HTML hyperlink into a markdown link
 		message = markdownLinkConverter.formatCommitMessage(message);	
 		writer.write(Formatter.formatDateTime(commit.getCommitTime()) + "    " + message);
-		writer.write(" " + Formatter.formatCommiter(commit.getCommitterIdent()));
+		writer.write(" " + Formatter.formatCommitter(commit.getCommitterIdent()));
 		writer.write("  "); // MD line warp
 		writer.write(NEW_LINE);
 		previousWasTag = false;
