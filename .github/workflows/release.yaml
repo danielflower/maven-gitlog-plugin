@@ -36,10 +36,10 @@ jobs:
       - name: Verify package
         run: mvn --batch-mode verify
         env:
-          GITHUB_ACTOR:
+          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Release package
         run: mvn -X --batch-mode -DskipTests=true releaser:release
         env:
-          GITHUB_ACTOR:
+          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
