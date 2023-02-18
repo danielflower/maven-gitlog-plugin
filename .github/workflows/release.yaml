@@ -26,6 +26,8 @@ jobs:
           cat ~/.m2/settings.xml
       - name: Set up maven setings
         uses: s4u/maven-settings-action@v2.8.0
+        with:
+          override: false
       - name: After settings.xml
         run: |
           cat ~/.m2/settings.xml
