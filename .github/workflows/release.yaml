@@ -35,5 +35,9 @@ jobs:
           cat ~/.m2/settings.xml
       - name: Verify package
         run: mvn --batch-mode verify
+        env:
+          GHACT: ${{ secrets.GITHUB_ACTOR }}
+          GHTKN: ${{ secrets.GITHUB_TOKEN }}
       - name: Release package
         run: mvn --batch-mode -DskipTests=true releaser:release
+
