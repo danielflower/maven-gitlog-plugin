@@ -19,7 +19,7 @@ public class ActionsTest {
 		System.out.println("githubActor = " + hide(githubActor));
 		System.out.println("githubToken = " + hide(githubToken));
 
-		Git git = Git.open(new File("D:\\code\\gittest"));
+		Git git = Git.open(new File("."));
 		CredentialsProvider credentialsProvider = new UsernamePasswordCredentialsProvider(githubActor, githubToken);
 		Collection<Ref> response = git.lsRemote()
 				.setTags(true).setHeads(false)
