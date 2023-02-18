@@ -120,7 +120,6 @@
 				<version>3.6.2</version>
 				<configuration>
 					<serverId>github</serverId>
-					<arguments>-X</arguments>
 					<releaseGoals>
 						<releaseGoal>clean</releaseGoal>
 						<releaseGoal>site</releaseGoal>
@@ -156,7 +155,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<version>3.10.1</version>
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
@@ -181,12 +180,12 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.4</version>
+				<version>3.12.1</version>
 				<dependencies>
 					<dependency>
 						<groupId>org.apache.maven.doxia</groupId>
 						<artifactId>doxia-module-markdown</artifactId>
-						<version>1.6</version>
+						<version>1.12.0</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -230,7 +229,7 @@
 					<plugin>
 						<groupId>org.sonatype.plugins</groupId>
 						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.6.8</version>
+						<version>1.6.13</version>
 						<extensions>true</extensions>
 						<configuration>
 							<serverId>ossrh</serverId>
@@ -285,7 +284,7 @@
 					<plugin>
 						<groupId>com.github.github</groupId>
 						<artifactId>site-maven-plugin</artifactId>
-						<version>0.11</version>
+						<version>0.12</version>
 						<executions>
 							<execution>
 								<phase>site</phase>
