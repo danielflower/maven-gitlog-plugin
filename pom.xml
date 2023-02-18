@@ -69,9 +69,9 @@
 			<version>3.6.4</version>
 		</dependency>
 		<dependency>
-			<groupId>com.madgag</groupId>
+			<groupId>org.eclipse.jgit</groupId>
 			<artifactId>org.eclipse.jgit</artifactId>
-			<version>2.99.99.2.0-UNOFFICIAL-ROBERTO-RELEASE</version>
+			<version>5.13.0.202109080827-r</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>jsch</artifactId>
