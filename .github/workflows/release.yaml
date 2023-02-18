@@ -36,7 +36,7 @@ jobs:
       - name: Verify package
         run: mvn --batch-mode verify
       - name: Release package
-        run: mvn --batch-mode -DskipTests=true releaser:release
+        run: mvn -X --batch-mode -DskipTests=true releaser:release
         env:
           GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
