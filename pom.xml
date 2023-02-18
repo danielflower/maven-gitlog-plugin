@@ -115,18 +115,6 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-gpg-plugin</artifactId>
-				<version>3.0.1</version>
-				<configuration>
-					<gpgArguments>
-						<arg>--pinentry-mode</arg>
-						<arg>loopback</arg>
-					</gpgArguments>
-				</configuration>
-			</plugin>
-
-			<plugin>
 				<groupId>com.github.danielflower.mavenplugins</groupId>
 				<artifactId>multi-module-maven-release-plugin</artifactId>
 				<version>3.6.1</version>
@@ -246,6 +234,17 @@
 							<serverId>ossrh</serverId>
 							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>3.0.1</version>
+						<configuration>
+							<gpgArguments>
+								<arg>--pinentry-mode</arg>
+								<arg>loopback</arg>
+							</gpgArguments>
 						</configuration>
 					</plugin>
 					<plugin>
