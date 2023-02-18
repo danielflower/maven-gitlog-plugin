@@ -30,7 +30,7 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:git:git@github.com/danielflower/maven-gitlog-plugin.git</connection>
+		<connection>scm:git:https://github.com/***/maven-gitlog-plugin</connection>
 		<developerConnection>scm:git:https://github.com/***/maven-gitlog-plugin</developerConnection>
 		<url>git://github.com/danielflower/maven-gitlog-plugin.git</url>
 	</scm>
@@ -119,7 +119,7 @@
 				<artifactId>multi-module-maven-release-plugin</artifactId>
 				<version>3.6.1</version>
 				<configuration>
-					<serverId>githuba</serverId>
+					<serverId>github</serverId>
 					<releaseGoals>
 						<releaseGoal>clean</releaseGoal>
 						<releaseGoal>site</releaseGoal>

@@ -18,9 +18,6 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-          server-id: ossrh
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
       - name: Before settings.xml
         run: |
           cat ~/.m2/settings.xml
@@ -40,6 +37,3 @@ jobs:
         run: mvn --batch-mode verify
       - name: Release package
         run: mvn --batch-mode -DskipTests=true releaser:release
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
