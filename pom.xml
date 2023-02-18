@@ -119,7 +119,7 @@
 				<artifactId>multi-module-maven-release-plugin</artifactId>
 				<version>3.6.1</version>
 				<configuration>
-					<serverId>github</serverId>
+					<serverId>githuba</serverId>
 					<releaseGoals>
 						<releaseGoal>clean</releaseGoal>
 						<releaseGoal>site</releaseGoal>
