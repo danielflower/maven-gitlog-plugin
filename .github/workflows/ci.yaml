@@ -34,4 +34,4 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build with Maven on JDK ${{ matrix.java }}
-        run: mvn --batch-mode --update-snapshots site verify
+        run: mvn --batch-mode verify
