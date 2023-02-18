@@ -13,6 +13,8 @@ jobs:
         run: |
           cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
           gpg --list-secret-keys --keyid-format LONG
+          echo curl it
+          curl -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -H 'accept: */*' https://api.github.com/user
       - name: Set up Maven Central Repository
         uses: actions/setup-java@v3
         with:
@@ -34,12 +36,12 @@ jobs:
         run: |
           cat ~/.m2/settings.xml
       - name: Verify package
-        run: mvn --batch-mode verify
+        run: mvn --no-transfer-progress --batch-mode verify
         env:
           GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Release package
-        run: mvn --batch-mode -DskipTests=true releaser:release
+        run: mvn --no-transfer-progress --batch-mode -DskipTests=true releaser:release
         env:
           GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
