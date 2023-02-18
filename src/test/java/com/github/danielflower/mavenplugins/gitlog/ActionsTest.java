@@ -4,6 +4,7 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -13,6 +14,7 @@ import java.util.stream.Stream;
 public class ActionsTest {
 
 	@Test
+	@Ignore
 	public void canDoIt() throws Exception {
 
 		String githubActor = System.getenv("GHACT");
