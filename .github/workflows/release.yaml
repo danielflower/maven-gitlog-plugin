@@ -24,26 +24,19 @@ jobs:
       - name: Set up maven setings
         uses: s4u/maven-settings-action@v2.8.0
         with:
-          githubServer: false
           servers: |
             [{
               "id": "ossrh",
               "username": "${{ secrets.OSSRH_USERNAME }}",
               "password": "${{ secrets.OSSRH_TOKEN }}"
-            },
-            {
-              "id": "github",
-              "username": "${{ secrets.GITHUB_ACTOR }}",
-              "password": "${{ secrets.GITHUB_TOKEN }}"
             }]
       - name: After settings.xml
         run: |
           cat ~/.m2/settings.xml
       - name: Verify package
         run: mvn --batch-mode verify
-        env:
-          GHACT: ${{ secrets.GITHUB_ACTOR }}
-          GHTKN: ${{ secrets.GITHUB_TOKEN }}
       - name: Release package
         run: mvn --batch-mode -DskipTests=true releaser:release
-
+        env:
+          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
