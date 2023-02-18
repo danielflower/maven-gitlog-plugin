@@ -1,24 +1,26 @@
-name: Release
-
-on: [push]
+name: Publish package to the Maven Central Repository
+on:
+  push
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
-    name: Maven release
     steps:
       - uses: actions/checkout@v3
+      - name: Install gpg secret key
+        run: |
+          cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
+          gpg --list-secret-keys --keyid-format LONG
+      - name: Set up Maven Central Repository
+        uses: actions/setup-java@v3
         with:
-          fetch-depth: 0
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-
-      - run: git branch
-      - run: echo "M2_HOME=$(dirname $(dirname `which mvn`))" >> $GITHUB_ENV
-      - run: git config --global user.email "githubactions@example.com"
-      - run: git config --global user.name "Github Actions"
-
-      - name: Verify build
-        run: mvn -DskipTests=true --batch-mode verify
+          java-version: '11'
+          distribution: 'adopt'
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+      - name: Verify package
+        run: mvn --batch-mode verify
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
