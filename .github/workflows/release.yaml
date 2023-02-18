@@ -2,6 +2,8 @@ name: Publish package to the Maven Central Repository
 on:
   push
 
+permissions: write-all
+
 jobs:
   publish:
     runs-on: ubuntu-latest
