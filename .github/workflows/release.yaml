@@ -27,7 +27,6 @@ jobs:
       - name: Set up maven setings
         uses: s4u/maven-settings-action@v2.8.0
         with:
-          override: false
           servers: |
             [{
               "id": "ossrh",
