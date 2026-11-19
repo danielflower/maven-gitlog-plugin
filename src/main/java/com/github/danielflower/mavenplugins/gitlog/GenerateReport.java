@@ -8,7 +8,6 @@ import java.io.File;
 import java.util.Locale;
 import org.apache.maven.reporting.MavenReport;
 import org.apache.maven.reporting.MavenReportException;
-import org.codehaus.doxia.sink.Sink;
 
 /**
  * Goal which generates a changelog based on commits made to the current git repo.
